@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AppHeader from './components/AppHeader';
+import MainPage from './pages/MainPage'
+import LoginWindow from './components/LoginWindow';
+import LoginWindowContext from './context/LoginWindowContext';
+import UserContext from './context/UserContext';
+import { IUser } from './models';
+import axios from 'axios';
+import Cart from './components/Cart';
 
 function App() {
+  const [showLoginWindow, setLoginWindow] = useState<boolean>(false)
+  const toggleLoginWindow = () => {
+    setLoginWindow(!showLoginWindow)
+  }
+  const [user, setUser] = useState<IUser>(
+    {
+      username: 'anonymous',
+      first_name: '',
+      last_name: ''
+    })
+
+  async function getUserData() {
+    const response = await axios.get<IUser>('http://localhost:8000/api/user-data/', {
+      headers: {
+        Authorization: 'Token ' + localStorage.getItem('token')
+      }
+    })
+    setUser(response.data)
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ user, setUser }}>
+      <LoginWindowContext.Provider value={{ showLoginWindow, toggleLoginWindow }}>
+        <AppHeader />
+        <MainPage />
+        <LoginWindow getUserData={getUserData} />
+        <Cart />
+      </LoginWindowContext.Provider>
+    </UserContext.Provider>
   );
 }
 

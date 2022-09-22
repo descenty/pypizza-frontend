@@ -1,38 +1,263 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    font-family: 'Roboto';
+    background-color: rgb(245, 245, 245);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+    text-decoration: inherit;
+    color: inherit
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    box-shadow: 1px 1px 10px gray;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+header>div>h1 {
+    cursor: pointer;
+}
+
+header>div>a {
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+header>div>a:hover {
+    background-color: antiquewhite;
+}
+
+header>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+    height: 40px;
+}
+
+header>nav {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+header>nav>a {
+    padding: 0.5em 1em;
+    border-radius: 10px 10px 2px 2px;
+    border-style: none;
+    cursor: pointer;
+}
+
+header>nav>a:hover {
+    background-color: antiquewhite;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    padding: 50px;
+}
+
+.pizza-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px rgb(138, 138, 138);
+    padding: 1em;
+    transition: 0.3s;
+}
+
+.pizza-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.pizza-info img {
+    width: 100%;
+}
+
+.pizza-card:hover {
+    transform: scale(1.05);
+}
+
+.pizza-info h3 {
+    font-weight: normal;
+    font-size: 22px;
+}
+
+.pizza-info p {
+    font-size: 14px;
+    color:rgb(81, 81, 81);
+}
+
+.buy-pizza {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buy-pizza button {
+    padding: 0.5em;
+    background-color: unset;
+    border-style: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buy-pizza button:hover {
+    background-color: antiquewhite;
+}
+
+#login-panel {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+#login-panel>div>div:nth-child(1) {
+    margin-top: 30px;
+}
+
+
+#login-panel>div>div:nth-child(1) img {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    margin-top: -65px;
+    margin-left: 160px;
+    cursor: pointer;
+    filter: contrast(0.5);
+}
+
+#login-panel>div {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
+    padding: 1em;
+    border-style: solid;
+    border-width: 4px;
+    border-color: antiquewhite;
+}
+
+#login-panel>div>div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+#login-panel input {
+    padding: 0.5em;
+    border-radius: 20px;
+    border-width: 1px;
+    font-size: 18px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+#login-panel input:active {
+    transform: scale(1.1);
+}
+
+#login-panel button {
+    border-radius: 10px;
+    border-width: 1px;
+    font-size: 18px;
+    padding: 0.4em 2em;
+    border-style: none;
+    cursor: pointer;
+    background-color: antiquewhite;
+    transition: 0.3s;
+}
+
+#login-panel button:hover {
+    transform: scale(1.1);
+}
+
+#cart {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end;
+  backdrop-filter: brightness(80%);
 }
 
-.App-link {
-  color: #61dafb;
+#cart>div {
+  background-color: rgb(245, 245, 245);
+  width: 300px;
+  height: 60vh;
+  border-radius: 20px 0 0 20px;
+  box-shadow: 1px 1px 5px rgb(76, 76, 76);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#cart ol {
+  width: 90%;
+}
+
+#cart li {
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  gap: 1em;
+  font-size: 16px;
+  margin-top: 30px;
+  width: 100%;
+  height: 60px;
+}
+
+#cart li>img {
+  height: 100%;
+}
+
+#cart li>div {
+  color:gray;
+}
+
+#cart li>div>div {
+  color: black;
+  display: flex;
+  gap: 1em;
 }
