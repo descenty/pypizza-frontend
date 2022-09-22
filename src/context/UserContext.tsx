@@ -8,9 +8,8 @@ interface IUserContext {
 
 const UserContext = React.createContext<IUserContext>({
     user: {
-        username: 'anonymous',
-        first_name: '',
-        last_name: ''
+        phone: 'anonymous',
+        fio: ''
     },
     setUser(user: IUser) { this.user = user }
 })

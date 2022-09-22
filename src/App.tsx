@@ -17,9 +17,8 @@ function App() {
   }
   const [user, setUser] = useState<IUser>(
     {
-      username: 'anonymous',
-      first_name: '',
-      last_name: ''
+      phone: 'anonymous',
+      fio: '',
     })
 
   async function getUserData() {

@@ -10,7 +10,7 @@ const AppHeader = () => {
             <div>
                 <h1>PyPizza</h1>
                 <a>г. Москва</a>
-                <a onClick={() => toggleLoginWindow()}>{user && user.username}</a>
+                <a onClick={() => toggleLoginWindow()}>{user && user.phone}</a>
                 <a>Корзина</a>
             </div>
             <nav>
@@ -20,6 +20,7 @@ const AppHeader = () => {
                 <a href="">Напитки</a>
                 <a href="">Акции</a>
                 <a href="">О проекте</a>
+                <a href="http://127.0.0.1:8000/admin/">Админ-панель</a>
             </nav>
         </header >
     );
