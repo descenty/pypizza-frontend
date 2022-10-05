@@ -1,16 +1,16 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import PizzaCard from "../components/PizzaCard"
-import { IPizza } from "../models"
+import GoodCard from "../components/GoodCard"
+import { IGood } from "../models"
 
 const MainPage = () => {
-    const [pizzas, setPizzas] = useState<IPizza[]>([])
-    const url = 'http://localhost:8000/api/pizza/'
+    const [goods, setGoods] = useState<IGood[]>([])
+    const url = 'http://localhost:8000/api/goods/'
 
-    async function fetchPizzas() {
+    async function fetchGoods() {
         try {
-            const response = await axios.get<IPizza[]>(url)
-            setPizzas(response.data)
+            const response = await axios.get<IGood[]>(url)
+            setGoods(response.data)
         }
         catch (e) {
             console.log('Не удалось загрузить пиццу')
@@ -19,12 +19,12 @@ const MainPage = () => {
     }
 
     useEffect(() => {
-        fetchPizzas()
+        fetchGoods()
     }, [])
 
     return (
         <section>
-            {pizzas.map(pizza => <PizzaCard pizza={pizza} key={pizza.id} />)}
+            {goods.map(good => <GoodCard good={good} key={good.id} />)}
         </section>
     )
 }

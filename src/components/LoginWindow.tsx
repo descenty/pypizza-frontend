@@ -20,7 +20,7 @@ const LoginWindow = ({getUserData}: ILoginWindowProps) => {
                 password: password
             })
             localStorage.setItem('token', response.data.token)
-            toggleLoginWindow();
+            toggleLoginWindow?.();
             await getUserData()
         }
         catch {
@@ -33,7 +33,7 @@ const LoginWindow = ({getUserData}: ILoginWindowProps) => {
                 <div>
                     <div>
                         <h2>Вход</h2>
-                        <img onClick={() => toggleLoginWindow()} src="close.png" alt="" />
+                        <img onClick={() => toggleLoginWindow?.()} src="close.png" alt="" />
                     </div>
                     <div>
                         <input onChange={event => setUsername(event.target.value)} value={username} placeholder="Номер телефона" />

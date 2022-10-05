@@ -6,12 +6,6 @@ interface IUserContext {
     setUser?: (user: IUser) => void
 }
 
-const UserContext = React.createContext<IUserContext>({
-    user: {
-        phone: 'anonymous',
-        fio: ''
-    },
-    setUser(user: IUser) { this.user = user }
-})
+const UserContext = React.createContext<IUserContext>({})
 
 export default UserContext

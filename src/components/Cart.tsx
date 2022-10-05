@@ -1,29 +1,31 @@
+import axios from "axios";
+import { useContext, useState } from "react";
+import CartWindowContext from "../context/CartWindowContext";
+import { IToken } from "../models";
+
 const Cart = () => {
-    if (false)
+    const { showCartWindow, toggleCartWindow } = useContext(CartWindowContext);
+    if (showCartWindow)
         return (
             <div id='cart'>
-                <div>
-                    <h2>Корзина</h2>
-                    <ol>
-                        <li>
-                            <img src='pepperoni fresh.png' />
-                            <div>
-                                <div className='good-top-div'>
-                                    Пепперони фреш
-                                    <span>1 шт.</span>
-                                </div>
-                                Средняя, 30 см.
-                            </div>
-                        </li>
-                        <li>ssd</li>
-                        <li>ssd</li>
-                        <li>ssd</li>
-                        <li>ssd</li>
-                    </ol>
+                <div className="cart-header">
+                    <h3>Корзина</h3>
+                    <img onClick={() => toggleCartWindow?.()} src="close.png" alt="" />
                 </div>
+                <div className="cart-goods">
+                    <div>
+                        <img src='pepperoni fresh.png' />
+                        <div>
+                            <h4>Пепперони фреш</h4>
+                            <span>Средняя, 30 см.</span>
+                        </div>
+                        <span className="good-quantity">3</span>
+                    </div>
+                </div>
+
             </div>
         )
-    else return(<></>)
+    else return (<></>)
 }
 
 export default Cart
