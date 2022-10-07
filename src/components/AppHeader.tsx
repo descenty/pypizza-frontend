@@ -1,19 +1,22 @@
 import { useContext } from "react";
-import CartWindowContext from "../context/CartWindowContext";
-import LoginWindowContext from "../context/LoginWindowContext";
 import UserContext from "../context/UserContext";
 
-const AppHeader = () => {
-    const { toggleLoginWindow } = useContext(LoginWindowContext)
-    const { toggleCartWindow } = useContext(CartWindowContext)
+interface IAppHeaderProps {
+    toggleLoginWindow: () => void
+    toggleCart: () => void
+    logOut: () => void
+}
+
+const AppHeader = ({ toggleLoginWindow, toggleCart, logOut }: IAppHeaderProps) => {
     const { user } = useContext(UserContext)
     return (
         <header>
             <div>
                 <h1>PyPizza</h1>
                 <a>г. Москва</a>
-                <a onClick={() => toggleLoginWindow?.()}>{user ? user.phone : 'Войти'}</a>
-                <a onClick={() => toggleCartWindow?.()}>Корзина</a>
+                <a onClick={() => toggleLoginWindow()}>{user ? user.phone : 'Войти'}</a>
+                {user && <a onClick={() => logOut()}>Выйти</a>}
+                <a onClick={() => toggleCart()}>Корзина</a>
             </div>
             <nav>
                 <a href="">Пицца</a>

@@ -96,7 +96,6 @@ section {
   gap: 0.1em;
   padding: 40px;
   width: 100%;
-  height: 100vh;
 }
 
 .good-card {
@@ -119,6 +118,11 @@ section {
 .good-info img {
   width: 85%;
   align-self: center;
+  transition: 0.5s;
+}
+
+.good-info img:hover {
+  transform: translateY(-5px)
 }
 
 .good-info h3 {

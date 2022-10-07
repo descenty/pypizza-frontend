@@ -4,9 +4,7 @@ import './App.css';
 import AppHeader from './components/AppHeader';
 import MainPage from './pages/MainPage'
 import LoginWindow from './components/LoginWindow';
-import LoginWindowContext from './context/LoginWindowContext';
 import UserContext from './context/UserContext';
-import CartWindowContext from './context/CartWindowContext';
 import { IUser } from './models';
 import axios from 'axios';
 import Cart from './components/Cart';
@@ -17,19 +15,31 @@ function App() {
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow)
   }
-  const [showCartWindow, setCartWindow] = useState<boolean>(false)
-  const toggleCartWindow = () => {
-    setCartWindow(!showCartWindow)
+  const [showCart, setCart] = useState<boolean>(false)
+  const toggleCart = () => {
+    setCart(!showCart)
   }
-  const [user, setUser] = useState<IUser>()
+  const [user, setUser] = useState<IUser | null>()
 
   async function getUserData() {
-    const response = await axios.get<IUser>('http://localhost:8000/api/user-data/', {
-      headers: {
-        Authorization: 'Token ' + localStorage.getItem('token')
+    if (localStorage.getItem('token')) {
+      try {
+        const response = await axios.get<IUser>('http://localhost:8000/api/user-data/', {
+          headers: {
+            Authorization: 'Token ' + localStorage.getItem('token')
+          }
+        })
+        setUser(response.data)
       }
-    })
-    setUser(response.data)
+      catch (e) {
+        console.log('Cannot get user data')
+      }
+    }
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    setUser(null)
   }
 
   useEffect(() => {
@@ -38,15 +48,11 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <LoginWindowContext.Provider value={{ showLoginWindow, toggleLoginWindow }}>
-        <CartWindowContext.Provider value={{ showCartWindow, toggleCartWindow }}>
-          <AppHeader />
-          <MainPage />
-          <LoginWindow getUserData={getUserData} />
-          <Cart />
-          <AppFooter />
-        </CartWindowContext.Provider>
-      </LoginWindowContext.Provider>
+      <AppHeader toggleCart={toggleCart} toggleLoginWindow={toggleLoginWindow} logOut={logOut}/>
+      <MainPage />
+      {showLoginWindow && <LoginWindow toggleLoginWindow={toggleLoginWindow} getUserData={getUserData} />}
+      {showCart && <Cart toggleCart={toggleCart} />}
+      <AppFooter />
     </UserContext.Provider>
   );
 }

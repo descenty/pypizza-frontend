@@ -2,7 +2,7 @@ import React from "react"
 import { IUser } from "../models"
 
 interface IUserContext {
-    user?: IUser
+    user?: IUser | null
     setUser?: (user: IUser) => void
 }
 
