@@ -6,6 +6,7 @@ import { IGood } from "../models"
 
 const MainPage = () => {
     const [goods, setGoods] = useState<IGood[] | null>(null)
+    const [error, setError] = useState('')
     const [isLoading, setLoading] = useState<boolean>(true)
     const url = 'http://localhost:8000/api/goods/'
 
@@ -15,7 +16,7 @@ const MainPage = () => {
             setGoods(response.data)
         }
         catch (e) {
-            console.log('API fetch error')
+            setError("Не удалось загрузить пиццу")
         }
         setLoading(false)
     }
@@ -27,6 +28,7 @@ const MainPage = () => {
     return (
         <section>
             {isLoading && <CircleLoader />}
+            {error && <h3>{error}</h3>}
             {goods?.map(good => <GoodCard good={good} key={good.id} />)}
         </section>
     )

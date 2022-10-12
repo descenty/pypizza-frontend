@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+
+
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Nunito", sans-serif;
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -15,16 +20,11 @@ html {
   );
 }
 
-body {
-  font-family: "Montserrat";
-  font-weight: 500;
-}
-
 #root {
   height: 100vh;
 }
 
-a {
+/* a {
   text-decoration: inherit;
   color: inherit;
 }
@@ -88,7 +88,7 @@ header > nav > a {
 header > nav > a:hover {
   background-color: antiquewhite;
   transform: scale(1.1);
-}
+} */
 
 section {
   display: flex;
@@ -369,4 +369,143 @@ footer {
   gap: 1em;
   padding: 10px;
   justify-content: center;
+}
+
+.search-div {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-div .search-icon {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  font-size: 18px;
+  color: gray;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5em;
+  padding-inline: 1em;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #4e60ff;
+  background: #f3f4ff;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(231, 231, 231);
+}
+
+header input {
+  border-radius: 10px;
+  padding: 0.7em;
+  width: 220px;
+  border-style: none;
+  background: #edeef2;
+  text-indent: 4px;
+  outline-color: #4e60ff;
+}
+
+header input + .search-icon {
+  transition: 0.3s;
+}
+
+header input:focus + .search-icon {
+  transform: scale(1.1);
+  color: #4e60ff;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+header div:nth-child(1) {
+  gap: 3em;
+}
+
+header h2 {
+  line-height: 22px;
+  cursor: pointer;
+}
+
+header h2 span {
+  color: #4e60ff;
+}
+
+header a {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+header button {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  border-style: none;
+  color: #4e60ff;
+  font-size: 18px;
+  position: relative;
+  background: #f3f4ff;
+  transition: 0.3s;
+}
+
+header button:hover {
+  transform: scale(1.1);
+}
+
+.cart-image {
+  font-size: 24px;
+}
+
+.cart-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  background: #4e60ff;
+  border-radius: 8px;
+  font-size: 11px;
+  width: 20px;
+  height: 20px;
+  right: -5px;
+  top: -5px;
+}
+
+#user-button {
+  font-size: 20px;
+  overflow: hidden;
+}
+
+#user-button img {
+  width: 94%;
+  height: 94%;
+  object-fit: cover;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1.5px;
 }
