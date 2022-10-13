@@ -1,0 +1,33 @@
+.good_page {
+  position: absolute;
+  backdrop-filter: brightness(50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.good_page > div {
+  background-color: white;
+  border-radius: 20px;
+  width: 90%;
+  display: flex;
+  padding: 1em;
+}
+
+.good_page h2 {
+  font-size: 26px;
+}
+
+.good_page p {
+  color: gray;
+}
+
+.good_page .configurations {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}

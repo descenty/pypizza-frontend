@@ -1,0 +1,62 @@
+.advertisments {
+  display: flex;
+  gap: 1.5em;
+  overflow-x: auto;
+}
+
+@media (min-width: 1152px) {
+  .advertisments {
+    justify-content: center;
+  }
+}
+
+.advertisments::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.advertisments > div {
+  display: flex;
+  min-width: 550px;
+  height: 200px;
+  background: #f3f4ff;
+  border-radius: 15px;
+  gap: 2em;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.advertisments > div img {
+  margin-left: 10px;
+  height: 140%;
+}
+
+.advertisments > div div {
+  display: flex;
+  flex-direction: column;
+}
+
+.advertisments > div div h3 {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.advertisments > div div h1 {
+  font-size: 44px;
+  color: #4e60ff;
+  margin-top: 10px;
+}
+
+.advertisments > div div span {
+  color: gray;
+  margin-top: 50px;
+  font-size: 14px;
+}
+
+.advertisments > .orange {
+  background: #fef2ec;
+}
+
+.advertisments > .orange h1 {
+  color: #fd6d22;
+}
