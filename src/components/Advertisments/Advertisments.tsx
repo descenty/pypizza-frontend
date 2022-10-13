@@ -11,7 +11,7 @@ const Advertisments = () => {
           <span>Deserts</span>
         </div>
       </div>
-      <div className="advertisment orange">
+      <div className={styles.orange}>
         <img src="burger.png" alt="burger" />
         <div>
           <h3>Big burgers</h3>

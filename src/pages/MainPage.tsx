@@ -32,7 +32,7 @@ const MainPage = () => {
     <>
       <Advertisments />
       <Categories />
-      {selectedGood && <GoodPage good={selectedGood} />}
+      {selectedGood && <GoodPage good={selectedGood} selectGood={selectGood} />}
       <section id="restaurants">
         {isLoading && <CircleLoader />}
         {error && <h3>{error}</h3>}
