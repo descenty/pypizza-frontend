@@ -349,7 +349,6 @@ header button {
   border-radius: 15px;
   border-style: none;
   color: #4e60ff;
-  font-size: 18px;
   position: relative;
   background: #f3f4ff;
   transition: 0.3s;
@@ -380,7 +379,6 @@ header button:hover {
 }
 
 #user-button {
-  font-size: 20px;
   overflow: hidden;
 }
 

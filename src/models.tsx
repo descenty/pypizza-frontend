@@ -1,4 +1,4 @@
-interface IConfiguration {
+export interface IConfiguration {
     size: string
     price: number
 }

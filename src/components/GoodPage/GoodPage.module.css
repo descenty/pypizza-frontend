@@ -1,5 +1,5 @@
 .good_page {
-  position: absolute;
+  position: fixed;
   backdrop-filter: brightness(50%);
   height: 100%;
   width: 100%;
@@ -59,11 +59,15 @@ button {
   padding: 0.5em;
   padding-inline: 1em;
   border-style: none;
+  border-radius: 10px;
+}
+
+.active {
+  background-color: white;
 }
 
 .good_page .configurations button:hover {
   background-color: white;
-  border-radius: 10px;
 }
 
 .add_to_cart {
