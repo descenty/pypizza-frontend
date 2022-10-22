@@ -19,4 +19,5 @@ export interface IToken {
 export interface IUser {
     phone: string
     fio: string
+    token: string
 }

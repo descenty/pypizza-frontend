@@ -1,7 +1,9 @@
 import styles from "./GoodPage.module.css";
 import { IGood, IConfiguration } from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import axios from "axios";
+import UserContext from "../../context/UserContext";
 
 interface IGoodPageProps {
   good?: IGood;
@@ -30,10 +32,35 @@ const getSizeName = (category: string, value: SizeType): string | undefined => {
     return sizes[category][value];
   } else return sizes["DEFAULT"][value];
 };
+
+const url = "http://localhost:8000/api/add-to-cart/";
+
+const addToCart = async (
+  good: IGood | undefined,
+  configuration: IConfiguration | undefined,
+  token: string | undefined
+) => {
+  await axios
+    .post(
+      url,
+      {
+        good_id: good?.id,
+        size: configuration?.size,
+      },
+      {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      }
+    )
+    .catch(() => alert("Не удалось добавить товар в корзину"));
+};
+
 const GoodPage = ({ good, selectGood }: IGoodPageProps) => {
   const [goodConfig, setGoodConfig] = useState<IConfiguration | undefined>(
     good?.configurations[0]
   );
+  const { user } = useContext(UserContext);
   return (
     <div className={styles.good_page}>
       <div>
@@ -58,7 +85,14 @@ const GoodPage = ({ good, selectGood }: IGoodPageProps) => {
               </button>
             ))}
           </div>
-          <button className={styles.add_to_cart}>
+          <button
+            className={styles.add_to_cart}
+            onClick={() =>
+              addToCart(good, goodConfig, user?.token).then(() =>
+                selectGood(undefined)
+              )
+            }
+          >
             Добавить в корзину за {goodConfig?.price} ₽
           </button>
         </div>
