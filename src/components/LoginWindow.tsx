@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { axiosInstance } from "../App";
 import { IToken } from "../models";
 
 interface ILoginWindowProps {
@@ -22,11 +23,12 @@ const LoginWindow = ({ getUserData, toggleLoginWindow }: ILoginWindowProps) => {
 
   async function authenticate() {
     try {
-      const response = await axios.post<IToken>(
-        "http://localhost:8000/api/token-auth/",
+      const response = await axiosInstance.post<IToken>(
+        "token-auth/",
         loginFormData
       );
       localStorage.setItem("token", response.data.token);
+      axiosInstance.defaults.headers.common['Authorization'] = "Token response.data.token"
       toggleLoginWindow();
       await getUserData();
     } catch {

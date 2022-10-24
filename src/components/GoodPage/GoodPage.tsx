@@ -1,62 +1,19 @@
 import styles from "./GoodPage.module.css";
-import { IGood, IConfiguration } from "../../models";
+import { IGood, IConfiguration, getSizeName, SizeType } from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
+import { axiosInstance } from "../../App";
+import { addToCart } from "../../APIFunctions";
 
 interface IGoodPageProps {
   good?: IGood;
   selectGood: Dispatch<SetStateAction<IGood | undefined>>;
+  updateCart: () => Promise<void>;
 }
 
-type SizeType = "SMALL" | "MEDIUM" | "BIG";
-
-type SizeName = { [day in SizeType]: string };
-
-const sizes: { [category: string]: SizeName } = {
-  PIZZA: {
-    SMALL: "Маленькая",
-    MEDIUM: "Средняя",
-    BIG: "Большая",
-  },
-  DEFAULT: {
-    SMALL: "Маленький",
-    MEDIUM: "Средний",
-    BIG: "Большой",
-  },
-};
-
-const getSizeName = (category: string, value: SizeType): string | undefined => {
-  if (category in sizes) {
-    return sizes[category][value];
-  } else return sizes["DEFAULT"][value];
-};
-
-const url = "http://localhost:8000/api/add-to-cart/";
-
-const addToCart = async (
-  good: IGood | undefined,
-  configuration: IConfiguration | undefined,
-  token: string | undefined
-) => {
-  await axios
-    .post(
-      url,
-      {
-        good_id: good?.id,
-        size: configuration?.size,
-      },
-      {
-        headers: {
-          Authorization: "Token " + token,
-        },
-      }
-    )
-    .catch(() => alert("Не удалось добавить товар в корзину"));
-};
-
-const GoodPage = ({ good, selectGood }: IGoodPageProps) => {
+const GoodPage = ({ good, selectGood, updateCart }: IGoodPageProps) => {
   const [goodConfig, setGoodConfig] = useState<IConfiguration | undefined>(
     good?.configurations[0]
   );
@@ -88,9 +45,10 @@ const GoodPage = ({ good, selectGood }: IGoodPageProps) => {
           <button
             className={styles.add_to_cart}
             onClick={() =>
-              addToCart(good, goodConfig, user?.token).then(() =>
-                selectGood(undefined)
-              )
+              addToCart(good, goodConfig).then(() => {
+                selectGood(undefined);
+                updateCart();
+              })
             }
           >
             Добавить в корзину за {goodConfig?.price} ₽

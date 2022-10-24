@@ -15,7 +15,7 @@ const PizzaCard = ({ good, selectGood }: IGoodCardProps) => {
   return (
     <div className="restaurant-card">
       <img src={good.image} alt="restaurant1" />
-      <span className="image-span">Featured</span>
+      {/* <span className="image-span">Featured</span> */}
       <div>
         <h3>{good.name}</h3>
         <div className="time-and-check">

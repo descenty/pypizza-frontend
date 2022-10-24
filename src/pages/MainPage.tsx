@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import GoodCard from "../components/GoodCard";
 import CircleLoader from "../components/Loader/CircleLoader";
 import Advertisments from "../components/Advertisments/Advertisments";
-import { IGood } from "../models";
+import { ICart, IGood } from "../models";
 import Categories from "../components/Categories/Categories";
 import GoodPage from "../components/GoodPage/GoodPage";
 
-const MainPage = () => {
+interface IMainPageProps {
+  updateCart: () => Promise<void>;
+}
+
+const MainPage = ({updateCart}: IMainPageProps) => {
   const [goods, setGoods] = useState<IGood[] | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -32,7 +36,7 @@ const MainPage = () => {
     <>
       <Advertisments />
       <Categories />
-      {selectedGood && <GoodPage good={selectedGood} selectGood={selectGood} />}
+      {selectedGood && <GoodPage good={selectedGood} selectGood={selectGood} updateCart={updateCart} />}
       <section id="restaurants">
         {isLoading && <CircleLoader />}
         {error && <h3>{error}</h3>}
