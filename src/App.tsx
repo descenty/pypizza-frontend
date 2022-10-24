@@ -73,7 +73,7 @@ function App() {
           getUserData={getUserData}
         />
       )}
-      {showCart && <Cart toggleCart={toggleCart} cart={cart} />}
+      <Cart toggleCart={toggleCart} showCart={showCart} cart={cart} />
       <AppFooter />
     </UserContext.Provider>
   );

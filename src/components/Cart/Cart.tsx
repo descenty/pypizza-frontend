@@ -1,24 +1,24 @@
 import { useState } from "react";
-import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { ImCross } from "react-icons/im";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
 import { addToCart, removeFromCart } from "../../APIFunctions";
-import { axiosInstance, baseURL } from "../../App";
+import { baseURL } from "../../App";
 import { getSizeName, ICart, SizeType } from "../../models";
 import styles from "./Cart.module.css";
 
 interface ICartProps {
   toggleCart: () => void;
+  showCart: boolean;
   cart: ICart | null;
 }
 
-const Cart = ({ toggleCart, cart }: ICartProps) => {
+const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
   const [update, setUpdate] = useState<boolean>(false);
   const toggleUpdate = () => {
     setUpdate(!update);
   };
   return (
-    <div className={styles.cart}>
+    <div className={`${styles.cart} ${showCart ? styles.open : styles.close}`}>
       <div className={styles.cart_header}>
         <h3>Корзина</h3>
         <GrFormClose
