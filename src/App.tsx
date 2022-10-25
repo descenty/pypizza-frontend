@@ -40,6 +40,7 @@ function App() {
   async function getUserData() {
     let token;
     if (localStorage.getItem("token")) {
+      alert('get')
       token = localStorage.getItem("token");
       axiosInstance.defaults.headers.common["Authorization"] = "Token " + token;
       try {
@@ -59,11 +60,7 @@ function App() {
   const updateCart = () => getCart().then((cart) => setCart(cart));
 
   useEffect(() => {
-    !user && getUserData();
-  }, [user]);
-
-  useEffect(() => {
-    user && updateCart();
+    !user ? getUserData() : updateCart();
   }, [user]);
 
   return (
