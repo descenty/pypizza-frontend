@@ -14,12 +14,14 @@
   overflow: hidden;
   z-index: 2;
   opacity: 0;
+  pointer-events: none;
 }
 
 
 
 .cart.open {
   animation: open 0.2s ease-in-out forwards;
+  pointer-events: all;
 }
 
 @keyframes open {

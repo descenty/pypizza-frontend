@@ -19,6 +19,7 @@ export interface IToken {
 export interface IUser {
   phone: string;
   fio: string;
+  bonus_points: number;
   token: string;
 }
 

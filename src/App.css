@@ -37,6 +37,7 @@ html {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(4px);
+  z-index: 3;
 }
 
 #login-panel > div > div:nth-child(1) {
@@ -299,6 +300,17 @@ header button:hover {
   font-size: 26px;
 }
 
+.bonus_points {
+  position: absolute;
+  top: 5px;
+  right: 1px;
+  font-size: 13px;
+  background: #4e60ff;
+  color: white; 
+  padding: 0px 4px;
+  border-radius: 50%;
+}
+
 .cart-span {
   display: flex;
   justify-content: center;
@@ -314,8 +326,20 @@ header button:hover {
   top: -5px;
 }
 
-#user-button {
-  overflow: hidden;
+.bonus_points {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  background: #4e60ff;
+  border-radius: 8px;
+  font-size: 11px;
+  width: 50px;
+  height: 14px;
+  top: 40px;
+  left: 0px;
+  text-align: center;
 }
 
 #user-button img {

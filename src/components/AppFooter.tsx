@@ -2,13 +2,13 @@ const AppFooter = () => {
     return (
         <footer>
             <div className="social-button">
-                <img src="youtube.svg" alt="youtube" />
+                <img src={process.env.PUBLIC_URL + '/youtube.svg'} alt="youtube" />
             </div>
             <div className="social-button">
-                <img src="instagram.svg" alt="instagram" />
+                <img src={process.env.PUBLIC_URL + '/instagram.svg'} alt="instagram" />
             </div>
             <div className="social-button">
-                <img src="telegram.svg" alt="telegram" />
+                <img src={process.env.PUBLIC_URL + '/telegram.svg'} alt="telegram" />
             </div>
         </footer>
     )

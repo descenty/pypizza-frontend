@@ -10,6 +10,8 @@ import axios from "axios";
 import Cart from "./components/Cart/Cart";
 import AppFooter from "./components/AppFooter";
 import { getCart } from "./APIFunctions";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import ProfilePage from "./pages/ProfilePage";
 
 export const baseURL = "http://localhost:8000";
 
@@ -35,11 +37,7 @@ function App() {
       token = localStorage.getItem("token");
       axiosInstance.defaults.headers.common["Authorization"] = "Token " + token;
       try {
-        const response = await axiosInstance.get<IUser>("user-data/", {
-          headers: {
-            Authorization: "Token " + token,
-          },
-        });
+        const response = await axiosInstance.get<IUser>("user-data/");
         setUser(Object.assign(response.data, { token: token }));
       } catch (e) {
         console.log("Cannot get user data");
@@ -61,20 +59,28 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <AppHeader
-        toggleCart={toggleCart}
-        toggleLoginWindow={toggleLoginWindow}
-        logOut={logOut}
-      />
-      <MainPage updateCart={updateCart} />
-      {showLoginWindow && (
-        <LoginWindow
+      <BrowserRouter>
+        <AppHeader
+          toggleCart={toggleCart}
           toggleLoginWindow={toggleLoginWindow}
-          getUserData={getUserData}
+          logOut={logOut}
         />
-      )}
-      <Cart toggleCart={toggleCart} showCart={showCart} cart={cart} />
-      <AppFooter />
+        {showLoginWindow && (
+          <LoginWindow
+            toggleLoginWindow={toggleLoginWindow}
+            getUserData={getUserData}
+          />
+        )}
+        <Routes>
+          <Route path="/" element={<MainPage updateCart={updateCart} />} />
+          <Route
+            path="profile/"
+            element={<ProfilePage />}
+          />
+        </Routes>
+        <Cart toggleCart={toggleCart} showCart={showCart} cart={cart} />
+        <AppFooter />
+      </BrowserRouter>
     </UserContext.Provider>
   );
 }

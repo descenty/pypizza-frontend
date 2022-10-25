@@ -5,6 +5,8 @@ import {
   AiOutlineShopping,
   AiOutlineUser,
 } from "react-icons/ai";
+import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IAppHeaderProps {
   toggleLoginWindow: () => void;
@@ -18,14 +20,17 @@ const AppHeader = ({
   logOut,
 }: IAppHeaderProps) => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   return (
     <header>
       <div>
-        <h2>
-          py
-          <br />
-          <span>pizza</span>
-        </h2>
+        <Link to="/">
+          <h2>
+            py
+            <br />
+            <span>pizza</span>
+          </h2>
+        </Link>
         <div className="search-div">
           <input type="text" name="search" id="search" placeholder="Поиск" />
           <AiOutlineSearch className="search-icon" />
@@ -40,8 +45,17 @@ const AppHeader = ({
           <AiOutlineShopping className="cart-image" />
           <span className="cart-span">4</span>
         </button>
-        <button id="user-button" onClick={() => toggleLoginWindow()}>
+        <button
+          id="user-button"
+          onClick={() => {
+            !user ? toggleLoginWindow() : navigate("profile/");
+          }}
+        >
           <AiOutlineUser className="user-image" />
+          <span className="bonus_points">
+            {user?.bonus_points}&nbsp;
+            <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
+          </span>
         </button>
       </div>
     </header>
