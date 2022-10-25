@@ -16,10 +16,17 @@ export interface IToken {
   token: string;
 }
 
+export interface ISavedAddress {
+  name: string;
+  latitute: number;
+  longitude: number;
+}
+
 export interface IUser {
   phone: string;
   fio: string;
   bonus_points: number;
+  saved_addresses: ISavedAddress[];
   token: string;
 }
 
@@ -41,14 +48,30 @@ export interface ICart {
 }
 
 export type SizeType = "SMALL" | "MEDIUM" | "BIG";
+export type Category = "PIZZA" | "DRINKS" | "BURGERS" | "DESERTS" | "DEFAULT";
 
-type SizeName = { [day in SizeType]: string };
+type SizeName = { [size in SizeType]: string };
 
-const sizes: { [category: string]: SizeName } = {
+const sizes: { [category in Category]: SizeName } = {
   PIZZA: {
     SMALL: "Маленькая",
     MEDIUM: "Средняя",
     BIG: "Большая",
+  },
+  BURGERS: {
+    SMALL: "Маленький",
+    MEDIUM: "Средний",
+    BIG: "Большой",
+  },
+  DRINKS: {
+    SMALL: "200 ml",
+    MEDIUM: "300 ml",
+    BIG: "500 ml",
+  },
+  DESERTS: {
+    SMALL: "Маленький",
+    MEDIUM: "Средний",
+    BIG: "Большой",
   },
   DEFAULT: {
     SMALL: "Маленький",
@@ -58,7 +81,7 @@ const sizes: { [category: string]: SizeName } = {
 };
 
 export const getSizeName = (
-  category: string,
+  category: Category,
   value: SizeType
 ): string | undefined => {
   if (category in sizes) {

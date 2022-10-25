@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import GoodCard from "../components/GoodCard";
 import CircleLoader from "../components/Loader/CircleLoader";
 import Advertisments from "../components/Advertisments/Advertisments";
-import { ICart, IGood } from "../models";
+import { Category, ICart, IGood } from "../models";
 import Categories from "../components/Categories/Categories";
 import GoodPage from "../components/GoodPage/GoodPage";
 
@@ -11,11 +11,12 @@ interface IMainPageProps {
   updateCart: () => Promise<void>;
 }
 
-const MainPage = ({updateCart}: IMainPageProps) => {
+const MainPage = ({ updateCart }: IMainPageProps) => {
   const [goods, setGoods] = useState<IGood[] | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState<boolean>(true);
   const [selectedGood, selectGood] = useState<IGood>();
+  const [category, setCategory] = useState<Category>("DEFAULT");
   const url = "http://localhost:8000/api/goods/";
 
   async function fetchGoods() {
@@ -35,15 +36,24 @@ const MainPage = ({updateCart}: IMainPageProps) => {
   return (
     <>
       <Advertisments />
-      <Categories />
-      {selectedGood && <GoodPage good={selectedGood} selectGood={selectGood} updateCart={updateCart} />}
+      <Categories categoryType={category} setCategoryType={setCategory} />
+      {selectedGood && (
+        <GoodPage
+          good={selectedGood}
+          selectGood={selectGood}
+          updateCart={updateCart}
+        />
+      )}
       <section id="restaurants">
         {isLoading && <CircleLoader />}
         {error && <h3>{error}</h3>}
         <div>
-          {goods?.map((good) => (
-            <GoodCard good={good} selectGood={selectGood} key={good.id} />
-          ))}
+          {goods?.map(
+            (good) =>
+              (category === "DEFAULT" || category === good.category) && (
+                <GoodCard good={good} selectGood={selectGood} key={good.id} />
+              )
+          )}
         </div>
       </section>
     </>

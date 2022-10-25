@@ -4,7 +4,7 @@ import { axiosInstance } from "../App";
 import { IToken } from "../models";
 
 interface ILoginWindowProps {
-  getUserData: () => Promise<void>;
+  getUserData: () => Promise<unknown>;
   toggleLoginWindow: () => void;
 }
 

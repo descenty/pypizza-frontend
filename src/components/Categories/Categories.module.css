@@ -26,11 +26,21 @@
   gap: 1em;
   font-size: 13px;
   font-weight: bold;
-  border-width: 1px;
   border-style: solid;
-  border-color: rgb(231, 231, 231);
   transition: 0.3s;
   cursor: pointer;
+}
+
+.selected_category {
+  background: #f3f4ff;
+  border-color: #4e60ff;
+  border-width: 2px;
+  color: #4e60ff;
+}
+
+.unselected_category {
+  border-width: 1px;
+  border-color: rgb(231, 231, 231);
 }
 
 .categories div:hover {

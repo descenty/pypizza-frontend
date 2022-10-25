@@ -3,20 +3,18 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
 import { addToCart, removeFromCart } from "../../APIFunctions";
 import { baseURL } from "../../App";
-import { getSizeName, ICart, SizeType } from "../../models";
+import { Category, getSizeName, ICart, SizeType } from "../../models";
 import styles from "./Cart.module.css";
 
 interface ICartProps {
   toggleCart: () => void;
   showCart: boolean;
   cart: ICart | null;
+  updateCart: () => void;
+  toggleOrderConfirmation: () => void;
 }
 
-const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
-  const [update, setUpdate] = useState<boolean>(false);
-  const toggleUpdate = () => {
-    setUpdate(!update);
-  };
+const Cart = ({ toggleCart, showCart, cart, updateCart, toggleOrderConfirmation }: ICartProps) => {
   return (
     <div className={`${styles.cart} ${showCart ? styles.open : styles.close}`}>
       <div className={styles.cart_header}>
@@ -27,6 +25,8 @@ const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
         />
       </div>
       <div className={styles.cart_goods}>
+        {!cart && <h4>Не удалось загрузить корзину</h4>}
+        {cart?.cart_goods.length === 0 && <h4>Корзина пуста</h4>}
         {cart?.cart_goods.map((cart_good) => (
           <div key={cart_good.created_date}>
             <img src={baseURL + cart_good.good.image} alt="" />
@@ -38,7 +38,7 @@ const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
                 <h4>{cart_good.good.name}</h4>
                 <span>
                   {getSizeName(
-                    cart_good.good.category,
+                    cart_good.good.category as Category,
                     cart_good.configuration.size as SizeType
                   )}
                 </span>
@@ -50,7 +50,7 @@ const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
                     addToCart(cart_good.good, cart_good.configuration).then(
                       () => {
                         cart_good.quantity++;
-                        toggleUpdate();
+                        updateCart()
                       }
                     )
                   }
@@ -67,7 +67,7 @@ const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
                       cart!.cart_goods = cart!.cart_goods.filter(
                         (cart_good) => cart_good.quantity !== 0
                       );
-                      toggleUpdate();
+                      updateCart()
                     })
                   }
                 />
@@ -76,13 +76,15 @@ const Cart = ({ toggleCart, showCart, cart }: ICartProps) => {
           </div>
         ))}
       </div>
-      <div className={styles.to_payment_div}>
-        <input type="text" placeholder="Промокод" />
-        <span>
-          Итого: <b>{cart?.total_with_discount} ₽</b>
-        </span>
-        <button>К оплате</button>
-      </div>
+      {cart && (
+        <div className={styles.to_payment_div}>
+          <input type="text" placeholder="Промокод" />
+          <span>
+            Итого: <b>{cart?.total_with_discount} ₽</b>
+          </span>
+          <button onClick={() => toggleOrderConfirmation()}>К оформлению заказа</button>
+        </div>
+      )}
     </div>
   );
 };

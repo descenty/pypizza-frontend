@@ -12,6 +12,7 @@ import AppFooter from "./components/AppFooter";
 import { getCart } from "./APIFunctions";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
+import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 
 export const baseURL = "http://localhost:8000";
 
@@ -28,6 +29,11 @@ function App() {
   const [showCart, setShowCart] = useState<boolean>(false);
   const toggleCart = () => {
     setShowCart(!showCart);
+  };
+  const [showOrderConfirmation, setShowOrderConfirmation] =
+    useState<boolean>(false);
+  const toggleOrderConfirmation = () => {
+    setShowOrderConfirmation(!showOrderConfirmation);
   };
   const [user, setUser] = useState<IUser | null>();
 
@@ -53,17 +59,22 @@ function App() {
   const updateCart = () => getCart().then((cart) => setCart(cart));
 
   useEffect(() => {
-    getUserData();
-    updateCart();
-  }, []);
+    !user && getUserData();
+  }, [user]);
+
+  useEffect(() => {
+    user && updateCart();
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <AppHeader
           toggleCart={toggleCart}
+          setShowCart={setShowCart}
           toggleLoginWindow={toggleLoginWindow}
           logOut={logOut}
+          cart={cart}
         />
         {showLoginWindow && (
           <LoginWindow
@@ -73,12 +84,19 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<MainPage updateCart={updateCart} />} />
-          <Route
-            path="profile/"
-            element={<ProfilePage />}
-          />
+          <Route path="profile/" element={<ProfilePage />} />
         </Routes>
-        <Cart toggleCart={toggleCart} showCart={showCart} cart={cart} />
+        <Cart
+          toggleCart={toggleCart}
+          showCart={showCart}
+          cart={cart}
+          updateCart={updateCart}
+          toggleOrderConfirmation={toggleOrderConfirmation}
+        />
+        <OrderConfirmation
+          toggleOrderConfirmation={toggleOrderConfirmation}
+          showOrderConfirmation={showOrderConfirmation}
+        />
         <AppFooter />
       </BrowserRouter>
     </UserContext.Provider>

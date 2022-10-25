@@ -1,5 +1,5 @@
 import styles from "./GoodPage.module.css";
-import { IGood, IConfiguration, getSizeName, SizeType } from "../../models";
+import { IGood, IConfiguration, getSizeName, SizeType, Category } from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import axios from "axios";
@@ -38,7 +38,7 @@ const GoodPage = ({ good, selectGood, updateCart }: IGoodPageProps) => {
                 onClick={() => setGoodConfig(config)}
                 key={config.size}
               >
-                {getSizeName(good?.category, config.size as SizeType)}
+                {getSizeName(good?.category as Category, config.size as SizeType)}
               </button>
             ))}
           </div>

@@ -64,9 +64,10 @@ html {
   gap: 1.5em;
   align-items: center;
   padding: 1em;
-  border-style: solid;
-  border-width: 4px;
-  border-color: antiquewhite;
+  border-style: dotted;
+  border-color: #4e60ff;
+  border-width: 1px;
+  box-shadow: 0px 10px 3px #4e60ff;
 }
 
 #login-panel > div > div:nth-child(2) {
@@ -77,31 +78,33 @@ html {
 }
 
 #login-panel input {
+  border-radius: 10px;
   padding: 0.5em;
-  border-radius: 20px;
-  border-width: 1px;
-  font-size: 18px;
+  width: 220px;
+  border-style: none;
+  background: #edeef2;
+  outline-color: #4e60ff;
   text-align: center;
-  transition: 0.3s;
-}
-
-#login-panel input:active {
-  transform: scale(1.1);
+  font-size: 16px;
 }
 
 #login-panel button {
   border-radius: 10px;
   border-width: 1px;
+  width: 90%;
   font-size: 18px;
   padding: 0.4em 2em;
   border-style: none;
   cursor: pointer;
-  background-color: antiquewhite;
   transition: 0.3s;
+  background: none;
+  font-weight: 500;
+  margin-top: 10px;
 }
 
 #login-panel button:hover {
-  transform: scale(1.1);
+  color: #4e60ff;
+  background: #f3f4ff;
 }
 
 .social-button {
@@ -237,7 +240,7 @@ header {
   border-color: rgb(231, 231, 231);
 }
 
-header input {
+.search-div input {
   border-radius: 10px;
   padding: 0.7em;
   width: 220px;
@@ -247,11 +250,11 @@ header input {
   outline-color: #4e60ff;
 }
 
-header input + .search-icon {
+.search-div + .search-icon {
   transition: 0.3s;
 }
 
-header input:focus + .search-icon {
+.search-div:focus + .search-icon {
   transform: scale(1.1);
   color: #4e60ff;
 }
@@ -306,7 +309,7 @@ header button:hover {
   right: 1px;
   font-size: 13px;
   background: #4e60ff;
-  color: white; 
+  color: white;
   padding: 0px 4px;
   border-radius: 50%;
 }

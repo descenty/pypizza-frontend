@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import {
   AiOutlineSearch,
@@ -6,21 +6,28 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ICart } from "../models";
 
 interface IAppHeaderProps {
   toggleLoginWindow: () => void;
   toggleCart: () => void;
+  setShowCart: Dispatch<SetStateAction<boolean>>;
   logOut: () => void;
+  cart: ICart | null;
 }
 
 const AppHeader = ({
   toggleLoginWindow,
   toggleCart,
+  setShowCart,
   logOut,
+  cart,
 }: IAppHeaderProps) => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => setShowCart(false), [location])
   return (
     <header>
       <div>
@@ -41,21 +48,27 @@ const AppHeader = ({
         <a href="#">Акции</a>
         <a href="#">Рестораны</a>
         <a href="#">Мои заказы</a>
-        <button id="cart-button" onClick={() => toggleCart()}>
-          <AiOutlineShopping className="cart-image" />
-          <span className="cart-span">4</span>
-        </button>
+        {user && (
+          <button id="cart-button" onClick={() => toggleCart()}>
+            <AiOutlineShopping className="cart-image" />
+            {cart?.count !== 0 && (
+              <span className="cart-span">{cart?.count}</span>
+            )}
+          </button>
+        )}
         <button
           id="user-button"
           onClick={() => {
-            !user ? toggleLoginWindow() : navigate("profile/");
+            !user ? toggleLoginWindow() : (navigate("profile/"));
           }}
         >
           <AiOutlineUser className="user-image" />
-          <span className="bonus_points">
-            {user?.bonus_points}&nbsp;
-            <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
-          </span>
+          {user && (
+            <span className="bonus_points">
+              {user?.bonus_points}&nbsp;
+              <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
+            </span>
+          )}
         </button>
       </div>
     </header>

@@ -1,11 +1,30 @@
 import styles from "./Categories.module.css";
 import categories from "../../data";
+import { Category } from "../../models";
+import { Dispatch, SetStateAction } from "react";
 
-const Categories = () => {
+interface ICategoryProps {
+  categoryType: Category;
+  setCategoryType: Dispatch<SetStateAction<Category>>;
+}
+
+const Categories = ({ categoryType, setCategoryType }: ICategoryProps) => {
   return (
     <section className={styles.categories}>
       {categories.map((category) => (
-        <div key={category.name}>
+        <div
+          className={
+            categoryType === category.id
+              ? styles.selected_category
+              : styles.unselected_category
+          }
+          key={category.name}
+          onClick={() =>
+            setCategoryType(
+              categoryType === category.id ? "DEFAULT" : category.id
+            )
+          }
+        >
           <img src={category.imageUrl} alt="category" />
           <span>{category.name}</span>
         </div>

@@ -1,4 +1,4 @@
-.good_page {
+.order_confirmation {
   position: fixed;
   backdrop-filter: brightness(50%);
   height: 100%;
@@ -7,13 +7,43 @@
   justify-content: center;
   align-items: center;
   z-index: 3;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.good_page > div {
+.order_confirmation.open {
+  animation: open 0.2s ease-in-out forwards;
+  pointer-events: all;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.order_confirmation.close {
+  animation: close 0.2s ease-in-out;
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.order_confirmation > div {
   background-color: white;
   border-radius: 20px;
   width: min(90%, 800px);
   display: flex;
+  flex-direction: column;
   gap: 1em;
   padding: 1em;
   position: relative;
@@ -97,4 +127,8 @@ button {
   right: 8px;
   cursor: pointer;
   z-index: 1;
+}
+
+.address_div {
+  width: 350px;
 }
