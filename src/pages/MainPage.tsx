@@ -26,11 +26,11 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
     } catch (e) {
       setError("Не удалось загрузить пиццу");
     }
-    setLoading(false);
   }
 
   useEffect(() => {
     fetchGoods();
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   return (
@@ -45,7 +45,7 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
         />
       )}
       <section id="restaurants">
-        {isLoading && <CircleLoader />}
+        <CircleLoader isLoading={isLoading} />
         {error && <h3>{error}</h3>}
         <div>
           {goods?.map(

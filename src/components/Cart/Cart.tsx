@@ -8,7 +8,7 @@ import styles from "./Cart.module.css";
 
 interface ICartProps {
   toggleCart: () => void;
-  showCart: boolean;
+  showCart: boolean | null;
   cart: ICart | null;
   updateCart: () => void;
   toggleOrderConfirmation: () => void;
