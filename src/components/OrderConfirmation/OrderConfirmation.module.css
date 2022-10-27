@@ -132,3 +132,8 @@ button {
 .address_div {
   width: 350px;
 }
+
+.map {
+  width: 100%;
+  height: 300px;
+}

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
+@import 'leaflet/dist/leaflet.css';
 
 * {
   box-sizing: border-box;
@@ -515,4 +516,16 @@ header button:hover {
 
 .tags div img {
   height: 16px;
+}
+
+.leaflet-marker-icon {
+  width: 40px !important;
+  height: 40px !important;
+  left: -7px;
+  top: -7px;
+}
+
+.leaflet-control-container,
+.leaflet-shadow-pane{
+  display: none ;
 }

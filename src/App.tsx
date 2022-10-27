@@ -40,7 +40,6 @@ function App() {
   async function getUserData() {
     let token;
     if (localStorage.getItem("token")) {
-      alert('get')
       token = localStorage.getItem("token");
       axiosInstance.defaults.headers.common["Authorization"] = "Token " + token;
       try {

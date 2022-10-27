@@ -18,7 +18,7 @@ export interface IToken {
 
 export interface ISavedAddress {
   name: string;
-  latitute: number;
+  latitude: number;
   longitude: number;
 }
 
