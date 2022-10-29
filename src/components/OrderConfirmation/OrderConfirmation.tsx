@@ -77,6 +77,7 @@ const OrderConfirmation = ({
         showOrderConfirmation ? styles.open : styles.close
       }`}
     >
+      <div className="backtrigger" onClick={() => toggleOrderConfirmation()}></div>
       <div>
         <h1>Адрес доставки</h1>
         <h1>{selectedAddress?.name}</h1>

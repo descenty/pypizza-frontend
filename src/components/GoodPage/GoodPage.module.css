@@ -13,10 +13,12 @@
   background-color: white;
   border-radius: 20px;
   width: min(90%, 800px);
+  height: 300px;
   display: flex;
   gap: 1em;
   padding: 1em;
   position: relative;
+  align-items: center;
 }
 
 @media (max-width: 695px) {
@@ -28,6 +30,7 @@
 
 .good_page > div > img {
   align-self: center;
+  height: 300px;
 }
 
 .good_page > div > div {

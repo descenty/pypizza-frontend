@@ -24,6 +24,7 @@ function App() {
   const [showLoginWindow, setLoginWindow] = useState<boolean>(false);
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow);
+    document.querySelector("body")!.style.overflow = !showLoginWindow ? 'hidden' : 'scroll'
   };
   const [cart, setCart] = useState<ICart | null>(null);
   const [showCart, setShowCart] = useState<boolean>(false);

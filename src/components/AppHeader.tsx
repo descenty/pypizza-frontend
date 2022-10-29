@@ -27,49 +27,57 @@ const AppHeader = ({
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => setShowCart(false), [location])
+  useEffect(() => setShowCart(false), [location]);
   return (
     <header>
       <div>
-        <Link to="/">
-          <h2>
-            py
-            <br />
-            <span>pizza</span>
-          </h2>
-        </Link>
-        <div className="search-div">
-          <input type="text" name="search" id="search" placeholder="Поиск" />
-          <AiOutlineSearch className="search-icon" />
+        <div>
+          <Link to="/">
+            <h2>
+              py
+              <br />
+              <span>pizza</span>
+            </h2>
+          </Link>
+          <div className="search-div">
+            <input type="text" name="search" id="search" placeholder="Поиск" />
+            <AiOutlineSearch className="search-icon" />
+          </div>
         </div>
-        <a href="#">г. Москва</a>
+        <div>
+          <a href="#">г. Москва</a>
+        </div>
       </div>
       <div>
-        <a href="#">Акции</a>
-        <a href="#">Рестораны</a>
-        <a href="#">Мои заказы</a>
-        {user && (
-          <button id="cart-button" onClick={() => toggleCart()}>
-            <AiOutlineShopping className="cart-image" />
-            {cart?.count !== 0 && (
-              <span className="cart-span">{cart?.count}</span>
+        <div>
+          <a href="#">Акции</a>
+          <a href="#">Рестораны</a>
+          <a href="#">Мои заказы</a>
+        </div>
+        <div>
+          {user && (
+            <button id="cart-button" onClick={() => toggleCart()}>
+              <AiOutlineShopping className="cart-image" />
+              {cart?.count !== 0 && (
+                <span className="cart-span">{cart?.count}</span>
+              )}
+            </button>
+          )}
+          <button
+            id="user-button"
+            onClick={() => {
+              !user ? toggleLoginWindow() : navigate("profile/");
+            }}
+          >
+            <AiOutlineUser className="user-image" />
+            {user && (
+              <span className="bonus_points">
+                {user?.bonus_points}&nbsp;
+                <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
+              </span>
             )}
           </button>
-        )}
-        <button
-          id="user-button"
-          onClick={() => {
-            !user ? toggleLoginWindow() : (navigate("profile/"));
-          }}
-        >
-          <AiOutlineUser className="user-image" />
-          {user && (
-            <span className="bonus_points">
-              {user?.bonus_points}&nbsp;
-              <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
-            </span>
-          )}
-        </button>
+        </div>
       </div>
     </header>
     // <header>

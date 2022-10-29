@@ -16,7 +16,7 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState<boolean>(true);
   const [selectedGood, selectGood] = useState<IGood>();
-  const [category, setCategory] = useState<Category>("DEFAULT");
+  const [category, setCategory] = useState<Category>("PIZZA");
   const url = "http://localhost:8000/api/goods/";
 
   async function fetchGoods() {

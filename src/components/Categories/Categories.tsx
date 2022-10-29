@@ -19,13 +19,8 @@ const Categories = ({ categoryType, setCategoryType }: ICategoryProps) => {
               : styles.unselected_category
           }
           key={category.name}
-          onClick={() =>
-            setCategoryType(
-              categoryType === category.id ? "DEFAULT" : category.id
-            )
-          }
+          onClick={() => setCategoryType(category.id)}
         >
-          <img src={category.imageUrl} alt="category" />
           <span>{category.name}</span>
         </div>
       ))}

@@ -1,5 +1,11 @@
 import styles from "./GoodPage.module.css";
-import { IGood, IConfiguration, getSizeName, SizeType, Category } from "../../models";
+import {
+  IGood,
+  IConfiguration,
+  getSizeName,
+  SizeType,
+  Category,
+} from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import axios from "axios";
@@ -32,15 +38,23 @@ const GoodPage = ({ good, selectGood, updateCart }: IGoodPageProps) => {
           <h2>{good?.name}</h2>
           <p>{good?.description}</p>
           <div className={styles.configurations}>
-            {good?.configurations.map((config) => (
-              <button
-                className={config === goodConfig ? styles.active : undefined}
-                onClick={() => setGoodConfig(config)}
-                key={config.size}
-              >
-                {getSizeName(good?.category as Category, config.size as SizeType)}
-              </button>
-            ))}
+            {good?.configurations.map(
+              (config) =>
+                config.size !== "DEFAULT" && (
+                  <button
+                    className={
+                      config === goodConfig ? styles.active : undefined
+                    }
+                    onClick={() => setGoodConfig(config)}
+                    key={config.size}
+                  >
+                    {getSizeName(
+                      good?.category as Category,
+                      config.size as SizeType
+                    )}
+                  </button>
+                )
+            )}
           </div>
           <button
             className={styles.add_to_cart}

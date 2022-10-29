@@ -38,7 +38,7 @@
   }
 }
 
-.order_confirmation > div {
+.order_confirmation > div:nth-child(2) {
   background-color: white;
   border-radius: 20px;
   width: min(90%, 800px);

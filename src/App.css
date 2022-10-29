@@ -19,16 +19,6 @@ html {
   gap: 1.5em;
 }
 
-.add-to-cart {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-weight: bold;
-  margin-top: 4px;
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
 #login-panel {
   position: absolute;
   top: 0;
@@ -37,7 +27,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
+  backdrop-filter: brightness(75%);
   z-index: 3;
 }
 
@@ -45,20 +35,24 @@ html {
   margin-top: 30px;
 }
 
-#login-panel > div > div:nth-child(1) img {
-  width: 16px;
-  height: 16px;
+.exitButton {
+  width: 32px;
+  height: 32px;
   position: absolute;
   margin-top: -65px;
-  margin-left: 150px;
-  cursor: pointer;
-  filter: contrast(0.5);
+  margin-left: 135px;
+  background: #edeef2;
+  border-radius: 20px;
 }
 
-#login-panel > div {
+.exitButton:focus {
+  background: red;
+}
+
+#login-panel > div:nth-child(2) {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  width: 300px;
+  width: 500px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -68,7 +62,7 @@ html {
   border-style: dotted;
   border-color: #4e60ff;
   border-width: 1px;
-  box-shadow: 0px 10px 3px #4e60ff;
+  z-index: 1;
 }
 
 #login-panel > div > div:nth-child(2) {
@@ -233,6 +227,7 @@ header {
   justify-content: space-around;
   align-items: center;
   padding: 1em;
+  align-self: center;
   width: 100%;
   flex-wrap: wrap;
   gap: 1.5em;
@@ -263,11 +258,10 @@ header {
 header div {
   display: flex;
   align-items: center;
-  gap: 1em;
-}
-
-header div:nth-child(1) {
-  gap: 3em;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 2em;
+  row-gap: 1.5em
 }
 
 header h2 {
@@ -359,7 +353,9 @@ header button:hover {
 #restaurants {
   width: 90%;
   align-self: center;
-  padding: 1.5em;
+  justify-content: center;
+  display: flex;
+  padding: 1.5em
 }
 
 #restaurants > h3 {
@@ -371,10 +367,11 @@ header button:hover {
 
 #restaurants > div {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
   gap: 1.5em;
   width: 100%;
   height: max-content;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 @media (max-width: 1200px) {
@@ -398,28 +395,28 @@ header button:hover {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  height: max-content;
+  height: 400px;
   border-width: 1px;
   border-style: solid;
   border-color: rgb(231, 231, 231);
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
+  outline-color: #4e60ff;
+  outline-width: 1px;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .restaurant-card:hover {
-  box-shadow: 0px 10px 3px #4e60ff;
-}
-
-.restaurant-card:hover > img {
-  transform: scale(1.2);
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 14%);
 }
 
 .restaurant-card > img {
-  padding: 5px;
-  height: 200px;
+  padding: 10px;
+  height: 230px;
   width: auto;
   align-self: center;
   object-fit: cover;
-  transition: 0.5s;
+  transition: 0.7s;
 }
 
 .restaurant-card .image-span {
@@ -443,7 +440,7 @@ header button:hover {
   display: flex;
   flex-direction: column;
   padding-inline: 1.5em;
-  gap: 0.5em;
+  gap: 0.3em;
 }
 
 .restaurant-card .name-and-cart {
@@ -491,8 +488,33 @@ header button:hover {
 .restaurant-card .time-and-check {
   font-size: 13px;
   color: gray;
-  gap: 0.5em;
 }
+
+.add-to-cart {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  position: absolute;
+  left: 24px;
+  bottom: 8px;
+  text-align: light;
+  width: 200px;
+}
+
+.add-to-cart span:nth-child(1) {
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.add-to-cart span:nth-child(2) {
+  font-weight: bold;
+  letter-spacing: -1px;
+  font-size: 18px;
+  margin-top: -2px;
+}
+
 
 .tags {
   margin-top: 10px;
@@ -528,4 +550,14 @@ header button:hover {
 .leaflet-control-container,
 .leaflet-shadow-pane{
   display: none ;
+}
+
+.backtrigger {
+  position: fixed;
+  background: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+  border-radius: 0 !important;
+  background: red;
 }

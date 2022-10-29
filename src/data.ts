@@ -19,8 +19,8 @@ const categories: ICategory[] = [
     },
     {
         id: "DRINKS",
-        name: "BBQ",
-        imageUrl: 'icons/bbq.png'
+        name: "Напитки",
+        imageUrl: 'icons/drink.png'
     },
     {
         id: "DESERTS",

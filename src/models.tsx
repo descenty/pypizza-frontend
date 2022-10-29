@@ -54,9 +54,9 @@ type SizeName = { [size in SizeType]: string };
 
 const sizes: { [category in Category]: SizeName } = {
   PIZZA: {
-    SMALL: "Маленькая",
-    MEDIUM: "Средняя",
-    BIG: "Большая",
+    SMALL: "Маленькая - 25 см",
+    MEDIUM: "Средняя - 30 см",
+    BIG: "Большая - 35 см",
   },
   BURGERS: {
     SMALL: "Маленький",

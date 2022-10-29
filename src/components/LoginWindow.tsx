@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { GrFormClose } from "react-icons/gr";
 import { axiosInstance } from "../App";
 import { IToken } from "../models";
 
@@ -28,7 +29,8 @@ const LoginWindow = ({ getUserData, toggleLoginWindow }: ILoginWindowProps) => {
         loginFormData
       );
       localStorage.setItem("token", response.data.token);
-      axiosInstance.defaults.headers.common['Authorization'] = "Token response.data.token"
+      axiosInstance.defaults.headers.common["Authorization"] =
+        "Token response.data.token";
       toggleLoginWindow();
       await getUserData();
     } catch {
@@ -37,10 +39,14 @@ const LoginWindow = ({ getUserData, toggleLoginWindow }: ILoginWindowProps) => {
   }
   return (
     <div id="login-panel">
+      <div className="backtrigger" onClick={() => toggleLoginWindow()}></div>
       <div>
         <div>
           <h2>Вход</h2>
-          <img onClick={() => toggleLoginWindow()} src="close.png" alt="" />
+          <GrFormClose
+            className="exitButton"
+            onClick={() => toggleLoginWindow()}
+          ></GrFormClose>
         </div>
         <div>
           <input
