@@ -13,93 +13,14 @@ html {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 #root {
   display: flex;
   flex-direction: column;
   gap: 1.5em;
-}
-
-#login-panel {
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: brightness(75%);
-  z-index: 3;
-}
-
-#login-panel > div > div:nth-child(1) {
-  margin-top: 30px;
-}
-
-.exitButton {
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  margin-top: -65px;
-  margin-left: 135px;
-  background: #edeef2;
-  border-radius: 20px;
-}
-
-.exitButton:focus {
-  background: red;
-}
-
-#login-panel > div:nth-child(2) {
-  background-color: rgb(255, 255, 255);
-  border-radius: 20px;
-  width: 500px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-  align-items: center;
-  padding: 1em;
-  border-style: dotted;
-  border-color: #4e60ff;
-  border-width: 1px;
-  z-index: 1;
-}
-
-#login-panel > div > div:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em;
-}
-
-#login-panel input {
-  border-radius: 10px;
-  padding: 0.5em;
-  width: 220px;
-  border-style: none;
-  background: #edeef2;
-  outline-color: #4e60ff;
-  text-align: center;
-  font-size: 16px;
-}
-
-#login-panel button {
-  border-radius: 10px;
-  border-width: 1px;
-  width: 90%;
-  font-size: 18px;
-  padding: 0.4em 2em;
-  border-style: none;
-  cursor: pointer;
-  transition: 0.3s;
-  background: none;
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-#login-panel button:hover {
-  color: #4e60ff;
-  background: #f3f4ff;
 }
 
 .social-button {

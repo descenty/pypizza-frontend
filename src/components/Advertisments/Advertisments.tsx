@@ -6,9 +6,9 @@ const Advertisments = () => {
       <div>
         <img src="cupcake.png" alt="cupcake" />
         <div>
-          <h3>All deserts</h3>
-          <h1>20% OFF</h1>
-          <span>Deserts</span>
+          <h3>Скидка 10% по промокоду</h3>
+          <h1>МИРЭА</h1>
+          <span>Акция действует до 25.12.2022</span>
         </div>
       </div>
       <div className={styles.orange}>

@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import AppHeader from "./components/AppHeader";
 import MainPage from "./pages/MainPage";
-import LoginWindow from "./components/LoginWindow";
+import LoginWindow from "./components/LoginWindow/LoginWindow";
 import UserContext from "./context/UserContext";
 import { ICart, IUser } from "./models";
 import axios from "axios";
@@ -14,10 +14,11 @@ import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 
-export const baseURL = "http://localhost:8000";
+// export const baseURL = "http://localhost:8000";
+export const baseURL = "http://192.168.0.101:8000"
 
 export const axiosInstance = axios.create({
-  baseURL: baseURL + "/api/",
+  baseURL: baseURL + '/api/',
 });
 
 function App() {

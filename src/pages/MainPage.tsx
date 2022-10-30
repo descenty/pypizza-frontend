@@ -6,6 +6,7 @@ import Advertisments from "../components/Advertisments/Advertisments";
 import { Category, ICart, IGood } from "../models";
 import Categories from "../components/Categories/Categories";
 import GoodPage from "../components/GoodPage/GoodPage";
+import { axiosInstance } from "../App";
 
 interface IMainPageProps {
   updateCart: () => Promise<void>;
@@ -17,11 +18,10 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [selectedGood, selectGood] = useState<IGood>();
   const [category, setCategory] = useState<Category>("PIZZA");
-  const url = "http://localhost:8000/api/goods/";
 
   async function fetchGoods() {
     try {
-      const response = await axios.get<IGood[]>(url);
+      const response = await axiosInstance.get<IGood[]>("goods/");
       setGoods(response.data);
     } catch (e) {
       setError("Не удалось загрузить пиццу");

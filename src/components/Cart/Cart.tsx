@@ -53,15 +53,6 @@ const Cart = ({
                 </span>
               </div>
               <div className={styles.good_quantity}>
-                <AiOutlinePlus
-                  className={styles.quantity_change}
-                  onClick={() =>
-                    addToCart(cart_good.good, cart_good.configuration).then(
-                      () => updateCart()
-                    )
-                  }
-                />
-                <span>{cart_good.quantity}</span>
                 <AiOutlineMinus
                   className={styles.quantity_change}
                   onClick={() =>
@@ -69,6 +60,15 @@ const Cart = ({
                       cart_good.good,
                       cart_good.configuration
                     ).then(() => updateCart())
+                  }
+                />
+                <span>{cart_good.quantity}</span>
+                <AiOutlinePlus
+                  className={styles.quantity_change}
+                  onClick={() =>
+                    addToCart(cart_good.good, cart_good.configuration).then(
+                      () => updateCart()
+                    )
                   }
                 />
               </div>

@@ -1,0 +1,144 @@
+.login_panel {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: brightness(75%);
+  z-index: 3;
+}
+
+.login_window {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  width: 500px;
+  max-width: 100%;
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  border-style: dotted;
+  border-color: #4e60ff;
+  border-width: 1px;
+  z-index: 1;
+}
+
+.login_header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-inline: 1em;
+  gap: 1em;
+}
+
+.login_content {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  padding-top: 1.5em;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  align-self: flex-start;
+}
+
+.phone_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.phone_form.hidden {
+  opacity: 0;
+}
+
+.login_panel input {
+  border-radius: 10px;
+  padding: 0.5em;
+  width: 100%;
+  border-style: none;
+  background: #edeef2;
+  outline-color: #4e60ff;
+  font-size: 18px;
+  text-indent: 16px;
+}
+
+.plus_span {
+  font-size: 20px;
+  position: absolute;
+  margin-top: 6.5px;
+  margin-left: 10px;
+}
+
+.input_div {
+  width: 100%;
+  position: relative;
+}
+
+.login_panel button {
+  border-radius: 10px;
+  border-width: 1px;
+  font-size: 18px;
+  padding: 0.4em 2em;
+  border-style: none;
+  cursor: pointer;
+  transition: 0.3s;
+  background: none;
+  font-weight: 500;
+}
+
+.login_panel button:hover {
+  color: #4e60ff;
+  background: #f3f4ff;
+}
+
+.button_inactive {
+  color: gray;
+  pointer-events: none;
+}
+
+.exitButton {
+  width: 32px;
+  height: 32px;
+  background: #edeef2;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.exitButton:focus {
+  background: red;
+}
+
+.sms_form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 450px;
+  max-width: 100%;
+  height: 100%;
+  left: 100%;
+  background: white;
+  gap: 1em;
+  transition: 0.5s;
+}
+
+.sms_form.show {
+  left: 1em;
+}
+
+.sms_form input {
+  width: 96%;
+}
