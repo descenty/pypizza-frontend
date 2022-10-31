@@ -1,18 +1,42 @@
 .profile_div {
-    display: flex;
-    flex-direction: column;
-    padding-inline: 2em;
-    gap: 1em;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 2.5em;
+  gap: 2em;
 }
 
 .bonus_points {
-    display: flex;
-    align-items: center;
-    gap: 5px
+  display: flex;
+  align-items: center;
 }
 
 .addresses_div {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  width: 300px;
+}
+
+.addresses_div h3 {
+  margin-left: 1em;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.8em 1.5em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
+}
+
+.address:hover {
+  box-shadow: 0px 5px 5px rgba(128, 128, 128, 0.3);
+}
+
+.close_button {
+  font-size: 32px;
+  cursor: pointer;
 }
