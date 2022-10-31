@@ -142,3 +142,10 @@
 .sms_form input {
   width: 96%;
 }
+
+.error_span {
+  color: red;
+  text-transform: lowercase;
+  margin-top: -10px;
+   margin-left: 10px;
+}

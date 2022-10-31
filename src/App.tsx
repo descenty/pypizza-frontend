@@ -11,21 +11,23 @@ import Cart from "./components/Cart/Cart";
 import AppFooter from "./components/AppFooter";
 import { getCart } from "./APIFunctions";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 
 // export const baseURL = "http://localhost:8000";
-export const baseURL = "http://192.168.0.101:8000"
+export const baseURL = "http://192.168.0.101:8000";
 
 export const axiosInstance = axios.create({
-  baseURL: baseURL + '/api/',
+  baseURL: baseURL + "/api/",
 });
 
 function App() {
   const [showLoginWindow, setLoginWindow] = useState<boolean>(false);
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow);
-    document.querySelector("body")!.style.overflow = !showLoginWindow ? 'hidden' : 'scroll'
+    document.querySelector("body")!.style.overflow = !showLoginWindow
+      ? "hidden"
+      : "scroll";
   };
   const [cart, setCart] = useState<ICart | null>(null);
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -64,6 +66,29 @@ function App() {
     !user ? getUserData() : updateCart();
   }, [user]);
 
+  const getGeolocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        axios
+          .get(
+            `http://api.openweathermap.org/geo/1.0/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=879b6e4ef63abefd6fa01b2a25c7999a&`
+          )
+          .then((response) =>
+            localStorage.setItem("city", response.data[0].local_names.ru)
+          );
+      },
+      () => alert("Failed to get location data"),
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+  };
+
+  useEffect(() => {
+    !localStorage.getItem("city") && getGeolocation();
+  }, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>

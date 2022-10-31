@@ -1,0 +1,18 @@
+.profile_div {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2em;
+    gap: 1em;
+}
+
+.bonus_points {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.addresses_div {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
