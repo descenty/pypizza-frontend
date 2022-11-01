@@ -1,4 +1,4 @@
-import styles from "./OrderConfirmation.module.css";
+import styles from "./NewAddressPage.module.css";
 import {
   IGood,
   IConfiguration,
@@ -32,22 +32,19 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import { time } from "console";
 
-interface IOrderConfirmationProps {
-  toggleOrderConfirmation: () => void;
-  showOrderConfirmation: boolean;
+interface INewAddressPageProps {
   toggleNewAddressPage: () => void;
+  showNewAddressPage: boolean;
 }
 
-const OrderConfirmation = ({
-  toggleOrderConfirmation,
-  showOrderConfirmation,
+const NewAddressPage = ({
   toggleNewAddressPage,
-}: IOrderConfirmationProps) => {
+  showNewAddressPage,
+}: INewAddressPageProps) => {
   const { user } = useContext(UserContext);
-  const addressesOptions = user?.saved_addresses.map((saved_address) => ({
-    value: saved_address,
-    label: saved_address.name,
-  }));
+  const [address, setAddress] = useState<
+    DaDataSuggestion<DaDataAddress> | undefined
+  >();
   const [selectedAddress, setSelectedAddress] = useState<ISavedAddress>();
 
   interface IDynamicMapProps {
@@ -70,37 +67,46 @@ const OrderConfirmation = ({
       50
     );
   }, [selectedAddress]);
+
+  useEffect(() => {
+    if (address)
+      axiosInstance
+        .post<ISavedAddress>("get-address-geolocation/", {
+          address: address.value,
+        })
+        .then((response) => setSelectedAddress(response.data));
+  }, [address]);
+
+  const addNewSavedAddress = async () => {
+    if (selectedAddress) {
+      await axiosInstance.post("add-saved-address/", {
+        address: selectedAddress.name,
+      });
+      user?.saved_addresses.push(selectedAddress);
+      toggleNewAddressPage();
+    }
+  };
   return (
     <div
       className={`${styles.order_confirmation} ${
-        showOrderConfirmation ? styles.open : styles.close
+        showNewAddressPage ? styles.open : styles.close
       }`}
     >
-      <div
-        className="backtrigger"
-        onClick={() => toggleOrderConfirmation()}
-      ></div>
+      <div className="backtrigger" onClick={() => toggleNewAddressPage()}></div>
       <div>
-        <h1>Адрес доставки</h1>
+        <h1>Новый адрес доставки</h1>
+        <h1>{selectedAddress?.name}</h1>
         <GrFormClose
           className={styles.close_button}
-          onClick={() => toggleOrderConfirmation()}
+          onClick={() => toggleNewAddressPage()}
         />
-        <Select
-          placeholder="Выберите адрес доставки"
-          options={addressesOptions}
-          onChange={(e) => {
-            setSelectedAddress(e?.value);
-          }}
-          // defaultValue={addressesOptions && addressesOptions[0]}
-        />
-        <button
-          onClick={() => {
-            toggleNewAddressPage();
-          }}
-        >
-          Добавить новый адрес
-        </button>
+        <div className={styles.address_div}>
+          <AddressSuggestions
+            token="d3842e1df7e2d35e71ecbc4469a4f6d76b74100e"
+            value={address}
+            onChange={setAddress}
+          />
+        </div>
         {selectedAddress && (
           <MapContainer
             center={[selectedAddress.latitude, selectedAddress.longitude]}
@@ -121,10 +127,12 @@ const OrderConfirmation = ({
             </Marker>
           </MapContainer>
         )}
-        <a href="#">К оплате</a>
+        <button onClick={async () => await addNewSavedAddress()}>
+          Добавить адрес
+        </button>
       </div>
     </div>
   );
 };
 
-export default OrderConfirmation;
+export default NewAddressPage;

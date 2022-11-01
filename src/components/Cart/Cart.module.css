@@ -30,7 +30,7 @@
   }
 }
 
-.cart.open {
+.open {
   animation: open 0.2s ease-in-out forwards;
   pointer-events: all;
 }
@@ -44,7 +44,7 @@
   }
 }
 
-.cart.close {
+.close {
   animation: close 0.2s ease-in-out;
 }
 
@@ -243,4 +243,8 @@
 
 .to_payment_div span b {
   color: #4e60ff;
+}
+
+.backtrigger {
+  background-color: rgba(0, 0, 0, 0.2);
 }

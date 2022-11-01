@@ -24,7 +24,10 @@ const Cart = ({
   return (
     <>
       {showCart && (
-        <div className="backtrigger" onClick={() => toggleCart()}></div>
+        <div
+          className={`backtrigger ${styles.backtrigger} ${showCart ? styles.open : styles.close}`}
+          onClick={() => toggleCart()}
+        ></div>
       )}
       <div
         className={`${styles.cart} ${showCart ? styles.open : styles.close}`}

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&display=swap");
-@import 'leaflet/dist/leaflet.css';
+@import "leaflet/dist/leaflet.css";
 
 * {
   box-sizing: border-box;
@@ -183,7 +183,7 @@ header div {
   justify-content: center;
   flex-wrap: wrap;
   column-gap: 2em;
-  row-gap: 1.5em
+  row-gap: 1.5em;
 }
 
 header h2 {
@@ -277,7 +277,7 @@ header button:hover {
   align-self: center;
   justify-content: center;
   display: flex;
-  padding: 1.5em
+  padding: 1.5em;
 }
 
 #restaurants > h3 {
@@ -437,7 +437,6 @@ header button:hover {
   margin-top: -2px;
 }
 
-
 .tags {
   margin-top: 10px;
   display: flex;
@@ -470,16 +469,14 @@ header button:hover {
 }
 
 .leaflet-control-container,
-.leaflet-shadow-pane{
-  display: none ;
+.leaflet-shadow-pane {
+  display: none;
 }
 
 .backtrigger {
   position: fixed;
-  background: none !important;
   width: 100% !important;
   height: 100% !important;
   z-index: 0;
   border-radius: 0 !important;
-  background: red;
 }

@@ -13,6 +13,7 @@ import { getCart } from "./APIFunctions";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
+import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
 
 // export const baseURL = "http://localhost:8000";
 export const baseURL = "http://192.168.0.101:8000";
@@ -38,6 +39,10 @@ function App() {
     useState<boolean>(false);
   const toggleOrderConfirmation = () => {
     setShowOrderConfirmation(!showOrderConfirmation);
+  };
+  const [showNewAddressPage, setShowNewAddressPage] = useState<boolean>(false);
+  const toggleNewAddressPage = () => {
+    setShowNewAddressPage(!showNewAddressPage);
   };
   const [user, setUser] = useState<IUser | null>();
 
@@ -107,7 +112,7 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<MainPage updateCart={updateCart} />} />
-          <Route path="profile/" element={<ProfilePage />} />
+          <Route path="profile/" element={<ProfilePage toggleNewAddressPage={toggleNewAddressPage} />} />
         </Routes>
         <Cart
           toggleCart={toggleCart}
@@ -119,6 +124,11 @@ function App() {
         <OrderConfirmation
           toggleOrderConfirmation={toggleOrderConfirmation}
           showOrderConfirmation={showOrderConfirmation}
+          toggleNewAddressPage={toggleNewAddressPage}
+        />
+        <NewAddressPage
+          toggleNewAddressPage={toggleNewAddressPage}
+          showNewAddressPage={showNewAddressPage}
         />
         <AppFooter />
       </BrowserRouter>

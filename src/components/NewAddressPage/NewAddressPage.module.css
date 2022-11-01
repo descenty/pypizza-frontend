@@ -1,0 +1,140 @@
+.order_confirmation {
+  position: fixed;
+  backdrop-filter: brightness(50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.order_confirmation.open {
+  animation: open 0.2s ease-in-out forwards;
+  pointer-events: all;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.order_confirmation.close {
+  animation: close 0.2s ease-in-out;
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.order_confirmation > div:nth-child(2) {
+  background-color: white;
+  border-radius: 20px;
+  width: min(90%, 800px);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  position: relative;
+}
+
+@media (max-width: 695px) {
+  .good_page > div {
+    flex-direction: column;
+    height: 570px;
+  }
+}
+
+.good_page > div > img {
+  align-self: center;
+}
+
+.good_page > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  position: relative;
+}
+
+.good_page h2 {
+  font-size: 26px;
+}
+
+.good_page p {
+  color: gray;
+}
+
+.good_page .configurations {
+  display: flex;
+  gap: 0.2em;
+  padding: 0.2em;
+  background-color: #f1f1f5;
+  width: max-content;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+button {
+  padding: 0.5em;
+  padding-inline: 1em;
+  border-style: none;
+  border-radius: 10px;
+}
+
+.active {
+  background-color: white;
+}
+
+.good_page .configurations button:hover {
+  background-color: white;
+}
+
+.add_to_cart {
+  width: max-content;
+  font-size: 15px;
+  font-weight: bold;
+  background: none;
+  border-style: none;
+  padding: 0.5em;
+  padding-inline: 1em;
+  border-radius: 10px;
+  transition: 0.3s;
+  background: #f3f4ff;
+  color: #4e60ff;
+  margin-top: 10px;
+}
+
+.add_to_cart:hover {
+  transform: scale(1.05);
+}
+
+.close_button {
+  position: absolute;
+  padding: 0;
+  font-size: 28px;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.address_div {
+  width: 350px;
+}
+
+.map {
+  width: 100%;
+  height: 300px;
+  z-index: 0;
+}

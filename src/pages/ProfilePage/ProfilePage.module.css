@@ -24,12 +24,16 @@
 .address {
   display: flex;
   align-items: center;
-  gap: 1em;
+  justify-content: space-between;
   padding: 0.8em 1.5em;
   border-radius: 20px;
-  cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
+  position: relative;
+}
+
+.address span {
+  width: 80%;
 }
 
 .address:hover {
@@ -37,6 +41,6 @@
 }
 
 .close_button {
-  font-size: 32px;
+  font-size: 24px;
   cursor: pointer;
 }
