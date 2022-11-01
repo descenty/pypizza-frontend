@@ -482,9 +482,9 @@ header button:hover {
 }
 
 .logo {
-  width: 100px;
+  width: 80px;
   display: flex;
-  padding: 0;
+  padding: 5px;
 }
 
 .logo img {

@@ -33,7 +33,7 @@ const AppHeader = ({
       <div>
         <div>
           <Link to="/" className="logo">
-            <img src={process.env.PUBLIC_URL + '/PyPizza.png'} alt="" />
+            <img src={process.env.PUBLIC_URL + "/PyPizza.png"} alt="" />
             {/* <h2>
               py
               <br />
@@ -53,7 +53,7 @@ const AppHeader = ({
         <div>
           <a href="#">Акции</a>
           <a href="#">Рестораны</a>
-          <a href="#">Мои заказы</a>
+          <Link to="orders/">Мои заказы</Link>
         </div>
         <div>
           {user && (

@@ -70,6 +70,14 @@ const OrderConfirmation = ({
       50
     );
   }, [selectedAddress]);
+
+  const makeOrder = async () => {
+    if (!selectedAddress) return;
+    const response = await axiosInstance.post("make-order/", {
+      address: selectedAddress?.name,
+    });
+    window.location.href = response.data.redirect;
+  };
   return (
     <div
       className={`${styles.order_confirmation} ${
@@ -121,7 +129,7 @@ const OrderConfirmation = ({
             </Marker>
           </MapContainer>
         )}
-        <a href="#">К оплате</a>
+        <button onClick={makeOrder}>К оплате</button>
       </div>
     </div>
   );

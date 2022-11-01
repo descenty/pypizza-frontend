@@ -14,6 +14,8 @@ import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
+import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirmation";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
 // export const baseURL = "http://localhost:8000";
 export const baseURL = "http://192.168.0.101:8000";
@@ -112,7 +114,17 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<MainPage updateCart={updateCart} />} />
-          <Route path="profile/" element={<ProfilePage toggleNewAddressPage={toggleNewAddressPage} />} />
+          <Route
+            path="profile/"
+            element={
+              <ProfilePage toggleNewAddressPage={toggleNewAddressPage} />
+            }
+          />
+          <Route
+            path="payment-confirmation/:id/"
+            element={<PaymentConfirmation />}
+          />
+          <Route path="orders/" element={<OrdersPage />} />
         </Routes>
         <Cart
           toggleCart={toggleCart}
