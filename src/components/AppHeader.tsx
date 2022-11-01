@@ -32,12 +32,13 @@ const AppHeader = ({
     <header>
       <div>
         <div>
-          <Link to="/">
-            <h2>
+          <Link to="/" className="logo">
+            <img src={process.env.PUBLIC_URL + '/PyPizza.png'} alt="" />
+            {/* <h2>
               py
               <br />
               <span>pizza</span>
-            </h2>
+            </h2> */}
           </Link>
           <div className="search-div">
             <input type="text" name="search" id="search" placeholder="Поиск" />
