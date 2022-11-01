@@ -205,7 +205,7 @@ header button {
   height: 50px;
   border-radius: 15px;
   border-style: none;
-  color: #4e60ff;
+  color: #fd6d22;
   position: relative;
   background: #f3f4ff;
   transition: 0.3s;
@@ -220,24 +220,13 @@ header button:hover {
   font-size: 26px;
 }
 
-.bonus_points {
-  position: absolute;
-  top: 5px;
-  right: 1px;
-  font-size: 13px;
-  background: #4e60ff;
-  color: white;
-  padding: 0px 4px;
-  border-radius: 50%;
-}
-
 .cart-span {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   color: white;
-  background: #4e60ff;
+  background: #fd6d22;
   border-radius: 8px;
   font-size: 11px;
   width: 20px;
@@ -252,7 +241,7 @@ header button:hover {
   align-items: center;
   position: absolute;
   color: white;
-  background: #4e60ff;
+  background: #fd6d22;
   border-radius: 8px;
   font-size: 11px;
   width: 50px;
@@ -489,4 +478,11 @@ header button:hover {
 
 .logo img {
   width: 100%;
+}
+
+.active_order_link {
+  color: #fd6d22;
+  border-radius: 0px;
+  border-width: 2px;
+  border-bottom-style: solid;
 }

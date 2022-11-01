@@ -22,11 +22,29 @@ export interface ISavedAddress {
   longitude: number;
 }
 
+export type SizeType = "SMALL" | "MEDIUM" | "BIG";
+export type StatusType = "CREATED" | "PAID" | "IN_WORK" | "COMPLETED";
+
+export interface IOrderedGood {
+  name: string;
+  size: SizeType | "DEFAULT";
+  price: number;
+}
+
+export interface IOrder {
+  id: number;
+  total: number;
+  created_at: string;
+  status: StatusType;
+  ordered_goods: IOrderedGood[];
+}
+
 export interface IUser {
   phone: string;
   fio: string;
   bonus_points: number;
   saved_addresses: ISavedAddress[];
+  orders: IOrder[]
   token: string;
 }
 
@@ -47,7 +65,6 @@ export interface ICart {
   promo_code_name: string | null;
 }
 
-export type SizeType = "SMALL" | "MEDIUM" | "BIG";
 export type Category = "PIZZA" | "DRINKS" | "BURGERS" | "DESERTS" | "DEFAULT";
 
 type SizeName = { [size in SizeType]: string };

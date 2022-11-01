@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-@media (max-width: 695px) {
+@media (max-width: 830px) {
   .good_page > div {
     flex-direction: column;
     height: 570px;
@@ -30,7 +30,7 @@
 
 .good_page > div > img {
   align-self: center;
-  height: 300px;
+  height: 280px;
 }
 
 .good_page > div > div {

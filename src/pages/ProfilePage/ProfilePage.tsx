@@ -33,17 +33,40 @@ const ProfilePage = ({ toggleNewAddressPage }: IProfilePageProps) => {
   return (
     <>
       <div className={styles.profile_div}>
-        <h1>Личный кабинет</h1>
+        <h3>Личный кабинет</h3>
         <h2>{user?.phone}</h2>
         <h3 className={styles.bonus_points}>
           Бонусные баллы: &nbsp;{user?.bonus_points}&nbsp;
           <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
         </h3>
-        <div>
+        {/* <div>
           <h3>Потратить бонусы:</h3>
-        </div>
-        <div>
-          <h3>Ваши заказы:</h3>
+        </div> */}
+        <div className={styles.orders_panel}>
+          <h3>История заказов:</h3>
+          <span>Последние 10 заказов</span>
+          <div className={styles.orders}>
+            <div className={styles.order}>
+              <span>№</span>
+              <span className={styles.column2}>Время заказа</span>
+              <span className={styles.column2}>Сумма</span>
+            </div>
+            {user?.orders.map((order) => (
+              <div key={order.created_at} className={styles.order}>
+                <span>{order.id}</span>
+                <span className={styles.column2}>
+                  {new Date(order.created_at).toLocaleString("ru", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
+                <span className={styles.column2}>{order.total} ₽</span>
+              </div>
+            ))}
+          </div>
         </div>
         <div className={styles.addresses_div}>
           <h3>Сохранённые адреса:</h3>

@@ -53,7 +53,9 @@ const AppHeader = ({
         <div>
           <a href="#">Акции</a>
           <a href="#">Рестораны</a>
-          <Link to="orders/">Мои заказы</Link>
+          <Link to="orders/" className="active_order_link">
+            Активный заказ
+          </Link>
         </div>
         <div>
           {user && (

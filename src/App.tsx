@@ -15,7 +15,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
 import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirmation";
-import OrdersPage from "./pages/OrdersPage/OrdersPage";
+import ActiveOrderPage from "./pages/OrdersPage/ActiveOrderPage";
 
 // export const baseURL = "http://localhost:8000";
 export const baseURL = "http://192.168.0.101:8000";
@@ -124,7 +124,7 @@ function App() {
             path="payment-confirmation/:id/"
             element={<PaymentConfirmation />}
           />
-          <Route path="orders/" element={<OrdersPage />} />
+          <Route path="orders/" element={<ActiveOrderPage />} />
         </Routes>
         <Cart
           toggleCart={toggleCart}
