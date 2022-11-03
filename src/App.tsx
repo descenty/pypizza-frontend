@@ -17,8 +17,8 @@ import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
 import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirmation";
 import ActiveOrderPage from "./pages/OrdersPage/ActiveOrderPage";
 
-// export const baseURL = "http://localhost:8000";
-export const baseURL = "http://192.168.0.101:8000";
+export const baseURL = "http://localhost:8000";
+// export const baseURL = "http://192.168.0.101:8000";
 
 export const axiosInstance = axios.create({
   baseURL: baseURL + "/api/",

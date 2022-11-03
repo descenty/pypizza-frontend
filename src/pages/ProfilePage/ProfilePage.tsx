@@ -53,6 +53,7 @@ const ProfilePage = ({ toggleNewAddressPage }: IProfilePageProps) => {
             </div>
             {user?.orders.map((order) => (
               <div key={order.created_at} className={styles.order}>
+                <span>{order.status}</span>
                 <span>{order.id}</span>
                 <span className={styles.column2}>
                   {new Date(order.created_at).toLocaleString("ru", {

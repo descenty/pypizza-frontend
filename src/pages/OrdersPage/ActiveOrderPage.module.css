@@ -1,0 +1,43 @@
+.active_order {
+  padding: 2em;
+  margin-top: -2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.active_orders_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.2em;
+  background-color: #f1f1f5;
+  width: max-content;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.active_orders_list > button {
+  padding: 1em;
+  padding-inline: 1em;
+  border-style: none;
+  border-radius: 10px;
+  width: 350px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.active_orders_list > button > span:nth-child(1) {
+    grid-column: 2 span;
+}
+
+.active_orders_list > button:hover {
+  background-color: white;
+}
+
+.active {
+  background-color: white;
+  color: #fd6d22;
+  font-weight: 600;
+}

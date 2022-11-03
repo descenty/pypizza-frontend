@@ -25,6 +25,13 @@ export interface ISavedAddress {
 export type SizeType = "SMALL" | "MEDIUM" | "BIG";
 export type StatusType = "CREATED" | "PAID" | "IN_WORK" | "COMPLETED";
 
+export const statuses: { [status in StatusType]: string } = {
+  CREATED: "Создан",
+  PAID: "Оплачен",
+  IN_WORK: "В работе",
+  COMPLETED: "Завершен",
+};
+
 export interface IOrderedGood {
   name: string;
   size: SizeType | "DEFAULT";
@@ -44,7 +51,7 @@ export interface IUser {
   fio: string;
   bonus_points: number;
   saved_addresses: ISavedAddress[];
-  orders: IOrder[]
+  orders: IOrder[];
   token: string;
 }
 
