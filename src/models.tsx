@@ -23,19 +23,26 @@ export interface ISavedAddress {
 }
 
 export type SizeType = "SMALL" | "MEDIUM" | "BIG";
-export type StatusType = "CREATED" | "PAID" | "IN_WORK" | "COMPLETED";
+export type StatusType = "CREATED" | "ACCEPTED" | "COOKING" | "COLLECTING" | "DELIVERING" | "COMPLETED";
 
 export const statuses: { [status in StatusType]: string } = {
   CREATED: "Создан",
-  PAID: "Оплачен",
-  IN_WORK: "В работе",
+  ACCEPTED: "Принят",
+  COOKING: "Готовится",
+  COLLECTING: "Собирается",
+  DELIVERING: "Доставляется",
   COMPLETED: "Завершен",
 };
 
 export interface IOrderedGood {
   name: string;
-  size: SizeType | "DEFAULT";
+  image: string;
+  description: string;
+  category: Category;
+  slug: string;
+  size: SizeType;
   price: number;
+  quantity: number;
 }
 
 export interface IOrder {

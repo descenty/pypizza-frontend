@@ -1,15 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { baseURL } from "../../App";
 import UserContext from "../../context/UserContext";
-import { IOrder, statuses } from "../../models";
+import { Category, getSizeName, IOrder, statuses } from "../../models";
+import { ruDate } from "../../utils";
 import styles from "./ActiveOrderPage.module.css";
 
 const ActiveOrderPage = () => {
   const { user } = useContext(UserContext);
-  const [selectedOrder, selectOrder] = useState<IOrder | undefined>(
-    user?.orders[0]
-  );
+  const [selectedOrder, selectOrder] = useState<IOrder | undefined>();
+  useEffect(() => selectOrder(user?.orders[0]), [user]);
   return (
-    <div className={styles.active_order}>
+    <div className={styles.active_order_page}>
       <div className={styles.active_orders_list}>
         {user?.orders.map((order) => (
           <button
@@ -19,26 +20,31 @@ const ActiveOrderPage = () => {
           >
             <span>
               Заказ от&nbsp;
-              {new Date(order.created_at).toLocaleString("ru", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {ruDate(order.created_at)}
             </span>
             <span>{statuses[order.status]}</span>
           </button>
         ))}
       </div>
-      <h2>Ваши заказы</h2>
-      <div>
-        {user?.orders.map((order) => (
-          <div key={order.created_at}>
-            Заказ от {new Date(order.created_at).toLocaleDateString("ru-RU")}
+      {selectedOrder && (
+        <div className={styles.selected_order}>
+          <h2>Заказ от {ruDate(selectedOrder.created_at)}</h2>
+          <h2>Статус: {statuses[selectedOrder.status]}</h2>
+          <div className={styles.ordered_goods}>
+            {selectedOrder.ordered_goods.map((ordered_good, index) => (
+              <div key={index}>
+                <img src={baseURL + ordered_good.image} alt="" />
+                <div>
+                  <h4>{ordered_good.name}</h4>
+                  <p>{getSizeName(ordered_good.category, ordered_good.size)}</p>
+                </div>
+                <h4>{ordered_good.quantity}</h4>
+                <p className={styles.ordered_good_price}>{ordered_good.price} ₽</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
