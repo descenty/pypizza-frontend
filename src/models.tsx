@@ -59,9 +59,25 @@ export interface IOrder {
   id: number;
   total: number;
   created_at: string;
+  target_time: string;
   status: StatusType;
   ordered_goods: IOrderedGood[];
   delivery_address: string;
+}
+
+export interface IAddress {
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface IRestaurant {
+  rating: number;
+  address: IAddress;
+}
+
+export interface ICity {
+  name: string;
 }
 
 export interface IUser {

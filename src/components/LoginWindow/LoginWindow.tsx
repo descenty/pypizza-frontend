@@ -2,6 +2,8 @@ import axios from "axios";
 import React, {
   ChangeEvent,
   ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
   useCallback,
   useContext,
   useRef,
@@ -16,9 +18,14 @@ import styles from "./LoginWindow.module.css";
 interface ILoginWindowProps {
   getUserData: () => Promise<unknown>;
   toggleLoginWindow: () => void;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const LoginWindow = ({ getUserData, toggleLoginWindow }: ILoginWindowProps) => {
+const LoginWindow = ({
+  getUserData,
+  toggleLoginWindow,
+  setLoading,
+}: ILoginWindowProps) => {
   const [showSMSForm, setShowSMSForm] = useState<boolean>(false);
   const [phoneInput, setPhoneInput] = useState<string>("7 ");
   const [phone, setPhone] = useState<string>("");
@@ -86,6 +93,8 @@ const LoginWindow = ({ getUserData, toggleLoginWindow }: ILoginWindowProps) => {
           });
           localStorage.setItem("token", response.data.token);
           await getUserData();
+          setLoading(true);
+          setTimeout(() => setLoading(false), 1000);
           toggleLoginWindow();
         } catch (e) {
           setError("неверный код");

@@ -1,0 +1,82 @@
+.order_confirmation {
+  position: fixed;
+  backdrop-filter: brightness(50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.order_confirmation.open {
+  animation: open 0.2s ease-in-out forwards;
+  pointer-events: all;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.order_confirmation.close {
+  animation: close 0.2s ease-in-out;
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.order_confirmation > div:nth-child(2) {
+  background-color: white;
+  border-radius: 20px;
+  width: min(90%, 800px);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  position: relative;
+}
+
+button {
+  padding: 0.5em;
+  padding-inline: 1em;
+  border-style: none;
+  border-radius: 10px;
+}
+
+.close_button {
+  position: absolute;
+  padding: 0;
+  font-size: 28px;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cities {
+    display: flex;
+    gap: 2em;
+}
+
+.cities > p {
+    padding: 0.5em;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cities > p:hover {
+  color: #4e60ff;
+}

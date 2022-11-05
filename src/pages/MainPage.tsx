@@ -15,7 +15,6 @@ interface IMainPageProps {
 const MainPage = ({ updateCart }: IMainPageProps) => {
   const [goods, setGoods] = useState<IGood[] | null>(null);
   const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState<boolean>(true);
   const [selectedGood, selectGood] = useState<IGood>();
   const [category, setCategory] = useState<Category>("PIZZA");
 
@@ -30,7 +29,6 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
 
   useEffect(() => {
     fetchGoods();
-    setTimeout(() => setLoading(false), 500);
   }, []);
 
   return (
@@ -45,7 +43,6 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
         />
       )}
       <section id="restaurants">
-        <CircleLoader isLoading={isLoading} />
         {error && <h3>{error}</h3>}
         <div>
           {goods?.map(

@@ -1,0 +1,22 @@
+.restaurants_page {
+  padding-inline: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.restaurants {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 500px;
+}
+
+.restaurants > div {
+  border: 1px solid rgb(231, 231, 231);
+  padding: 0.8em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}

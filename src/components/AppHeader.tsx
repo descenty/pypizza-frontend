@@ -13,6 +13,7 @@ interface IAppHeaderProps {
   toggleLoginWindow: () => void;
   toggleCart: () => void;
   setShowCart: Dispatch<SetStateAction<boolean>>;
+  toggleCitySelectWindow: () => void;
   logOut: () => void;
   cart: ICart | null;
 }
@@ -21,6 +22,7 @@ const AppHeader = ({
   toggleLoginWindow,
   toggleCart,
   setShowCart,
+  toggleCitySelectWindow,
   logOut,
   cart,
 }: IAppHeaderProps) => {
@@ -46,13 +48,13 @@ const AppHeader = ({
           </div>
         </div>
         <div>
-          <a href="#">г. Москва</a>
+          <a href="#" onClick={toggleCitySelectWindow}>г. Москва</a>
         </div>
       </div>
       <div>
         <div>
           <a href="#">Акции</a>
-          <a href="#">Рестораны</a>
+          <Link to="restaurants/">Рестораны</Link>
           {user &&
             user!.orders!.filter((order) => order.status !== "COMPLETED")
               .length > 0 && (

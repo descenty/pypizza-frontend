@@ -16,6 +16,9 @@ import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation"
 import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
 import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirmation";
 import ActiveOrderPage from "./pages/OrdersPage/ActiveOrderPage";
+import CitySelectWindow from "./components/CitySelectWindow/CitySelectWindow";
+import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
+import CircleLoader from "./components/Loader/CircleLoader";
 
 export const baseURL = "http://localhost:8000";
 // export const baseURL = "http://192.168.0.101:8000";
@@ -25,6 +28,7 @@ export const axiosInstance = axios.create({
 });
 
 function App() {
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [showLoginWindow, setLoginWindow] = useState<boolean>(false);
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow);
@@ -45,6 +49,11 @@ function App() {
   const [showNewAddressPage, setShowNewAddressPage] = useState<boolean>(false);
   const toggleNewAddressPage = () => {
     setShowNewAddressPage(!showNewAddressPage);
+  };
+  const [showCitySelectWindow, setShowCitySelectWindow] =
+    useState<boolean>(false);
+  const toggleCitySelectWindow = () => {
+    setShowCitySelectWindow(!showCitySelectWindow);
   };
   const [user, setUser] = useState<IUser | null>();
 
@@ -71,6 +80,7 @@ function App() {
 
   useEffect(() => {
     !user ? getUserData() : updateCart();
+    setTimeout(() => setLoading(false), 500);
   }, [user]);
 
   const getGeolocation = () => {
@@ -103,6 +113,7 @@ function App() {
           toggleCart={toggleCart}
           setShowCart={setShowCart}
           toggleLoginWindow={toggleLoginWindow}
+          toggleCitySelectWindow={toggleCitySelectWindow}
           logOut={logOut}
           cart={cart}
         />
@@ -110,6 +121,7 @@ function App() {
           <LoginWindow
             toggleLoginWindow={toggleLoginWindow}
             getUserData={getUserData}
+            setLoading={setLoading}
           />
         )}
         <Routes>
@@ -125,7 +137,9 @@ function App() {
             element={<PaymentConfirmation />}
           />
           <Route path="orders/" element={<ActiveOrderPage />} />
+          <Route path="restaurants/" element={<RestaurantsPage />} />
         </Routes>
+        <CircleLoader isLoading={isLoading} />
         <Cart
           toggleCart={toggleCart}
           showCart={showCart}
@@ -141,6 +155,10 @@ function App() {
         <NewAddressPage
           toggleNewAddressPage={toggleNewAddressPage}
           showNewAddressPage={showNewAddressPage}
+        />
+        <CitySelectWindow
+          toggleCitySelectWindow={toggleCitySelectWindow}
+          showCitySelectWindow={showCitySelectWindow}
         />
         <AppFooter />
       </BrowserRouter>

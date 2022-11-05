@@ -95,25 +95,25 @@ const ActiveOrderPage = () => {
                 Math.max(
                   0,
                   Math.floor(
-                    (new Date(
-                      new Date(selectedOrder.created_at).getTime() + 2400000
-                    ).getTime() -
+                    (new Date(selectedOrder.target_time).getTime() -
                       new Date().getTime()) /
                       60000
                   )
                 ),
                 "минута",
-                "минут",
+                "минуты",
                 "минут"
               )}
             </p>
             <p className={styles.target_time}>
-              {new Date(
-                new Date(selectedOrder.created_at).getTime() + 2400000
-              ).toLocaleTimeString("ru-RU", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {selectedOrder.target_time &&
+                new Date(selectedOrder.target_time).toLocaleTimeString(
+                  "ru-RU",
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }
+                )}
             </p>
           </div>
           <Line

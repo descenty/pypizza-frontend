@@ -22,7 +22,7 @@ const GoodCard = ({ good, selectGood }: IGoodCardProps) => {
       }}
     >
       <img src={good.image} alt="restaurant1" />
-      <span className="image-span">-10%</span>
+      {/* <span className="image-span">-10%</span> */}
       <div>
         <h3>{good.name}</h3>
         <div className="time-and-check">
