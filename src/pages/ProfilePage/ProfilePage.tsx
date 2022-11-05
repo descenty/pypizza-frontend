@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { GrFormClose } from "react-icons/gr";
+import { GrFormClose, GrLocation } from "react-icons/gr";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import { axiosInstance } from "../../App";
 import NewAddressPage from "../../components/NewAddressPage/NewAddressPage";
@@ -51,9 +51,8 @@ const ProfilePage = ({ toggleNewAddressPage }: IProfilePageProps) => {
               <span className={styles.column2}>Время заказа</span>
               <span className={styles.column2}>Сумма</span>
             </div>
-            {user?.orders.map((order) => (
+            {user?.orders.map((order) => (order.status === "ACCEPTED" &&
               <div key={order.created_at} className={styles.order}>
-                <span>{order.status}</span>
                 <span>{order.id}</span>
                 <span className={styles.column2}>
                   {new Date(order.created_at).toLocaleString("ru", {

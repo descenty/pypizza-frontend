@@ -88,10 +88,6 @@ button {
   margin-top: 10px;
 }
 
-.add_to_cart:hover {
-  transform: scale(1.05);
-}
-
 .close_button {
   position: absolute;
   padding: 0;

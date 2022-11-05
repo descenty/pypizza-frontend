@@ -23,7 +23,17 @@ export interface ISavedAddress {
 }
 
 export type SizeType = "SMALL" | "MEDIUM" | "BIG";
+
 export type StatusType = "CREATED" | "ACCEPTED" | "COOKING" | "COLLECTING" | "DELIVERING" | "COMPLETED";
+
+// export const statusesValues: { [status in StatusType]: number } = {
+//   CREATED: 0,
+//   ACCEPTED: 1,
+//   COOKING: 2,
+//   COLLECTING: 3,
+//   DELIVERING: 4,
+//   COMPLETED: 5,
+// };
 
 export const statuses: { [status in StatusType]: string } = {
   CREATED: "Создан",
@@ -51,6 +61,7 @@ export interface IOrder {
   created_at: string;
   status: StatusType;
   ordered_goods: IOrderedGood[];
+  delivery_address: string;
 }
 
 export interface IUser {

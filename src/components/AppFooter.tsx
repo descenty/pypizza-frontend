@@ -1,7 +1,7 @@
 const AppFooter = () => {
-    return (
-        <footer>
-            <div className="social-button">
+  return (
+    <footer>
+      {/* <div className="social-button">
                 <img src={process.env.PUBLIC_URL + '/youtube.svg'} alt="youtube" />
             </div>
             <div className="social-button">
@@ -9,9 +9,10 @@ const AppFooter = () => {
             </div>
             <div className="social-button">
                 <img src={process.env.PUBLIC_URL + '/telegram.svg'} alt="telegram" />
-            </div>
-        </footer>
-    )
-}
+            </div> */}
+      <span>React + Django</span>
+    </footer>
+  );
+};
 
-export default AppFooter
+export default AppFooter;

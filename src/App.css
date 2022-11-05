@@ -99,6 +99,10 @@ footer {
   border-color: rgb(231, 231, 231);
 }
 
+footer span {
+  letter-spacing: 2px;
+}
+
 .search-div {
   position: relative;
   display: flex;
@@ -130,8 +134,7 @@ a,
   font-weight: bold;
 }
 
-a:hover,
-.add-to-cart button:hover {
+a:hover{
   color: #4e60ff;
   background: #f3f4ff;
 }
@@ -206,9 +209,11 @@ header button {
   border-radius: 15px;
   border-style: none;
   color: #fd6d22;
+  background-color: white;
   position: relative;
-  background: #f3f4ff;
   transition: 0.3s;
+  border: 1px solid rgb(240, 240, 240);
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
 }
 
 header button:hover {
@@ -307,9 +312,7 @@ header button:hover {
   flex-direction: column;
   border-radius: 20px;
   height: 400px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(231, 231, 231);
+  border: 1px solid rgb(231, 231, 231);
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
   outline-color: #4e60ff;
   outline-width: 1px;
@@ -471,9 +474,13 @@ header button:hover {
 }
 
 .logo {
-  width: 80px;
+  width: 95px;
   display: flex;
   padding: 5px;
+  padding-inline: 1em;
+}
+
+.logo:hover {
 }
 
 .logo img {

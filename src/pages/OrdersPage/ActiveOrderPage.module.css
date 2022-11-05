@@ -9,8 +9,8 @@
 .active_orders_list {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
-  padding: 0.2em;
+  gap: 1px;
+  padding: 1px;
   background-color: #f1f1f5;
   width: max-content;
   border-radius: 10px;
@@ -19,11 +19,11 @@
 }
 
 .active_orders_list > button {
+  border-radius: 0;
   padding: 1em;
   padding-inline: 1em;
   border-style: none;
-  border-radius: 10px;
-  width: 350px;
+  width: 400px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -43,10 +43,15 @@
 }
 
 .selected_order {
-
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
+  position: relative;
+  width: 400px;
+}
+
+.progress {
+  width: 400px;
 }
 
 .ordered_goods {
@@ -57,13 +62,12 @@
 }
 
 .ordered_goods > div {
-  height: 100px;
   display: flex;
   align-items: center;
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
   transition: 0.5s;
   gap: 1em;
-  padding: 16px;
+  padding: 10px;
   position: relative;
   border-radius: 10px;
 }
@@ -73,21 +77,73 @@
 }
 
 .ordered_goods > div > img {
-  height: 100%;
+  height: 70px;
 }
-
-.ordered_goods > div > h4 {
-  position: absolute;
-  right: 40px;
-}
-
 
 .ordered_good_price {
   position: absolute;
   right: 0;
   bottom: 0;
-  padding: 0.1em 0.5em;
+  padding: 0.2em 0.8em;
   border-radius: 10px 0px 0px 0px;
   background-color: #4e60ff;
   color: white;
+}
+
+.quantity {
+  font-weight: normal;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 0.4em 0.8em;
+  border-radius: 0px 0px 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.total {
+  margin-right: 10px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+.total b {
+  color: #4e60ff;
+}
+
+.statuses {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  width: 400px;
+}
+
+.status {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0.8em;
+  box-shadow: 0 5px 5px 0 rgb(0 0 0 / 12%);
+  transition: 0.3s;
+}
+
+.order_label {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.delivery_address {
+  margin-top: -20px;
+  margin-left: 15px;
+}
+
+.time {
+  margin-top: -10px;
+  margin-bottom: -25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 5px;
 }

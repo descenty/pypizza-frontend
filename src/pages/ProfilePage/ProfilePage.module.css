@@ -28,8 +28,8 @@
   padding: 0.8em 1.5em;
   border-radius: 20px;
   transition: 0.3s;
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
   position: relative;
+  border: 1px solid rgb(231, 231, 231);
 }
 
 .address span {
@@ -37,7 +37,7 @@
 }
 
 .address:hover {
-  box-shadow: 0px 5px 5px rgba(128, 128, 128, 0.3);
+  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
 }
 
 .close_button {
@@ -70,7 +70,6 @@
 .order {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
   border-radius: 20px;
   height: 50px;
   align-items: center;
@@ -78,14 +77,17 @@
   text-align: center;
   transition: 0.3s;
   cursor: pointer;
+  border: 1px solid rgb(231, 231, 231);
 }
 
 .order:nth-child(1) {
   cursor: initial;
+  border: 1px none;
+  box-shadow: none;
 }
 
 .order:hover {
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 14%);
+  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 7%);
 }
 
 .column2 {

@@ -27,7 +27,7 @@ const AppHeader = ({
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => setShowCart(false), [location]);
+  useEffect(() => setShowCart(false), [location, setShowCart]);
   return (
     <header>
       <div>
