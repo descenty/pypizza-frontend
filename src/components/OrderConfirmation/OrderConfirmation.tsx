@@ -49,6 +49,7 @@ const OrderConfirmation = ({
     label: saved_address.name,
   }));
   const [selectedAddress, setSelectedAddress] = useState<ISavedAddress>();
+  const [disableButton, setDisableButton] = useState<boolean>();
 
   interface IDynamicMapProps {
     selectedAddress: ISavedAddress;
@@ -129,7 +130,17 @@ const OrderConfirmation = ({
             </Marker>
           </MapContainer>
         )}
-        <button onClick={makeOrder}>К оплате</button>
+        {selectedAddress && (
+          <button
+            disabled={disableButton}
+            onClick={() => {
+              setDisableButton(true);
+              makeOrder();
+            }}
+          >
+            К оплате
+          </button>
+        )}
       </div>
     </div>
   );

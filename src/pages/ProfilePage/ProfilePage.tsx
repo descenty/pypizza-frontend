@@ -51,7 +51,7 @@ const ProfilePage = ({ toggleNewAddressPage }: IProfilePageProps) => {
               <span className={styles.column2}>Время заказа</span>
               <span className={styles.column2}>Сумма</span>
             </div>
-            {user?.orders.map((order) => (order.status === "ACCEPTED" &&
+            {user?.orders.map((order) => (order.status === "COMPLETED" &&
               <div key={order.created_at} className={styles.order}>
                 <span>{order.id}</span>
                 <span className={styles.column2}>

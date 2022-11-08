@@ -5,9 +5,16 @@ import {
   getSizeName,
   SizeType,
   Category,
+  ICart,
 } from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
 import { axiosInstance } from "../../App";
@@ -17,15 +24,27 @@ interface IGoodPageProps {
   good?: IGood;
   selectGood: Dispatch<SetStateAction<IGood | undefined>>;
   updateCart: () => Promise<void>;
+  cart: ICart | null;
 }
 
-const GoodPage = ({ good, selectGood, updateCart }: IGoodPageProps) => {
+const GoodPage = ({ good, selectGood, cart, updateCart }: IGoodPageProps) => {
   const [goodConfig, setGoodConfig] = useState<IConfiguration | undefined>(
     good?.configurations[0]
   );
-  const { user } = useContext(UserContext);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
+  useEffect(() => {
+    if (
+      cart &&
+      cart.cart_goods.some((cart_good) => cart_good.good.id === good?.id) &&
+      cart.cart_goods.find((cart_good) => cart_good.good.id === good?.id)!
+        .quantity >= 10
+    ) {
+      selectGood(undefined);
+      alert(`Нельзя добавить больше 10 ${good?.name}`);
+    }
+  }, [cart, good, selectGood]);
   return (
-    <div className={styles.good_page}>
+    <div className={`${styles.good_page} ${good ? styles.open : styles.close}`}>
       <div>
         <button
           className={styles.close_button}
@@ -58,12 +77,18 @@ const GoodPage = ({ good, selectGood, updateCart }: IGoodPageProps) => {
           </div>
           <button
             className={styles.add_to_cart}
-            onClick={() =>
-              addToCart(good, goodConfig).then(() => {
-                selectGood(undefined);
-                updateCart();
-              })
-            }
+            disabled={disableButton}
+            onClick={() => {
+              setDisableButton(true);
+              setTimeout(
+                () =>
+                  addToCart(good, goodConfig).then(() => {
+                    selectGood(undefined);
+                    updateCart();
+                  }),
+                500
+              );
+            }}
           >
             Добавить в корзину за {goodConfig?.price} ₽
           </button>

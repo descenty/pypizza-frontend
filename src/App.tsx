@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import AppHeader from "./components/AppHeader";
+import AppHeader from "./components/AppHeader/AppHeader";
 import MainPage from "./pages/MainPage";
 import LoginWindow from "./components/LoginWindow/LoginWindow";
 import UserContext from "./context/UserContext";
@@ -21,7 +21,7 @@ import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
 import CircleLoader from "./components/Loader/CircleLoader";
 
 export const baseURL = "http://localhost:8000";
-// export const baseURL = "http://192.168.0.101:8000";
+// export const baseURL = "http://192.168.138.202:8000";
 
 export const axiosInstance = axios.create({
   baseURL: baseURL + "/api/",
@@ -29,6 +29,7 @@ export const axiosInstance = axios.create({
 
 function App() {
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [city, setCity] = useState<string | undefined>();
   const [showLoginWindow, setLoginWindow] = useState<boolean>(false);
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow);
@@ -90,11 +91,12 @@ function App() {
           .get(
             `http://api.openweathermap.org/geo/1.0/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=879b6e4ef63abefd6fa01b2a25c7999a&`
           )
-          .then((response) =>
-            localStorage.setItem("city", response.data[0].local_names.ru)
-          );
+          .then((response) => setCity(response.data[0].local_names.ru));
       },
-      () => alert("Failed to get location data"),
+      () => {
+        console.log("Failed to get location data");
+        setCity("Москва");
+      },
       {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -102,9 +104,11 @@ function App() {
       }
     );
   };
-
   useEffect(() => {
-    !localStorage.getItem("city") && getGeolocation();
+    city && localStorage.setItem("city", city);
+  }, [city]);
+  useEffect(() => {
+    setTimeout(() => !city && getGeolocation(), 1000);
   }, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -116,6 +120,7 @@ function App() {
           toggleCitySelectWindow={toggleCitySelectWindow}
           logOut={logOut}
           cart={cart}
+          city={city}
         />
         {showLoginWindow && (
           <LoginWindow
@@ -125,7 +130,7 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<MainPage updateCart={updateCart} />} />
+          <Route path="/" element={<MainPage cart={cart} updateCart={updateCart} />} />
           <Route
             path="profile/"
             element={
@@ -137,7 +142,7 @@ function App() {
             element={<PaymentConfirmation />}
           />
           <Route path="orders/" element={<ActiveOrderPage />} />
-          <Route path="restaurants/" element={<RestaurantsPage />} />
+          <Route path="restaurants/" element={<RestaurantsPage city={city} />} />
         </Routes>
         <CircleLoader isLoading={isLoading} />
         <Cart
@@ -159,6 +164,7 @@ function App() {
         <CitySelectWindow
           toggleCitySelectWindow={toggleCitySelectWindow}
           showCitySelectWindow={showCitySelectWindow}
+          setCity={setCity}
         />
         <AppFooter />
       </BrowserRouter>

@@ -1,8 +1,17 @@
 .profile_div {
   display: flex;
   flex-direction: column;
-  padding-inline: 3em;
+  padding-left: 3em;
+  padding-right: 1em;
   gap: 2em;
+  transition: 0.3s;
+}
+
+@media (max-width: 300px) {
+  .profile_div {
+    padding: 1em;
+    align-items: center;
+  }
 }
 
 .bonus_points {
@@ -14,7 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5em;
-  width: 300px;
+  max-width: 300px;
 }
 
 .addresses_div h3 {
@@ -64,14 +73,14 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width: 420px;
+  max-width: 420px;
 }
 
 .order {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   border-radius: 20px;
-  height: 50px;
+  padding: 0.5em;
   align-items: center;
   justify-items: center;
   text-align: center;

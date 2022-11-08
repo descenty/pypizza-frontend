@@ -1,5 +1,6 @@
 .restaurants_page {
-  padding-inline: 3em;
+  padding-left: 3em;
+  padding-right: 1em;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -9,7 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width: 500px;
+  max-width: 500px;
 }
 
 .restaurants > div {

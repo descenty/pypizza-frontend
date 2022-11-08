@@ -12,10 +12,10 @@
   gap: 1px;
   padding: 1px;
   background-color: #f1f1f5;
-  width: max-content;
   border-radius: 10px;
   overflow: hidden;
   flex-wrap: wrap;
+  max-width: 402px;
 }
 
 .active_orders_list > button {
@@ -23,9 +23,10 @@
   padding: 1em;
   padding-inline: 1em;
   border-style: none;
-  width: 400px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+  row-gap: 0.2em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .active_orders_list > button > span:nth-child(1) {
@@ -47,17 +48,12 @@
   flex-direction: column;
   gap: 2em;
   position: relative;
-  width: 400px;
-}
-
-.progress {
-  width: 400px;
+  max-width: 700px;
 }
 
 .ordered_goods {
   display: flex;
   flex-direction: column;
-  width: 400px;
   gap: 1em;
 }
 
@@ -116,8 +112,29 @@
 .statuses {
   display: flex;
   justify-content: center;
-  gap: 2em;
-  width: 400px;
+}
+
+@media (max-width: 450px) {
+  .statuses span {
+    display: none;
+  }
+  .status {
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0.5em !important;
+  }
+}
+
+.statuses > div {
+  width: 150px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statuses span {
+  font-size: 14px;
 }
 
 .status {

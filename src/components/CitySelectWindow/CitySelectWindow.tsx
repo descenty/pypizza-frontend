@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { axiosInstance } from "../../App";
 import { ICity } from "../../models";
@@ -7,11 +7,13 @@ import styles from "./CitySelectWindow.module.css";
 interface ICitySelectWindowProps {
   toggleCitySelectWindow: () => void;
   showCitySelectWindow: boolean;
+  setCity: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const CitySelectWindow = ({
   toggleCitySelectWindow,
   showCitySelectWindow,
+  setCity,
 }: ICitySelectWindowProps) => {
   const [cities, setCities] = useState<ICity[] | undefined>();
   useEffect(() => {
@@ -37,7 +39,15 @@ const CitySelectWindow = ({
         />
         <div className={styles.cities}>
           {cities?.map((city) => (
-            <p key={city.name}>{city.name}</p>
+            <p
+              key={city.name}
+              onClick={() => {
+                setCity(city.name);
+                toggleCitySelectWindow();
+              }}
+            >
+              {city.name}
+            </p>
           ))}
         </div>
       </div>

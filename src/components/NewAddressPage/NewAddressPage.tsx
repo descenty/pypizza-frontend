@@ -15,7 +15,7 @@ import {
   useRef,
   useState,
 } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import UserContext from "../../context/UserContext";
 import { axiosInstance } from "../../App";
 import { addToCart } from "../../APIFunctions";
@@ -79,10 +79,17 @@ const NewAddressPage = ({
 
   const addNewSavedAddress = async () => {
     if (selectedAddress) {
-      await axiosInstance.post("add-saved-address/", {
-        address: selectedAddress.name,
-      });
-      user?.saved_addresses.push(selectedAddress);
+      try {
+        await axiosInstance.post("add-saved-address/", {
+          address: selectedAddress.name,
+        });
+        user?.saved_addresses.push(selectedAddress);
+      } catch (e) {
+        const error = e as AxiosError;
+        if (error && error.response!.status) {
+          alert("Выбранный адрес уже добавлен");
+        } else alert("Не удалось добавить новый адрес");
+      }
       toggleNewAddressPage();
     }
   };
@@ -95,7 +102,6 @@ const NewAddressPage = ({
       <div className="backtrigger" onClick={() => toggleNewAddressPage()}></div>
       <div>
         <h1>Новый адрес доставки</h1>
-        <h1>{selectedAddress?.name}</h1>
         <GrFormClose
           className={styles.close_button}
           onClick={() => toggleNewAddressPage()}

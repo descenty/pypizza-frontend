@@ -134,7 +134,7 @@ a,
   font-weight: bold;
 }
 
-a:hover{
+a:hover {
   color: #4e60ff;
   background: #f3f4ff;
 }
@@ -159,6 +159,15 @@ header {
   border-width: 1px;
   border-style: solid;
   border-color: rgb(231, 231, 231);
+}
+
+@media (max-width: 580px) {
+  body {
+    padding-top: 0.3em;
+  }
+  .big_header {
+    display: none;
+  }
 }
 
 .search-div input {
@@ -203,7 +212,8 @@ header a {
   font-size: 14px;
 }
 
-header button {
+header button,
+button {
   width: 50px;
   height: 50px;
   border-radius: 15px;
@@ -216,7 +226,7 @@ header button {
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
 }
 
-header button:hover {
+button:hover {
   transform: scale(1.1);
 }
 
@@ -254,6 +264,10 @@ header button:hover {
   top: 40px;
   left: 0px;
   text-align: center;
+}
+
+#user-button {
+  position: relative;
 }
 
 #user-button img {

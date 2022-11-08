@@ -10,9 +10,10 @@ import { axiosInstance } from "../App";
 
 interface IMainPageProps {
   updateCart: () => Promise<void>;
+  cart: ICart | null;
 }
 
-const MainPage = ({ updateCart }: IMainPageProps) => {
+const MainPage = ({ cart, updateCart }: IMainPageProps) => {
   const [goods, setGoods] = useState<IGood[] | null>(null);
   const [error, setError] = useState("");
   const [selectedGood, selectGood] = useState<IGood>();
@@ -39,6 +40,7 @@ const MainPage = ({ updateCart }: IMainPageProps) => {
         <GoodPage
           good={selectedGood}
           selectGood={selectGood}
+          cart={cart}
           updateCart={updateCart}
         />
       )}

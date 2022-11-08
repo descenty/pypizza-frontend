@@ -25,12 +25,6 @@ const ActiveOrderPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (selectedOrder) {
-        console.log(
-          (new Date().getTime() -
-            new Date(selectedOrder.created_at).getTime()) /
-            1000 /
-            60
-        );
         setProgress(
           Math.floor(
             (new Date().getTime() -
@@ -125,33 +119,48 @@ const ActiveOrderPage = () => {
             trailColor="#F7F7F7"
           />
           <div className={styles.statuses}>
-            <AiOutlineHourglass
-              className={`${styles.status} ${styles.active}`}
-            />
-            <AiOutlineCheck
-              className={`${styles.status} ${
-                Object.keys(statuses).indexOf(selectedOrder.status) >= 1 &&
-                styles.active
-              }`}
-            />
-            <IoPizzaOutline
-              className={`${styles.status} ${
-                Object.keys(statuses).indexOf(selectedOrder.status) >= 2 &&
-                styles.active
-              }`}
-            />
-            <AiOutlineInbox
-              className={`${styles.status} ${
-                Object.keys(statuses).indexOf(selectedOrder.status) >= 3 &&
-                styles.active
-              }`}
-            />
-            <MdOutlineDeliveryDining
-              className={`${styles.status} ${
-                Object.keys(statuses).indexOf(selectedOrder.status) >= 4 &&
-                styles.active
-              }`}
-            />
+            <div>
+              <AiOutlineHourglass
+                className={`${styles.status} ${styles.active}`}
+              />
+              <span>Создан</span>
+            </div>
+            <div>
+              <AiOutlineCheck
+                className={`${styles.status} ${
+                  Object.keys(statuses).indexOf(selectedOrder.status) >= 1 &&
+                  styles.active
+                }`}
+              />
+              <span>Принят</span>
+            </div>
+            <div>
+              <IoPizzaOutline
+                className={`${styles.status} ${
+                  Object.keys(statuses).indexOf(selectedOrder.status) >= 2 &&
+                  styles.active
+                }`}
+              />
+              <span>Готовится</span>
+            </div>
+            <div>
+              <AiOutlineInbox
+                className={`${styles.status} ${
+                  Object.keys(statuses).indexOf(selectedOrder.status) >= 3 &&
+                  styles.active
+                }`}
+              />
+              <span>Собирается</span>
+            </div>
+            <div>
+              <MdOutlineDeliveryDining
+                className={`${styles.status} ${
+                  Object.keys(statuses).indexOf(selectedOrder.status) >= 4 &&
+                  styles.active
+                }`}
+              />
+              <span>Едет к вам</span>
+            </div>
           </div>
           <div className={styles.ordered_goods}>
             {selectedOrder.ordered_goods.map((ordered_good, index) => (
