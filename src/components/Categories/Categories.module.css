@@ -5,8 +5,10 @@
 
 .categories {
   display: flex;
+  align-self: center;
   justify-content: center;
-  gap: 2em;
+  width: 90%;
+  gap: 1.4em;
   overflow-y: auto;
   flex-wrap: wrap;
 }

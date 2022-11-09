@@ -3,7 +3,10 @@ import styles from "./Advertisments.module.css";
 const Advertisments = () => {
   return (
     <section className={styles.advertisments}>
-      <div>
+      <img src="coffee.webp" alt="" />
+      <img src="snacks.webp" alt="" />
+      <img src="rolls.webp" alt="" />
+      {/* <div>
         <img src="cupcake.png" alt="cupcake" />
         <div>
           <h3>Скидка 10% по промокоду</h3>
@@ -18,7 +21,7 @@ const Advertisments = () => {
           <h1>50% OFF</h1>
           <span>Burgers</span>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -319,3 +319,55 @@
     transform: rotate(360deg);
   }
 }
+
+.promo_code_div {
+  margin-top: -10px;
+  margin-bottom: 5px;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.promo_code_div .close_button {
+  width: 26px;
+  height: 26px;
+  padding: 0.3em;
+  color: gray;
+}
+
+.promo_code_div .close_button:hover {
+  color: black !important;
+  transform: scale(1);
+}
+
+.promo_code_input_div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.promo_code_input_div > button {
+  position: absolute;
+  right: 5px;
+  padding-inline: 1.5em;
+  font-weight: normal;
+}
+
+.promo_code_input_div > button:disabled {
+  background: inherit !important;
+  color: rgb(171, 171, 171);
+  font-weight: normal !important;
+}
+
+.promo_code_input_div input:focus + button {
+  font-weight: bold;
+}
+
+.error_span {
+  color: red;
+  text-transform: lowercase;
+  margin-top: -10px;
+  margin-left: 10px;
+}

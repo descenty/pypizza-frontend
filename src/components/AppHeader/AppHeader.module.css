@@ -50,6 +50,7 @@
   width: 70px;
   box-shadow: none;
   border-style: none;
+  text-align: left;
 }
 
 .logo:hover {

@@ -164,9 +164,9 @@ const ActiveOrderPage = ({
                 Оплата
               </button>
               <button
-                onClick={() => {
+                onClick={async () => {
                   try {
-                    axiosInstance.post("cancel-order/", {
+                    await axiosInstance.post("cancel-order/", {
                       id: selectedOrder.id,
                     });
                     setUser &&

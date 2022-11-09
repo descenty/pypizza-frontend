@@ -1,8 +1,13 @@
 .advertisments {
   display: flex;
-  gap: 1.5em;
-  overflow-x: auto;
   padding: 1em;
+  width: 95%;
+  gap: 1.5em;
+  align-self: center;
+  justify-content: left !important;
+  overflow-x: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
 }
 
 @media (min-width: 1152px) {
@@ -60,4 +65,12 @@
 
 .advertisments > .orange h1 {
   color: #fd6d22;
+}
+
+
+.advertisments > img {
+  border-radius: 15px;
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
 }
