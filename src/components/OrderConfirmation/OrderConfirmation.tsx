@@ -101,7 +101,7 @@ const OrderConfirmation = ({
           onChange={(e) => {
             setSelectedAddress(e?.value);
           }}
-          // defaultValue={addressesOptions && addressesOptions[0]}
+          isSearchable={false}
         />
         <button
           onClick={() => {

@@ -151,9 +151,17 @@ function App() {
           />
           <Route
             path="payment-confirmation/:id/"
-            element={<PaymentConfirmation />}
+            element={<PaymentConfirmation setLoading={setLoading} />}
           />
-          <Route path="orders/" element={<ActiveOrderPage />} />
+          <Route
+            path="orders/"
+            element={
+              <ActiveOrderPage
+                updateUserData={getUserData}
+                setLoading={setLoading}
+              />
+            }
+          />
           <Route
             path="restaurants/"
             element={<RestaurantsPage city={city} />}

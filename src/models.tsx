@@ -63,6 +63,7 @@ export interface IOrder {
   status: StatusType;
   ordered_goods: IOrderedGood[];
   delivery_address: string;
+  payment_url: string;
 }
 
 export interface IAddress {

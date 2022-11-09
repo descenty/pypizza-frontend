@@ -12,8 +12,11 @@
 .payment_awaiting_panel {
   position: absolute;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 3em;
+  text-align: center;
 }
 
 .payment_success_panel {
@@ -28,10 +31,34 @@
   gap: 1em;
   transition: 1s;
   opacity: 0;
+  pointer-events: none;
+}
+
+.buttons_div {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 80%;
+  gap: 2em;
+  align-self: center;
+  justify-content: center;
+}
+
+.buttons_div button {
+  cursor: pointer;
+  background: none;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.buttons_div button:hover {
+  background: #f3f4ff;
+  color: #4e60ff;
 }
 
 .payment_success_panel.success {
   opacity: 1;
+  pointer-events: all;
 }
 
 .check {

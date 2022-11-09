@@ -49,7 +49,7 @@
   position: relative;
 }
 
-button {
+.order_confirmation button {
   padding: 0.5em;
   padding-inline: 1em;
   border-style: none;

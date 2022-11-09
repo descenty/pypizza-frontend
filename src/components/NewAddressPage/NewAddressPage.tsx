@@ -46,35 +46,53 @@ const NewAddressPage = ({
     DaDataSuggestion<DaDataAddress> | undefined
   >();
   const [selectedAddress, setSelectedAddress] = useState<ISavedAddress>();
+  const [error, setError] = useState<string | null>(null);
 
   interface IDynamicMapProps {
     selectedAddress: ISavedAddress;
   }
   const DynamicMapComponent = ({ selectedAddress }: IDynamicMapProps) => {
     const map = useMap();
-    map.setView(
-      [selectedAddress.latitude, selectedAddress.longitude],
-      map.getZoom()
-    );
+    console.log(selectedAddress);
+    if (selectedAddress) {
+      map.setView(
+        [selectedAddress.latitude, selectedAddress.longitude],
+        map.getZoom()
+      );
+    }
     return null;
   };
   useEffect(() => {
-    setTimeout(
-      () =>
-        document
-          .querySelector(".leaflet-marker-icon")
-          ?.setAttribute("src", process.env.PUBLIC_URL + "/marker.svg"),
-      50
-    );
+    if (selectedAddress)
+      setTimeout(
+        () =>
+          document
+            .querySelector(".leaflet-marker-icon")
+            ?.setAttribute("src", process.env.PUBLIC_URL + "/marker.svg"),
+        50
+      );
   }, [selectedAddress]);
 
   useEffect(() => {
-    if (address)
-      axiosInstance
-        .post<ISavedAddress>("get-address-geolocation/", {
-          address: address.value,
-        })
-        .then((response) => setSelectedAddress(response.data));
+    if (address) {
+      try {
+        axiosInstance
+          .post<ISavedAddress>("get-address-geolocation/", {
+            address: address.value,
+          })
+          .then((response) => {
+            if (response.data.latitude) {
+              setSelectedAddress(response.data);
+              setError(null);
+            } else {
+              setError("некорректный адрес доставки");
+              setSelectedAddress(undefined);
+            }
+          });
+      } catch (ex) {
+        console.log(ex);
+      }
+    }
   }, [address]);
 
   const addNewSavedAddress = async () => {
@@ -86,11 +104,15 @@ const NewAddressPage = ({
         user?.saved_addresses.push(selectedAddress);
       } catch (e) {
         const error = e as AxiosError;
-        if (error && error.response!.status) {
-          alert("Выбранный адрес уже добавлен");
-        } else alert("Не удалось добавить новый адрес");
+        if (error) {
+          error.response!.status === 403 &&
+            setError("Выбранный адрес уже добавлен");
+          error.response!.status === 404 &&
+            setError("В этом городе нет пиццерии");
+          error.response!.status === 400 &&
+            setError("Не удалось добавить новый адрес");
+        } else toggleNewAddressPage();
       }
-      toggleNewAddressPage();
     }
   };
   return (
@@ -113,6 +135,7 @@ const NewAddressPage = ({
             onChange={setAddress}
           />
         </div>
+        {error && <span className={styles.error_span}>{error}</span>}
         {selectedAddress && (
           <MapContainer
             center={[selectedAddress.latitude, selectedAddress.longitude]}
@@ -133,7 +156,10 @@ const NewAddressPage = ({
             </Marker>
           </MapContainer>
         )}
-        <button onClick={async () => await addNewSavedAddress()}>
+        <button
+          disabled={!selectedAddress}
+          onClick={async () => await addNewSavedAddress()}
+        >
           Добавить адрес
         </button>
       </div>

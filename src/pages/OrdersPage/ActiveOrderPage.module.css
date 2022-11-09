@@ -116,7 +116,12 @@
 
 @media (max-width: 450px) {
   .statuses span {
-    display: none;
+    position: absolute;
+    width: 100px;
+    text-align: center;
+    margin-top: 48px;
+    opacity: 0;
+    transition: 0.3s;
   }
   .status {
     width: 42px !important;
@@ -146,6 +151,10 @@
   transition: 0.3s;
 }
 
+.status:hover + span {
+  opacity: 1 !important;
+}
+
 .order_label {
   font-size: 20px;
   margin-left: 10px;
@@ -163,4 +172,11 @@
   justify-content: space-between;
   align-items: center;
   padding-inline: 5px;
+}
+
+.error_span {
+  color: red;
+  text-transform: lowercase;
+  margin-top: -10px;
+  margin-left: 10px;
 }

@@ -6,6 +6,7 @@ import {
   AiOutlineUser,
   AiOutlineHome,
 } from "react-icons/ai";
+import { IoPizzaOutline } from "react-icons/io5";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ICart } from "../../models";
@@ -79,9 +80,12 @@ const AppHeader = ({
             <a href="#">Акции</a>
             <Link to="restaurants/">Рестораны</Link>
             {user &&
-              user!.orders!.filter((order) => order.status !== "COMPLETED")
+              user.orders.filter((order) => order.status !== "COMPLETED")
                 .length > 0 && (
-                <Link to="orders/" className="active_order_link">
+                <Link
+                  to="orders/"
+                  className={`active_order_link ${styles.to_hide}`}
+                >
                   Активный заказ
                 </Link>
               )}
@@ -124,18 +128,29 @@ const AppHeader = ({
           <AiOutlineUser className="user-image" />
           {user && (
             <span className={styles.bonus_points}>
-              {user?.bonus_points}&nbsp;
+              {user.bonus_points}&nbsp;
               <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
             </span>
           )}
         </button>
         {user && (
-          <button onClick={() => toggleCart()}>
-            <AiOutlineShopping className="cart-image" />
-            {cart?.count !== 0 && (
-              <span className={styles.cart_span}>{cart?.count}</span>
+          <>
+            <button onClick={() => toggleCart()}>
+              <AiOutlineShopping className="cart-image" />
+              {cart?.count !== 0 && (
+                <span className={styles.cart_span}>{cart?.count}</span>
+              )}
+            </button>
+            {user.orders.filter((order) => order.status !== "COMPLETED")
+              .length > 0 && (
+              <button
+                className={styles.orders_button}
+                onClick={() => navigate("orders/")}
+              >
+                <IoPizzaOutline />
+              </button>
             )}
-          </button>
+          </>
         )}
       </div>
     </>
