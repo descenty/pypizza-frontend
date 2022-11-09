@@ -13,6 +13,13 @@
   max-width: 500px;
 }
 
+@media (max-width: 580px) {
+  .restaurants_page {
+    align-items: center;
+    padding: 1em !important;
+  }
+}
+
 .restaurants > div {
   border: 1px solid rgb(231, 231, 231);
   padding: 0.8em;

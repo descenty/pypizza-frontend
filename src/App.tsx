@@ -20,13 +20,12 @@ import CitySelectWindow from "./components/CitySelectWindow/CitySelectWindow";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
 import CircleLoader from "./components/Loader/CircleLoader";
 
-export const baseURL = "http://localhost:8000";
-// export const baseURL = "http://192.168.138.202:8000";
+// export const baseURL = "http://localhost:8000";
+export const baseURL = "http://192.168.138.202:8000";
 
 export const axiosInstance = axios.create({
   baseURL: baseURL + "/api/",
 });
-
 function App() {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [city, setCity] = useState<string | undefined>();
@@ -72,7 +71,13 @@ function App() {
     }
   }
 
+  const toggleLoading = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 1000);
+  };
+
   const logOut = () => {
+    toggleLoading();
     localStorage.removeItem("token");
     setUser(null);
   };
@@ -114,11 +119,12 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <AppHeader
+          setLoading={setLoading}
           toggleCart={toggleCart}
+          showCart={showCart}
           setShowCart={setShowCart}
           toggleLoginWindow={toggleLoginWindow}
           toggleCitySelectWindow={toggleCitySelectWindow}
-          logOut={logOut}
           cart={cart}
           city={city}
         />
@@ -130,11 +136,17 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/" element={<MainPage cart={cart} updateCart={updateCart} />} />
+          <Route
+            path="/"
+            element={<MainPage cart={cart} updateCart={updateCart} />}
+          />
           <Route
             path="profile/"
             element={
-              <ProfilePage toggleNewAddressPage={toggleNewAddressPage} />
+              <ProfilePage
+                logOut={logOut}
+                toggleNewAddressPage={toggleNewAddressPage}
+              />
             }
           />
           <Route
@@ -142,7 +154,10 @@ function App() {
             element={<PaymentConfirmation />}
           />
           <Route path="orders/" element={<ActiveOrderPage />} />
-          <Route path="restaurants/" element={<RestaurantsPage city={city} />} />
+          <Route
+            path="restaurants/"
+            element={<RestaurantsPage city={city} />}
+          />
         </Routes>
         <CircleLoader isLoading={isLoading} />
         <Cart

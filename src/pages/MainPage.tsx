@@ -36,14 +36,12 @@ const MainPage = ({ cart, updateCart }: IMainPageProps) => {
     <>
       <Advertisments />
       <Categories categoryType={category} setCategoryType={setCategory} />
-      {selectedGood && (
-        <GoodPage
-          good={selectedGood}
-          selectGood={selectGood}
-          cart={cart}
-          updateCart={updateCart}
-        />
-      )}
+      <GoodPage
+        good={selectedGood}
+        selectGood={selectGood}
+        cart={cart}
+        updateCart={updateCart}
+      />
       <section id="restaurants">
         {error && <h3>{error}</h3>}
         <div>

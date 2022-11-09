@@ -106,17 +106,17 @@ export interface ICart {
   promo_code_name: string | null;
 }
 
-export type Category = "PIZZA" | "DRINKS" | "BURGERS" | "DESERTS" | "DEFAULT";
+export type Category = "PIZZA" | "DRINKS" | "SNACKS" | "DESERTS" | "DEFAULT";
 
 type SizeName = { [size in SizeType]: string };
 
 const sizes: { [category in Category]: SizeName } = {
   PIZZA: {
-    SMALL: "Маленькая - 25 см",
-    MEDIUM: "Средняя - 30 см",
-    BIG: "Большая - 35 см",
+    SMALL: "Маленькая 25 см",
+    MEDIUM: "Средняя 30 см",
+    BIG: "Большая 35 см",
   },
-  BURGERS: {
+  SNACKS: {
     SMALL: "Маленький",
     MEDIUM: "Средний",
     BIG: "Большой",

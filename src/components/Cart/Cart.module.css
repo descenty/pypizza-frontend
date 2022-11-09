@@ -15,15 +15,15 @@
   pointer-events: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .cart {
     width: 100%;
-    bottom: 0px;
+    bottom: 50px;
     right: 0px;
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 580px) {
   .cart {
     bottom: 10px;
     right: 10px;

@@ -10,7 +10,7 @@ const AppFooter = () => {
             <div className="social-button">
                 <img src={process.env.PUBLIC_URL + '/telegram.svg'} alt="telegram" />
             </div> */}
-      <span>React + Django</span>
+      {/* <span>React + Django</span> */}
     </footer>
   );
 };

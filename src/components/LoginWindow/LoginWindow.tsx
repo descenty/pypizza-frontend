@@ -91,10 +91,10 @@ const LoginWindow = ({
             phone: phone,
             code: event.target.value,
           });
-          localStorage.setItem("token", response.data.token);
-          await getUserData();
           setLoading(true);
           setTimeout(() => setLoading(false), 1000);
+          localStorage.setItem("token", response.data.token);
+          await getUserData();
           toggleLoginWindow();
         } catch (e) {
           setError("неверный код");
@@ -128,6 +128,7 @@ const LoginWindow = ({
                 value={phoneInput}
                 placeholder="7 . . . . . . ."
                 maxLength={15}
+                inputMode="numeric"
               />
             </div>
             {enableRecaptcha && (
@@ -156,6 +157,7 @@ const LoginWindow = ({
               maxLength={4}
               onChange={codeInputChange}
               value={code}
+              inputMode="numeric"
             />
             {error && <span className={styles.error_span}>{error}</span>}
             {canGenerateCode && (

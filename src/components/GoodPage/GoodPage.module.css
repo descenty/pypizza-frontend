@@ -1,17 +1,20 @@
 .good_page {
   position: fixed;
-  backdrop-filter: brightness(50%);
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 6;
   opacity: 0;
   pointer-events: none;
 }
 
-.good_page > div {
+.backtrigger {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.good_page > div:nth-child(2) {
   background-color: white;
   border-radius: 20px;
   width: min(90%, 800px);
@@ -23,10 +26,25 @@
   align-items: center;
 }
 
-@media (max-width: 830px) {
-  .good_page > div {
+@media (max-width: 880px) {
+  .good_page > div:nth-child(2) {
     flex-direction: column;
+    text-align: center;
     height: 570px;
+  }
+  .good_page > div:nth-child(2) > div {
+    align-items: center;
+  }
+  .good_page img {
+    width: 250px !important;
+    height: 250px !important;
+  }
+  .configurations {
+    align-self: center;
+  }
+  .configurations button {
+    width: 90px !important;
+    align-self: center;
   }
 }
 
@@ -40,6 +58,7 @@
   flex-direction: column;
   gap: 0.8em;
   position: relative;
+  width: 100%;
 }
 
 .good_page h2 {
@@ -54,10 +73,14 @@
   display: flex;
   gap: 0.2em;
   padding: 0.2em;
+  border-radius: 10px;
   background-color: #f1f1f5;
   width: max-content;
-  border-radius: 10px;
   overflow: hidden;
+}
+
+.good_page .configurations button {
+  width: 150px;
 }
 
 button {
@@ -72,25 +95,31 @@ button {
 }
 
 .good_page .configurations button:hover {
-  background-color: white;
+  background: white;
 }
 
 .add_to_cart {
+  position: relative;
   width: max-content;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 700;
+  background: none;
   border-style: none;
   padding: 0.5em;
   padding-inline: 1em;
   border-radius: 10px;
   transition: 0.3s;
+  margin-top: 15px;
+  margin-bottom: -10px;
+}
+
+.add_to_cart:hover {
   background: #f3f4ff;
   color: #4e60ff;
-  margin-top: 10px;
 }
 
 .add_to_cart:disabled {
-  color: rgb(180, 180, 180);
+  color: rgb(140, 140, 140);
   background: inherit;
 }
 

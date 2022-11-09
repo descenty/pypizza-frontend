@@ -8,6 +8,7 @@
   margin: 0;
   font-family: "Nunito", sans-serif;
   user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 html {
@@ -117,7 +118,12 @@ footer span {
   color: gray;
 }
 
-a,
+a {
+  text-decoration: initial;
+  color: initial;
+}
+
+header a,
 .add-to-cart button {
   color: inherit;
   text-decoration: none;
@@ -159,15 +165,6 @@ header {
   border-width: 1px;
   border-style: solid;
   border-color: rgb(231, 231, 231);
-}
-
-@media (max-width: 580px) {
-  body {
-    padding-top: 0.3em;
-  }
-  .big_header {
-    display: none;
-  }
 }
 
 .search-div input {
@@ -212,13 +209,11 @@ header a {
   font-size: 14px;
 }
 
-header button,
-button {
+header button {
   width: 50px;
   height: 50px;
   border-radius: 15px;
   border-style: none;
-  color: #fd6d22;
   background-color: white;
   position: relative;
   transition: 0.3s;
@@ -226,7 +221,7 @@ button {
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
 }
 
-button:hover {
+header button:hover {
   transform: scale(1.1);
 }
 
@@ -262,7 +257,6 @@ button:hover {
   width: 50px;
   height: 14px;
   top: 40px;
-  left: 0px;
   text-align: center;
 }
 
@@ -315,6 +309,9 @@ button:hover {
   }
 }
 @media (max-width: 590px) {
+  #restaurants {
+    padding: 0;
+  }
   #restaurants > div {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -487,23 +484,13 @@ button:hover {
   border-radius: 0 !important;
 }
 
-.logo {
-  width: 95px;
-  display: flex;
-  padding: 5px;
-  padding-inline: 1em;
-}
-
-.logo:hover {
-}
-
-.logo img {
-  width: 100%;
-}
-
 .active_order_link {
   color: #fd6d22;
   border-radius: 0px;
   border-width: 2px;
   border-bottom-style: solid;
+}
+
+@viewport {
+  orientation: portrait;
 }
