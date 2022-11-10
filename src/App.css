@@ -147,8 +147,7 @@ header a,
 }
 
 a:hover {
-  color: #4e60ff;
-  background: #f3f4ff;
+  color: #fd6d22;
 }
 
 button {
@@ -183,11 +182,11 @@ header {
   outline-color: #4e60ff;
 }
 
-.search-div + .search-icon {
+.search-div .search-icon {
   transition: 0.3s;
 }
 
-.search-div:focus + .search-icon {
+.search-div input:focus + .search-icon {
   transform: scale(1.1);
   color: #4e60ff;
 }
@@ -207,7 +206,7 @@ header h2 {
 }
 
 header h2 span {
-  color: #4e60ff;
+  color: #fd6d22;
 }
 
 header a {

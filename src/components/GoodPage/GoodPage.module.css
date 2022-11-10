@@ -67,6 +67,8 @@
 
 .good_page p {
   color: gray;
+  max-width: 370px;
+  margin-bottom: 10px;
 }
 
 .good_page .configurations {
@@ -107,8 +109,7 @@
 }
 
 .add_to_cart:hover {
-  background: #f3f4ff;
-  color: #4e60ff;
+  color: #fd6d22;
 }
 
 .add_to_cart:disabled {

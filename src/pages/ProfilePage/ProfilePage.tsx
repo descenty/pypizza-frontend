@@ -33,8 +33,9 @@ const ProfilePage = ({ toggleNewAddressPage, logOut}: IProfilePageProps) => {
 
   return user ? (
     <div className={styles.profile_div}>
-      <h3>Личный кабинет</h3>
-      <h2>{user?.phone}</h2>
+      <h2>Личный кабинет</h2>
+      <h2>{user.first_name}</h2>
+      <h2>{user.phone}</h2>
       <h3 className={styles.bonus_points}>
         Бонусные баллы: &nbsp;{user?.bonus_points}&nbsp;
         <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>

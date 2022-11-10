@@ -14,9 +14,13 @@ import styles from "./PaymentConfirmation.module.css";
 
 interface IPaymentConfirmationProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
+  updateUserData: () => void;
 }
 
-const PaymentConfirmation = ({ setLoading }: IPaymentConfirmationProps) => {
+const PaymentConfirmation = ({
+  setLoading,
+  updateUserData,
+}: IPaymentConfirmationProps) => {
   const { user, setUser } = useContext(UserContext);
   const { id } = useParams();
   const [success, setSuccess] = useState<boolean>(false);
@@ -34,7 +38,10 @@ const PaymentConfirmation = ({ setLoading }: IPaymentConfirmationProps) => {
             if (response.status === 200) {
               setTimeout(() => setSuccess(true), 2000);
               setTimeout(() => setLoading(true), 3000);
-              setTimeout(() => navigate("/"), 4000);
+              setTimeout(() => {
+                navigate("/");
+                updateUserData();
+              }, 4000);
               setTimeout(() => setLoading(false), 5000);
             } else setTimeout(() => confirmPayment(), 5000);
           } catch (e) {
@@ -47,7 +54,7 @@ const PaymentConfirmation = ({ setLoading }: IPaymentConfirmationProps) => {
         confirmPayment();
       }
     }
-  }, [id, navigate, user]);
+  }, [id, navigate, setLoading, user]);
   return (
     <div className={styles.payment_confirmation}>
       <div className={styles.payment_awaiting_panel}>

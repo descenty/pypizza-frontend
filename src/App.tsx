@@ -18,7 +18,7 @@ import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirm
 import ActiveOrderPage from "./pages/OrdersPage/ActiveOrderPage";
 import CitySelectWindow from "./components/CitySelectWindow/CitySelectWindow";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
-import CircleLoader from "./components/Loader/CircleLoader";
+import CircleLoader from "./components/CircleLoader/CircleLoader";
 
 // export const baseURL = "http://localhost:8000";
 export const baseURL = "http://192.168.138.202:8000";
@@ -151,7 +151,12 @@ function App() {
           />
           <Route
             path="payment-confirmation/:id/"
-            element={<PaymentConfirmation setLoading={setLoading} />}
+            element={
+              <PaymentConfirmation
+                updateUserData={getUserData}
+                setLoading={setLoading}
+              />
+            }
           />
           <Route
             path="orders/"

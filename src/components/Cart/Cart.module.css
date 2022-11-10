@@ -152,7 +152,6 @@
 
 .cart .cart_goods .good_quantity > span {
   border-radius: 50%;
-  color: #4e60ff;
   width: 24px;
   height: 24px;
   display: flex;
@@ -171,7 +170,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f3f4ff;
+  background-color: #f1f1f5;
+
 }
 
 .quantity_change.disabled {
@@ -236,11 +236,13 @@
   font-weight: bold;
   font-size: 16px;
   transition: 0.3s;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
 }
 
 .to_payment_div button:hover {
-  color: #4e60ff;
-  background: #f3f4ff;
+  color: #fd6d22;
 }
 
 .to_payment_div span {
@@ -249,7 +251,7 @@
 }
 
 .to_payment_div span b {
-  color: #4e60ff;
+  color: #fd6d22;
 }
 
 .backtrigger {
@@ -300,7 +302,7 @@
   border: 8px solid #fff;
   border-radius: 50%;
   animation: ldsring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #4e60ff transparent transparent transparent;
+  border-color: #fd6d22 transparent transparent transparent;
 }
 .ldsring div:nth-child(1) {
   animation-delay: -0.45s;

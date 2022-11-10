@@ -7,47 +7,26 @@
   display: flex;
   align-self: center;
   justify-content: center;
-  width: 90%;
-  gap: 1.4em;
+  width: 95%;
   overflow-y: auto;
   flex-wrap: wrap;
+  margin-bottom: -1em;
 }
 
 .categories div {
-  min-width: 100px;
   height: 40px;
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1em;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
-  border-style: solid;
   transition: 0.3s;
   cursor: pointer;
+  min-width: 90px;
 }
 
-.selected_category {
-  background: #f3f4ff;
-  border-color: #4e60ff;
-  border-width: 2px;
-  color: #4e60ff;
-}
-
-.unselected_category {
-  border-width: 1px;
-  border-color: rgb(231, 231, 231);
-}
-
+.selected_category,
 .categories div:hover {
-  background: #f3f4ff;
-  border-color: #4e60ff;
-  border-width: 2px;
-  color: #4e60ff;
-}
-
-.categories div img {
-  height: 28px;
+  color: #fd6d22;
 }

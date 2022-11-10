@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import GoodCard from "../components/GoodCard";
-import CircleLoader from "../components/Loader/CircleLoader";
+import CircleLoader from "../components/CircleLoader/CircleLoader";
 import Advertisments from "../components/Advertisments/Advertisments";
 import { Category, ICart, IGood } from "../models";
 import Categories from "../components/Categories/Categories";

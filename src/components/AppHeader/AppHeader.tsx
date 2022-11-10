@@ -54,9 +54,9 @@ const AppHeader = ({
             <button className={styles.logo} onClick={navigateToMain}>
               {/* <img src={process.env.PUBLIC_URL + "/PyPizza.png"} alt="" /> */}
               <h2>
-                py
+                точка
                 <br />
-                <span>pizza</span>
+                <span>пицца</span>
               </h2>
             </button>
             <div className={`search-div ${styles.to_hide}`}>

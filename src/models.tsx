@@ -83,7 +83,7 @@ export interface ICity {
 
 export interface IUser {
   phone: string;
-  fio: string;
+  first_name: string;
   bonus_points: number;
   saved_addresses: ISavedAddress[];
   orders: IOrder[];
@@ -118,9 +118,9 @@ const sizes: { [category in Category]: SizeName } = {
     BIG: "Большая 35 см",
   },
   SNACKS: {
-    SMALL: "Маленький",
-    MEDIUM: "Средний",
-    BIG: "Большой",
+    SMALL: "4 шт.",
+    MEDIUM: "6 шт.",
+    BIG: "9 шт.",
   },
   DRINKS: {
     SMALL: "200 ml",
