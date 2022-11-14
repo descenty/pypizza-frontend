@@ -54,7 +54,7 @@ const ProfilePage = ({ toggleNewAddressPage, logOut}: IProfilePageProps) => {
               <span className={styles.column2}>Время заказа</span>
               <span className={styles.column2}>Сумма</span>
             </div>
-            {user.orders.map(
+            {[...user.orders].reverse().slice(0, 10).map(
               (order) =>
                 order.status === "COMPLETED" && (
                   <div key={order.created_at} className={styles.order}>
