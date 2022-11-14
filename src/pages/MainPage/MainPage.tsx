@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import GoodCard from "../components/GoodCard";
-import CircleLoader from "../components/CircleLoader/CircleLoader";
-import Advertisments from "../components/Advertisments/Advertisments";
-import { Category, ICart, IGood } from "../models";
-import Categories from "../components/Categories/Categories";
-import GoodPage from "../components/GoodPage/GoodPage";
-import { axiosInstance } from "../App";
+import GoodCard from "../../components/GoodCard/GoodCard";
+import CircleLoader from "../../components/CircleLoader/CircleLoader";
+import Advertisments from "../../components/Advertisments/Advertisments";
+import { Category, ICart, IGood } from "../../models";
+import Categories from "../../components/Categories/Categories";
+import GoodPage from "../../components/GoodPage/GoodPage";
+import { axiosInstance } from "../../App";
+import styles from './MainPage.module.css'
 
 interface IMainPageProps {
   updateCart: () => Promise<void>;
@@ -42,7 +43,7 @@ const MainPage = ({ cart, updateCart }: IMainPageProps) => {
         cart={cart}
         updateCart={updateCart}
       />
-      <section id="restaurants">
+      <section className={styles.goods}>
         {error && <h3>{error}</h3>}
         <div>
           {goods?.map(

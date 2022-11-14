@@ -1,3 +1,98 @@
+header {
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+  align-self: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(231, 231, 231);
+}
+
+header a {
+  color: inherit;
+  text-decoration: none;
+  background: none;
+  border-style: none;
+  padding: 0.5em;
+  padding-inline: 1em;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 2em;
+  row-gap: 1.5em;
+}
+
+header h2 {
+  line-height: 22px;
+  cursor: pointer;
+}
+
+header h2 span {
+  color: #fd6d22;
+}
+
+header a {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+header button {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  border-style: none;
+  background-color: white;
+  position: relative;
+  transition: 0.3s;
+  border: 1px solid rgb(240, 240, 240);
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 7%);
+}
+
+header button:hover {
+  transform: scale(1.1);
+}
+
+.search_div {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search_div input {
+  border-radius: 10px;
+  padding: 0.7em;
+  width: 220px;
+  border-style: none;
+  background: #edeef2;
+  text-indent: 4px;
+  outline-color: #4e60ff;
+}
+
+.search_icon {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  font-size: 18px;
+  color: gray;
+  transition: 0.3s;
+}
+
+.search_div input:focus + .search_icon {
+  transform: scale(1.1);
+  color: #4e60ff;
+}
+
 .mobile_header {
   position: fixed;
   height: 58px;
@@ -123,4 +218,50 @@
 
 .orders_button:hover {
   color: #fd6d22 !important;
+}
+
+.active_order_link {
+  color: #fd6d22;
+  border-radius: 0px;
+  border-width: 2px;
+  border-bottom-style: solid;
+}
+
+.user_button {
+  position: relative;
+}
+
+.cart_image,
+.user_image {
+  font-size: 26px;
+}
+
+.cart_span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  background: #fd6d22;
+  border-radius: 8px;
+  font-size: 11px;
+  width: 20px;
+  height: 20px;
+  right: -5px;
+  top: -5px;
+}
+
+.bonus_points {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  background: #fd6d22;
+  border-radius: 8px;
+  font-size: 11px;
+  width: 50px;
+  height: 14px;
+  top: 40px;
+  text-align: center;
 }

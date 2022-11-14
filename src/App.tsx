@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import AppHeader from "./components/AppHeader/AppHeader";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage/MainPage";
 import LoginWindow from "./components/LoginWindow/LoginWindow";
 import UserContext from "./context/UserContext";
 import { ICart, IUser } from "./models";
 import axios from "axios";
 import Cart from "./components/Cart/Cart";
-import AppFooter from "./components/AppFooter";
+import AppFooter from "./components/AppFooter/AppFooter";
 import { getCart } from "./APIFunctions";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -21,7 +21,8 @@ import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
 import CircleLoader from "./components/CircleLoader/CircleLoader";
 
 // export const baseURL = "http://localhost:8000";
-export const baseURL = "http://192.168.138.202:8000";
+// export const baseURL = "http://192.168.138.202:8000";
+export const baseURL = "http://192.168.0.105:8000"
 
 export const axiosInstance = axios.create({
   baseURL: baseURL + "/api/",

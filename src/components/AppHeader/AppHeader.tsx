@@ -59,14 +59,14 @@ const AppHeader = ({
                 <span>пицца</span>
               </h2>
             </button>
-            <div className={`search-div ${styles.to_hide}`}>
+            <div className={`${styles.search_div} ${styles.to_hide}`}>
               <input
                 type="text"
                 name="search"
                 id="search"
                 placeholder="Поиск"
               />
-              <AiOutlineSearch className="search-icon" />
+              <AiOutlineSearch className={styles.search_icon} />
             </div>
           </div>
           <div>
@@ -84,7 +84,7 @@ const AppHeader = ({
                 .length > 0 && (
                 <Link
                   to="orders/"
-                  className={`active_order_link ${styles.to_hide}`}
+                  className={`${styles.active_order_link} ${styles.to_hide}`}
                 >
                   Активный заказ
                 </Link>
@@ -92,22 +92,22 @@ const AppHeader = ({
           </div>
           <div className={styles.to_hide}>
             {user && (
-              <button id="cart-button" onClick={() => toggleCart()}>
-                <AiOutlineShopping className="cart-image" />
+              <button className={styles.cart_button} onClick={() => toggleCart()}>
+                <AiOutlineShopping className={styles.cart_image} />
                 {cart?.count !== 0 && (
-                  <span className="cart-span">{cart?.count}</span>
+                  <span className={styles.cart_span}>{cart?.count}</span>
                 )}
               </button>
             )}
             <button
-              id="user-button"
+              className={styles.user_button}
               onClick={() => {
                 !user ? toggleLoginWindow() : navigate("profile/");
               }}
             >
-              <AiOutlineUser className="user-image" />
+              <AiOutlineUser className={styles.user_image} />
               {user && (
-                <span className="bonus_points">
+                <span className={styles.bonus_points}>
                   {user?.bonus_points}&nbsp;
                   <VscDebugBreakpointLogUnverified></VscDebugBreakpointLogUnverified>
                 </span>
@@ -118,14 +118,14 @@ const AppHeader = ({
       </header>
       <div className={styles.mobile_header}>
         <button onClick={navigateToMain}>
-          <AiOutlineHome className="cart-image" />
+          <AiOutlineHome className={styles.cart_image} />
         </button>
         <button
           onClick={() => {
             !user ? toggleLoginWindow() : navigate("profile/");
           }}
         >
-          <AiOutlineUser className="user-image" />
+          <AiOutlineUser className={styles.user_image} />
           {user && (
             <span className={styles.bonus_points}>
               {user.bonus_points}&nbsp;
@@ -136,7 +136,7 @@ const AppHeader = ({
         {user && (
           <>
             <button onClick={() => toggleCart()}>
-              <AiOutlineShopping className="cart-image" />
+              <AiOutlineShopping className={styles.cart_image} />
               {cart?.count !== 0 && (
                 <span className={styles.cart_span}>{cart?.count}</span>
               )}

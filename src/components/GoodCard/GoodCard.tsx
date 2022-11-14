@@ -1,11 +1,12 @@
-import { Category, getSizeName, IGood, SizeType } from "../models";
+import { Category, getSizeName, IGood, SizeType } from "../../models";
 import {
   AiOutlineSearch,
   AiOutlineShopping,
   AiOutlineUser,
 } from "react-icons/ai";
 import { Dispatch, SetStateAction, useContext } from "react";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
+import styles from './GoodCard.module.css'
 
 interface IGoodCardProps {
   good: IGood;
@@ -16,19 +17,19 @@ const GoodCard = ({ good, selectGood }: IGoodCardProps) => {
   const { user } = useContext(UserContext);
   return (
     <div
-      className="restaurant-card"
+      className={styles.good_card}
       onClick={() => {
         user ? selectGood(good) : alert("Необходим вход");
       }}
     >
-      <img src={good.image} alt="restaurant1" />
-      {/* <span className="image-span">-10%</span> */}
+      <img src={good.image} alt="изображение товара" />
+      {/* <span className={styles.image_span}>-10%</span> */}
       <div>
         <h3>{good.name}</h3>
-        <div className="time-and-check">
+        <div>
           <p>{good.description}</p>
         </div>
-        <div className="add-to-cart">
+        <div className={styles.add_to_cart}>
           <span>
             {getSizeName(
               good.category as Category,
@@ -41,21 +42,9 @@ const GoodCard = ({ good, selectGood }: IGoodCardProps) => {
             от {Math.min(...good.configurations.map((config) => config.price))}
             &nbsp;₽
           </span>
-          {/* <button onClick={() => selectGood(good)}>Добавить</button> */}
         </div>
       </div>
     </div>
-    /* <div className="good-card">
-            <div className="good-info">
-                <img src={good.image} alt={good.name}/>
-                <h3>{good.name}</h3>
-                <p>{good.description}</p>
-            </div>
-            <div className="add-to-cart">
-                <span>от 289 ₽</span>
-                <button>Добавить</button>
-            </div>
-        </div> */
   );
 };
 

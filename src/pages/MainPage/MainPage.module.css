@@ -1,0 +1,48 @@
+.goods {
+  width: 95%;
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  padding: 1.5em;
+}
+
+.goods > h3 {
+  margin-bottom: 12px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.goods > div {
+  display: grid;
+  align-items: center;
+  gap: 1.4em;
+  row-gap: 1.4em;
+  height: max-content;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .goods {
+    width: 100%;
+  }
+  .goods > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 872px) {
+  .goods {
+    width: 100%;
+  }
+  .goods > div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 590px) {
+  .goods {
+    width: 100%;
+  }
+  .goods > div {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
