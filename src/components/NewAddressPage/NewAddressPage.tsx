@@ -158,7 +158,10 @@ const NewAddressPage = ({
         )}
         <button
           disabled={!selectedAddress}
-          onClick={async () => await addNewSavedAddress()}
+          onClick={async () => {
+            await addNewSavedAddress();
+            toggleNewAddressPage();
+          }}
         >
           Добавить адрес
         </button>

@@ -73,7 +73,6 @@ const OrderConfirmation = ({
   }, [selectedAddress]);
 
   const makeOrder = async () => {
-    if (!selectedAddress) return;
     const response = await axiosInstance.post("make-order/", {
       address: selectedAddress?.name,
     });

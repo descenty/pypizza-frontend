@@ -98,11 +98,10 @@ const LoginWindow = ({
           toggleLoginWindow();
         } catch (e) {
           setError("неверный код");
-          console.log(e);
         }
       }
     },
-    [getUserData, phone, toggleLoginWindow]
+    [getUserData, phone, setLoading, toggleLoginWindow]
   );
   return (
     <div className={styles.login_panel}>

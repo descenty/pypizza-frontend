@@ -20,9 +20,6 @@
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border-style: dotted;
-  border-color: #4e60ff;
-  border-width: 1px;
   z-index: 1;
 }
 
@@ -70,7 +67,6 @@
   width: 100%;
   border-style: none;
   background: #edeef2;
-  outline-color: #4e60ff;
   font-size: 18px;
   text-indent: 16px;
 }
@@ -100,8 +96,7 @@
 }
 
 .login_panel button:hover {
-  color: #4e60ff;
-  background: #f3f4ff;
+  color: #fd6d22;
 }
 
 .button_inactive {

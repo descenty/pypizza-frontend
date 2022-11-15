@@ -52,12 +52,10 @@ const ActiveOrderPage = ({
     const interval = setInterval(() => {
       if (selectedOrder) {
         setProgress(
-          Math.floor(
-            (new Date().getTime() -
-              new Date(selectedOrder.created_at).getTime()) /
-              1000 /
-              60
-          ) / 0.4
+          ((new Date().getTime() -
+            new Date(selectedOrder.created_at).getTime()) /
+            (new Date(selectedOrder.target_time).getTime() -
+              new Date(selectedOrder.created_at).getTime())) * 100
         );
       }
     }, 1000);
@@ -112,9 +110,7 @@ const ActiveOrderPage = ({
                   {Math.max(
                     0,
                     Math.floor(
-                      (new Date(
-                        new Date(selectedOrder.created_at).getTime() + 2400000
-                      ).getTime() -
+                      (new Date(selectedOrder.target_time).getTime() -
                         new Date().getTime()) /
                         60000
                     )

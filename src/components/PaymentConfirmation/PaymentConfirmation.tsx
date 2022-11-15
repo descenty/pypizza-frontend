@@ -54,7 +54,7 @@ const PaymentConfirmation = ({
         confirmPayment();
       }
     }
-  }, [id, navigate, setLoading, user]);
+  }, [id, navigate, setLoading, updateUserData, user]);
   return (
     <div className={styles.payment_confirmation}>
       <div className={styles.payment_awaiting_panel}>

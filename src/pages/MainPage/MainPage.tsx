@@ -25,7 +25,7 @@ const MainPage = ({ cart, updateCart }: IMainPageProps) => {
       const response = await axiosInstance.get<IGood[]>("goods/");
       setGoods(response.data);
     } catch (e) {
-      setError("Не удалось загрузить пиццу");
+      setError("Не удалось загрузить товары");
     }
   }
 
