@@ -15,7 +15,7 @@ import { IoMdPizza } from "react-icons/io";
 import { HiArrowDown } from "react-icons/hi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { IoPizzaOutline } from "react-icons/io5";
-import { axiosInstance, baseURL } from "../../App";
+import { axiosInstance, baseURL, wsURL } from "../../App";
 import UserContext from "../../context/UserContext";
 import { Category, getSizeName, IOrder, statuses } from "../../models";
 import { getNoun, ruDate } from "../../utils";
@@ -35,32 +35,71 @@ const ActiveOrderPage = ({
 }: IActiveOrderPageProps) => {
   const { user, setUser } = useContext(UserContext);
   const [selectedOrder, selectOrder] = useState<IOrder | undefined>();
+  const [visibleOrder, setVisibleOrder] = useState<IOrder | undefined>();
   const [activeOrders, setActiveOrders] = useState<IOrder[] | undefined>();
   const [progress, setProgress] = useState<number>(10);
   const [error, setError] = useState<string | null>(null);
+  const [currentSocket, setCurrentSocket] = useState<WebSocket | undefined>();
   const navigate = useNavigate();
   useEffect(() => {
-    if (selectedOrder?.status === "CREATED") {
-      const deleteTime = new Date(
-        new Date(selectedOrder.created_at).getTime() + 300000
-      ).toLocaleTimeString("ru-RU", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      setError(`Заказ не оплачен, оплатите до ${deleteTime}`);
-    } else setError(null);
+    setVisibleOrder(selectedOrder);
     const interval = setInterval(() => {
       if (selectedOrder) {
         setProgress(
           ((new Date().getTime() -
             new Date(selectedOrder.created_at).getTime()) /
             (new Date(selectedOrder.target_time).getTime() -
-              new Date(selectedOrder.created_at).getTime())) * 100
+              new Date(selectedOrder.created_at).getTime())) *
+            100
         );
       }
     }, 1000);
     return () => clearInterval(interval);
   }, [selectedOrder]);
+  useEffect(() => {
+    if (visibleOrder?.status === "CREATED") {
+      const deleteTime = new Date(
+        new Date(visibleOrder.created_at).getTime() + 300000
+      ).toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      setError(`Заказ не оплачен, оплатите до ${deleteTime}`);
+    } else setError(null);
+    const openWS = async () => {
+      if (currentSocket)
+        currentSocket.close()
+      const socket = new WebSocket(wsURL + "?token=" + user?.token);
+      setCurrentSocket(socket)
+      socket.onopen = (e: Event) => {
+        console.log("Соединение установлено");
+        socket.send(
+          JSON.stringify({
+            action: "subscribe_instance",
+            pk: visibleOrder?.id,
+            request_id: 1,
+          })
+        );
+      };
+      socket.onmessage = (message: MessageEvent<any>) => {
+        const order: IOrder = JSON.parse(message.data).data;
+        if (order.status === "COMPLETED") {
+          socket.close();
+          updateUserData()
+          setCurrentSocket(undefined)
+        } else {
+          setVisibleOrder(order);
+        }
+      };
+      socket.onclose = () => {
+        console.log("Соединение прервано");
+      };
+      socket.onerror = (error) => {
+        setTimeout(() => openWS(), 1000);
+      };
+    };
+    if (user && visibleOrder && visibleOrder === selectedOrder) openWS();
+  }, [navigate, selectedOrder, updateUserData, user, visibleOrder]);
   useEffect(() => {
     if (
       user &&
@@ -89,28 +128,27 @@ const ActiveOrderPage = ({
                 Заказ от&nbsp;
                 {ruDate(order.created_at)}
               </span>
-              <span>{statuses[order.status]}</span>
             </button>
           ))}
         </div>
       )}
-      {selectedOrder && (
+      {visibleOrder && (
         <div className={styles.selected_order}>
           <h2 className={styles.order_label}>
-            Заказ от {ruDate(selectedOrder.created_at)}
+            Заказ № {visibleOrder.id} от {ruDate(visibleOrder.created_at)}
           </h2>
           <p className={styles.delivery_address}>
-            <GrLocation /> &nbsp;{selectedOrder.delivery_address}
+            <GrLocation /> &nbsp;{visibleOrder.delivery_address}
           </p>
           {error && <span className={styles.error_span}>{error}</span>}
-          {selectedOrder.status !== "CREATED" ? (
+          {visibleOrder.status !== "CREATED" ? (
             <>
               <div className={styles.time}>
                 <p className={styles.estimated_time}>
                   {Math.max(
                     0,
                     Math.floor(
-                      (new Date(selectedOrder.target_time).getTime() -
+                      (new Date(visibleOrder.target_time).getTime() -
                         new Date().getTime()) /
                         60000
                     )
@@ -120,7 +158,7 @@ const ActiveOrderPage = ({
                     Math.max(
                       0,
                       Math.floor(
-                        (new Date(selectedOrder.target_time).getTime() -
+                        (new Date(visibleOrder.target_time).getTime() -
                           new Date().getTime()) /
                           60000
                       )
@@ -131,8 +169,8 @@ const ActiveOrderPage = ({
                   )}
                 </p>
                 <p className={styles.target_time}>
-                  {selectedOrder.target_time &&
-                    new Date(selectedOrder.target_time).toLocaleTimeString(
+                  {visibleOrder.target_time &&
+                    new Date(visibleOrder.target_time).toLocaleTimeString(
                       "ru-RU",
                       {
                         hour: "2-digit",
@@ -154,7 +192,7 @@ const ActiveOrderPage = ({
             <>
               <button
                 onClick={() =>
-                  (window.location.href = selectedOrder.payment_url)
+                  (window.location.href = visibleOrder.payment_url)
                 }
               >
                 Оплата
@@ -163,14 +201,14 @@ const ActiveOrderPage = ({
                 onClick={async () => {
                   try {
                     await axiosInstance.post("cancel-order/", {
-                      id: selectedOrder.id,
+                      id: visibleOrder.id,
                     });
                     setUser &&
                       user &&
                       setUser({
                         ...user,
                         orders: user.orders.filter(
-                          (order) => order.id !== selectedOrder.id
+                          (order) => order.id !== visibleOrder.id
                         ),
                       });
                     setLoading(true);
@@ -195,7 +233,7 @@ const ActiveOrderPage = ({
             <div>
               <AiOutlineCheck
                 className={`${styles.status} ${
-                  Object.keys(statuses).indexOf(selectedOrder.status) >= 1 &&
+                  Object.keys(statuses).indexOf(visibleOrder.status) >= 1 &&
                   styles.active
                 }`}
               />
@@ -204,7 +242,7 @@ const ActiveOrderPage = ({
             <div>
               <IoPizzaOutline
                 className={`${styles.status} ${
-                  Object.keys(statuses).indexOf(selectedOrder.status) >= 2 &&
+                  Object.keys(statuses).indexOf(visibleOrder.status) >= 2 &&
                   styles.active
                 }`}
               />
@@ -213,7 +251,7 @@ const ActiveOrderPage = ({
             <div>
               <AiOutlineInbox
                 className={`${styles.status} ${
-                  Object.keys(statuses).indexOf(selectedOrder.status) >= 3 &&
+                  Object.keys(statuses).indexOf(visibleOrder.status) >= 3 &&
                   styles.active
                 }`}
               />
@@ -222,7 +260,7 @@ const ActiveOrderPage = ({
             <div>
               <MdOutlineDeliveryDining
                 className={`${styles.status} ${
-                  Object.keys(statuses).indexOf(selectedOrder.status) >= 4 &&
+                  Object.keys(statuses).indexOf(visibleOrder.status) >= 4 &&
                   styles.active
                 }`}
               />
@@ -230,7 +268,7 @@ const ActiveOrderPage = ({
             </div>
           </div>
           <div className={styles.ordered_goods}>
-            {selectedOrder.ordered_goods.map((ordered_good, index) => (
+            {visibleOrder.ordered_goods.map((ordered_good, index) => (
               <div key={index}>
                 <img src={baseURL + ordered_good.image} alt="" />
                 <div>
@@ -244,7 +282,7 @@ const ActiveOrderPage = ({
               </div>
             ))}
             <p className={styles.total}>
-              Итого: <b>{selectedOrder.total} ₽</b>
+              Итого: <b>{visibleOrder.total} ₽</b>
             </p>
           </div>
         </div>

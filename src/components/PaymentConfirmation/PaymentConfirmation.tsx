@@ -26,7 +26,7 @@ const PaymentConfirmation = ({
   const [success, setSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) {
+    if (user && !success) {
       if (user?.orders.filter((order) => order.id === Number(id)).length === 0)
         navigate("/");
       else {
@@ -36,13 +36,11 @@ const PaymentConfirmation = ({
               `payment-confirmation/${id}/`
             );
             if (response.status === 200) {
-              setTimeout(() => setSuccess(true), 2000);
-              setTimeout(() => setLoading(true), 3000);
               setTimeout(() => {
-                navigate("/");
+                setSuccess(true);
                 updateUserData();
-              }, 4000);
-              setTimeout(() => setLoading(false), 5000);
+              }, 2000);
+              setTimeout(() => navigate("/"), 3000);
             } else setTimeout(() => confirmPayment(), 5000);
           } catch (e) {
             const error = e as AxiosError;
@@ -54,7 +52,7 @@ const PaymentConfirmation = ({
         confirmPayment();
       }
     }
-  }, [id, navigate, setLoading, updateUserData, user]);
+  }, [id, navigate, setLoading, success, updateUserData, user]);
   return (
     <div className={styles.payment_confirmation}>
       <div className={styles.payment_awaiting_panel}>

@@ -15,7 +15,7 @@
   border-radius: 10px;
   overflow: hidden;
   flex-wrap: wrap;
-  max-width: 402px;
+  max-width: 260px;
 }
 
 .active_orders_list > button {
