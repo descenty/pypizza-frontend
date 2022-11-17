@@ -73,3 +73,9 @@
   max-height: 250px;
   object-fit: cover;
 }
+
+@-moz-document url-prefix() {
+  .advertisments > img {
+    width: auto;
+  }
+}
