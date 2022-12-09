@@ -34,7 +34,12 @@ const Search = () => {
         <div className={styles.suggestions}>
           {filteredGoods?.map((good) => (
             <span key={good.id} onClick={() => goodsStore.selectGood(good)}>
-              {good.name}
+              <span>{good.name}</span>
+              <span>
+                от&nbsp;
+                {Math.min(...good.configurations.map((config) => config.price))}
+                &nbsp;₽
+              </span>
             </span>
           ))}
         </div>

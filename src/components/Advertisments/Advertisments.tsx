@@ -5,14 +5,18 @@ import "swiper/css/navigation";
 import styles from "./Advertisments.module.css";
 import { useEffect, useState } from "react";
 
+const slidesPerViewFunc = () =>
+  window.innerWidth > 850 ? (window.innerWidth > 1300 ? 2 : 1.5) : 1;
+
 const Advertisments = () => {
-  const [slidesPerView, setSlidesPerView] = useState<"auto" | number>(1);
+  const [slidesPerView, setSlidesPerView] = useState<"auto" | number>(
+    slidesPerViewFunc()
+  );
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSlidesPerView(
-        window.innerWidth > 850 ? (window.innerWidth > 1300 ? 2 : 1.5) : 1
-      );
-    }, 1000);
+    const interval = setInterval(
+      () => setSlidesPerView(slidesPerViewFunc()),
+      1000
+    );
     return () => clearInterval(interval);
   }, []);
   console.log(slidesPerView);
