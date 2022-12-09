@@ -15,25 +15,15 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
 import NewAddressPage from "./components/NewAddressPage/NewAddressPage";
 import PaymentConfirmation from "./components/PaymentConfirmation/PaymentConfirmation";
-import ActiveOrderPage from "./pages/OrdersPage/ActiveOrderPage";
+import ActiveOrderPage from "./pages/OrdersPage/OrdersPage";
 import CitySelectWindow from "./components/CitySelectWindow/CitySelectWindow";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
 import CircleLoader from "./components/CircleLoader/CircleLoader";
+import { axiosInstance } from "./settings";
 
-// export const baseURL = "http://localhost:8000";
-export const baseURL = "http://192.168.138.202:8000";
-// export const baseURL = "http://192.168.0.105:8000"
-export const wsURL = 'ws://192.168.138.202:8000/ws/orders/'
-// export const wsURL = "ws://localhost:8000/ws/orders/";
-
-
-
-export const axiosInstance = axios.create({
-  baseURL: baseURL + "/api/",
-});
 function App() {
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [city, setCity] = useState<string | undefined>();
+  const [city, setCity] = useState<string | null>(null);
   const [showLoginWindow, setLoginWindow] = useState<boolean>(false);
   const toggleLoginWindow = () => {
     setLoginWindow(!showLoginWindow);
@@ -119,7 +109,8 @@ function App() {
   }, [city]);
   useEffect(() => {
     setTimeout(() => !city && getGeolocation(), 1000);
-  }, []);
+  }, [city]);
+  useEffect(() => setCity(localStorage.getItem("city")), []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
@@ -143,7 +134,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainPage cart={cart} updateCart={updateCart} />}
+            element={
+              <MainPage
+                cart={cart}
+                updateCart={updateCart}
+                showLoginWindow={setLoginWindow}
+              />
+            }
           />
           <Route
             path="profile/"

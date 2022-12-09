@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { GrFormClose, GrLocation } from "react-icons/gr";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import NewAddressPage from "../../components/NewAddressPage/NewAddressPage";
 import UserContext from "../../context/UserContext";
 import { ISavedAddress } from "../../models";

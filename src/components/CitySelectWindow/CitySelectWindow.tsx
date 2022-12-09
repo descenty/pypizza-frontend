@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import { ICity } from "../../models";
 import styles from "./CitySelectWindow.module.css";
 
 interface ICitySelectWindowProps {
   toggleCitySelectWindow: () => void;
   showCitySelectWindow: boolean;
-  setCity: Dispatch<SetStateAction<string | undefined>>;
+  setCity: Dispatch<SetStateAction<string | null>>;
 }
 
 const CitySelectWindow = ({

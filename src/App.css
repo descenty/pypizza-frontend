@@ -19,6 +19,16 @@ html {
   display: none;
 }
 
+:root {
+  --swiper-theme-color: #fd6d22 !important;
+}
+
+@media (max-width: 580px) {
+  :root {
+    --swiper-navigation-size: 30px !important;
+  }
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -60,7 +70,7 @@ a:hover {
   position: fixed;
   width: 100% !important;
   height: 100% !important;
-  z-index: 0;
+  z-index: 3;
   border-radius: 0 !important;
 }
 

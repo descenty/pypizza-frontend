@@ -8,7 +8,7 @@ import {
 } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
 import { addToCart, removeFromCart } from "../../APIFunctions";
-import { axiosInstance, baseURL } from "../../App";
+import { axiosInstance, baseURL } from "../../settings";
 import { Category, getSizeName, ICart, SizeType } from "../../models";
 import CircleLoader from "../CircleLoader/CircleLoader";
 import styles from "./Cart.module.css";

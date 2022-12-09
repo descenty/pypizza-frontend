@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { axiosInstance } from "./App";
+import { axiosInstance } from "./settings";
 import { ICart, IConfiguration, IGood } from "./models";
 
 export const addToCart = async (

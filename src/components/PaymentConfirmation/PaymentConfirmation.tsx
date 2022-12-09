@@ -8,7 +8,7 @@ import {
 } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import UserContext from "../../context/UserContext";
 import styles from "./PaymentConfirmation.module.css";
 

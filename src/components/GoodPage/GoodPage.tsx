@@ -17,55 +17,65 @@ import {
 } from "react";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import { addToCart } from "../../APIFunctions";
+import { goodsStore } from "../../stores/GoodsStore";
+import { observer } from "mobx-react";
 
 interface IGoodPageProps {
-  good?: IGood;
-  selectGood: Dispatch<SetStateAction<IGood | undefined>>;
   updateCart: () => Promise<void>;
   cart: ICart | null;
 }
 
-const GoodPage = ({ good, selectGood, cart, updateCart }: IGoodPageProps) => {
+const GoodPage = ({ cart, updateCart }: IGoodPageProps) => {
+  const { selectedGood, selectGood } = goodsStore;
   const [goodConfig, setGoodConfig] = useState<IConfiguration | undefined>(
-    good?.configurations[0]
+    selectedGood?.configurations[0]
   );
   const [disableButton, setDisableButton] = useState<boolean>(false);
   useEffect(() => {
     if (
       cart &&
-      cart.cart_goods.some((cart_good) => cart_good.good.id === good?.id) &&
-      cart.cart_goods.find((cart_good) => cart_good.good.id === good?.id)!
-        .quantity >= 10
+      cart.cart_goods.some(
+        (cart_good) => cart_good.good.id === selectedGood?.id
+      ) &&
+      cart.cart_goods.find(
+        (cart_good) => cart_good.good.id === selectedGood?.id
+      )!.quantity >= 10
     ) {
-      selectGood(undefined);
-      alert(`Нельзя добавить больше 10 ${good?.name}`);
+      selectGood(null);
+      alert(`Нельзя добавить больше 10 ${selectedGood?.name}`);
     }
-    setGoodConfig(good?.configurations[0]);
-    document.querySelector("body")!.style.overflow = good ? "hidden" : "scroll";
-  }, [cart, good, selectGood]);
+    setGoodConfig(selectedGood?.configurations[0]);
+    document.querySelector("body")!.style.overflow = selectedGood
+      ? "hidden"
+      : "scroll";
+  }, [cart, selectedGood, selectGood]);
   return (
-    <div className={`${styles.good_page} ${good ? styles.open : styles.close}`}>
+    <div
+      className={`${styles.good_page} ${
+        selectedGood ? styles.open : styles.close
+      }`}
+    >
       <div
         className={`backtrigger ${styles.backtrigger} ${
-          good ? styles.open : styles.close
+          selectedGood ? styles.open : styles.close
         } `}
-        onClick={() => selectGood(undefined)}
+        onClick={() => selectGood(null)}
       ></div>
       <div>
         <button
           className={styles.close_button}
-          onClick={() => selectGood(undefined)}
+          onClick={() => selectGood(null)}
         >
           <AiOutlineClose className={styles.close_button} />
         </button>
-        <img src={good?.image} alt="good" />
+        <img src={selectedGood?.image} alt="good" />
         <div>
-          <h2>{good?.name}</h2>
-          <p>{good?.description}</p>
+          <h2>{selectedGood?.name}</h2>
+          <p>{selectedGood?.description}</p>
           <div className={styles.configurations}>
-            {good?.configurations.map(
+            {selectedGood?.configurations.map(
               (config) =>
                 config.size !== "DEFAULT" && (
                   <button
@@ -76,7 +86,7 @@ const GoodPage = ({ good, selectGood, cart, updateCart }: IGoodPageProps) => {
                     key={config.size}
                   >
                     {getSizeName(
-                      good?.category as Category,
+                      selectedGood?.category as Category,
                       config.size as SizeType
                     )}
                   </button>
@@ -90,8 +100,8 @@ const GoodPage = ({ good, selectGood, cart, updateCart }: IGoodPageProps) => {
               setDisableButton(true);
               setTimeout(
                 () =>
-                  addToCart(good, goodConfig).then(() => {
-                    selectGood(undefined);
+                  addToCart(selectedGood!, goodConfig).then(() => {
+                    selectGood(null);
                     updateCart();
                     setDisableButton(false);
                   }),
@@ -107,4 +117,4 @@ const GoodPage = ({ good, selectGood, cart, updateCart }: IGoodPageProps) => {
   );
 };
 
-export default GoodPage;
+export default observer(GoodPage);

@@ -11,6 +11,7 @@ import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ICart } from "../../models";
 import styles from "./AppHeader.module.css";
+import Search from "../Search/Search";
 
 interface IAppHeaderProps {
   toggleLoginWindow: () => void;
@@ -19,7 +20,7 @@ interface IAppHeaderProps {
   setShowCart: Dispatch<SetStateAction<boolean>>;
   toggleCitySelectWindow: () => void;
   cart: ICart | null;
-  city: string | undefined;
+  city: string | null;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -49,8 +50,8 @@ const AppHeader = ({
   return (
     <>
       <header className="big_header">
-        <div>
-          <div>
+        <section>
+          <section>
             <button className={styles.logo} onClick={navigateToMain}>
               {/* <img src={process.env.PUBLIC_URL + "/PyPizza.png"} alt="" /> */}
               <h2>
@@ -59,24 +60,16 @@ const AppHeader = ({
                 <span>пицца</span>
               </h2>
             </button>
-            <div className={`${styles.search_div} ${styles.to_hide}`}>
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Поиск"
-              />
-              <AiOutlineSearch className={styles.search_icon} />
-            </div>
-          </div>
-          <div>
+            <Search />
+          </section>
+          <section className={styles.to_hide}>
             <a href="#" onClick={toggleCitySelectWindow}>
               г. {city}
             </a>
-          </div>
-        </div>
-        <div>
-          <div>
+          </section>
+        </section>
+        <section>
+          <section className={styles.to_hide}>
             <a href="#">Акции</a>
             <Link to="restaurants/">Рестораны</Link>
             {user &&
@@ -89,8 +82,8 @@ const AppHeader = ({
                   Активный заказ
                 </Link>
               )}
-          </div>
-          <div className={styles.to_hide}>
+          </section>
+          <section className={styles.to_hide}>
             {user && (
               <button className={styles.cart_button} onClick={() => toggleCart()}>
                 <AiOutlineShopping className={styles.cart_image} />
@@ -113,8 +106,8 @@ const AppHeader = ({
                 </span>
               )}
             </button>
-          </div>
-        </div>
+          </section>
+        </section>
       </header>
       <div className={styles.mobile_header}>
         <button onClick={navigateToMain}>

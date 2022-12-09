@@ -4,12 +4,12 @@ header {
   justify-content: space-around;
   align-items: center;
   padding: 1em;
+  padding-bottom: 1em;
   align-self: center;
   width: 100%;
   flex-wrap: wrap;
   gap: 1.5em;
   border-width: 1px;
-  border-style: solid;
   border-color: rgb(231, 231, 231);
 }
 
@@ -24,7 +24,7 @@ header a {
   transition: 0.3s;
 }
 
-header div {
+header section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,9 +174,7 @@ header button:hover {
 
 @media (max-width: 580px) {
   header {
-    padding: 0;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-bottom: 0em;
   }
   header a {
     font-size: 13px;
@@ -184,8 +182,12 @@ header button:hover {
   header {
     gap: 0em;
   }
-  header div {
-    gap: 1em;
+  header section {
+    gap: 0.8em;
+    width: 100%;
+  }
+  header section section {
+    justify-content: space-around;
   }
   .to_hide {
     display: none;

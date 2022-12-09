@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { GrLocation } from "react-icons/gr";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import { IRestaurant } from "../../models";
 import styles from "./RestaurantsPage.module.css";
 
 interface IOrderConfirmationProps {
-  city: string | undefined;
+  city: string | null;
 }
 
 const RestaurantsPage = ({ city }: IOrderConfirmationProps) => {

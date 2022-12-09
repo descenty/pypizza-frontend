@@ -17,7 +17,7 @@ import {
 } from "react";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import { addToCart } from "../../APIFunctions";
 import { GrFormClose } from "react-icons/gr";
 import {

@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { GrFormClose } from "react-icons/gr";
-import { axiosInstance } from "../../App";
+import { axiosInstance } from "../../settings";
 import { IToken } from "../../models";
 import styles from "./LoginWindow.module.css";
 

@@ -24,6 +24,7 @@
   padding: 1em;
   position: relative;
   align-items: center;
+  z-index: 3;
 }
 
 @media (max-width: 880px) {
@@ -43,7 +44,7 @@
     align-self: center;
   }
   .configurations button {
-    width: 90px !important;
+    width: 85px !important;
     align-self: center;
   }
 }

@@ -6,20 +6,21 @@ import {
 } from "react-icons/ai";
 import { Dispatch, SetStateAction, useContext } from "react";
 import UserContext from "../../context/UserContext";
-import styles from './GoodCard.module.css'
+import styles from "./GoodCard.module.css";
+import { goodsStore } from "../../stores/GoodsStore";
 
 interface IGoodCardProps {
   good: IGood;
-  selectGood: Dispatch<SetStateAction<IGood | undefined>>;
+  showLoginWindow: Dispatch<SetStateAction<boolean>>;
 }
 
-const GoodCard = ({ good, selectGood }: IGoodCardProps) => {
+const GoodCard = ({ good, showLoginWindow }: IGoodCardProps) => {
   const { user } = useContext(UserContext);
   return (
     <div
       className={styles.good_card}
       onClick={() => {
-        user ? selectGood(good) : alert("Необходим вход");
+        user ? goodsStore.selectGood(good) : showLoginWindow(true);
       }}
     >
       <img src={good.image} alt="изображение товара" />
