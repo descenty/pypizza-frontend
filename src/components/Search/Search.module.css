@@ -51,7 +51,7 @@
   opacity: 0;
 }
 
-.suggestions > span {
+.suggestions > div {
   padding-inline: 1.2em;
   padding-block: 0.5em;
   width: 100%;
@@ -64,7 +64,7 @@
   justify-content: space-between;
 }
 
-.suggestions > span:hover {
+.suggestions > div:hover {
   color: #fd6d22;
 }
 

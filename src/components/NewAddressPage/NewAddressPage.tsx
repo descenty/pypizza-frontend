@@ -102,6 +102,7 @@ const NewAddressPage = ({
           address: selectedAddress.name,
         });
         user?.saved_addresses.push(selectedAddress);
+        toggleNewAddressPage();
       } catch (e) {
         const error = e as AxiosError;
         if (error) {

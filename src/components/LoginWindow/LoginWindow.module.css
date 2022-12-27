@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  z-index: 1;
+  z-index: 3;
 }
 
 .login_header {
