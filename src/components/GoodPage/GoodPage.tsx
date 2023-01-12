@@ -1,6 +1,5 @@
 import styles from "./GoodPage.module.css";
 import {
-  IGood,
   IConfiguration,
   getSizeName,
   SizeType,
@@ -8,16 +7,7 @@ import {
   ICart,
 } from "../../models";
 import { AiOutlineClose } from "react-icons/ai";
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import axios from "axios";
-import UserContext from "../../context/UserContext";
-import { axiosInstance } from "../../settings";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { addToCart } from "../../APIFunctions";
 import { goodsStore } from "../../stores/GoodsStore";
 import { observer } from "mobx-react";
@@ -28,39 +18,88 @@ interface IGoodPageProps {
 }
 
 const GoodPage = ({ cart, updateCart }: IGoodPageProps) => {
-  const { selectedGood, selectGood } = goodsStore;
+  const { selectedGood, selectGood, showGoodWindow } = goodsStore;
   const [goodConfig, setGoodConfig] = useState<IConfiguration | undefined>(
     selectedGood?.configurations[0]
   );
   const [disableButton, setDisableButton] = useState<boolean>(false);
+  const addToCartButtonClick = useCallback(() => {
+    setDisableButton(true);
+    setTimeout(() => {
+      const selectedGoodInCart = cart?.cart_goods.find(
+        (cart_good) => cart_good.good.id === selectedGood?.id
+      );
+      if (selectedGoodInCart && selectedGoodInCart.quantity >= 10) {
+        selectGood(null);
+        alert(`Нельзя добавить больше 10 ${selectedGood?.name}`);
+      } else {
+        addToCart(selectedGood!, goodConfig).then(() => {
+          selectGood(null);
+          updateCart();
+        });
+      }
+      setDisableButton(false);
+    }, 500);
+  }, [cart?.cart_goods, selectedGood, selectGood, goodConfig, updateCart]);
+
   useEffect(() => {
-    if (
-      cart &&
-      cart.cart_goods.some(
-        (cart_good) => cart_good.good.id === selectedGood?.id
-      ) &&
-      cart.cart_goods.find(
-        (cart_good) => cart_good.good.id === selectedGood?.id
-      )!.quantity >= 10
-    ) {
-      selectGood(null);
-      alert(`Нельзя добавить больше 10 ${selectedGood?.name}`);
-    }
     setGoodConfig(selectedGood?.configurations[0]);
     document.querySelector("body")!.style.overflow = selectedGood
       ? "hidden"
       : "scroll";
   }, [cart, selectedGood, selectGood]);
+
+  const keyboardActions = useMemo(
+    () => ({
+      Enter: () => addToCartButtonClick(),
+      Escape: () => selectGood(null),
+      ArrowLeft: () =>
+        selectedGood?.configurations[0] !== goodConfig &&
+        setGoodConfig(
+          selectedGood?.configurations[
+            selectedGood?.configurations.indexOf(goodConfig!) - 1
+          ]
+        ),
+      ArrowRight: () =>
+        selectedGood?.configurations[selectedGood.configurations.length - 1] !==
+          goodConfig &&
+        setGoodConfig(
+          selectedGood?.configurations[
+            selectedGood?.configurations.indexOf(goodConfig!) + 1
+          ]
+        ),
+    }),
+    [addToCartButtonClick, goodConfig, selectGood, selectedGood?.configurations]
+  );
+
+  const handleKeyboardEvent = useCallback(
+    (event: KeyboardEvent) => {
+      Object.keys(keyboardActions).includes(event.key) &&
+        keyboardActions[event.key as keyof typeof keyboardActions]();
+    },
+    [keyboardActions]
+  );
+
+  useEffect(() => {
+    showGoodWindow
+      ? document.addEventListener("keydown", handleKeyboardEvent)
+      : document.removeEventListener("keydown", handleKeyboardEvent);
+    return () => document.removeEventListener("keydown", handleKeyboardEvent);
+  }, [handleKeyboardEvent, showGoodWindow]);
+
   return (
     <div
-      className={`${styles.good_page} ${
-        selectedGood ? styles.open : styles.close
-      }`}
+      className={[
+        styles.good_page,
+        showGoodWindow ? styles.open : styles.close,
+      ].join(" ")}
     >
       <div
-        className={`backtrigger ${styles.backtrigger} ${
-          selectedGood ? styles.open : styles.close
-        } `}
+        className={[
+          "backtrigger",
+          styles.backtrigger,
+          showGoodWindow ? styles.open : styles.close,
+        ].join(" ")}
         onClick={() => selectGood(null)}
       ></div>
       <div>
@@ -96,18 +135,7 @@ const GoodPage = ({ cart, updateCart }: IGoodPageProps) => {
           <button
             className={styles.add_to_cart}
             disabled={disableButton}
-            onClick={() => {
-              setDisableButton(true);
-              setTimeout(
-                () =>
-                  addToCart(selectedGood!, goodConfig).then(() => {
-                    selectGood(null);
-                    updateCart();
-                    setDisableButton(false);
-                  }),
-                500
-              );
-            }}
+            onClick={addToCartButtonClick}
           >
             Добавить в корзину за {goodConfig?.price} ₽
           </button>

@@ -19,7 +19,6 @@ const Advertisments = () => {
     );
     return () => clearInterval(interval);
   }, []);
-  console.log(slidesPerView);
   return (
     <Swiper
       slidesPerView={slidesPerView}

@@ -1,9 +1,7 @@
-import axios from "axios";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import GoodCard from "../../components/GoodCard/GoodCard";
-import CircleLoader from "../../components/CircleLoader/CircleLoader";
 import Advertisments from "../../components/Advertisments/Advertisments";
-import { Category, ICart, IGood } from "../../models";
+import { Category, ICart } from "../../models";
 import Categories from "../../components/Categories/Categories";
 import GoodPage from "../../components/GoodPage/GoodPage";
 import styles from "./MainPage.module.css";
