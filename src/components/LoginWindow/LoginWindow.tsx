@@ -1,18 +1,13 @@
-import axios from "axios";
 import React, {
   ChangeEvent,
-  ChangeEventHandler,
   Dispatch,
   SetStateAction,
   useCallback,
-  useContext,
-  useRef,
   useState,
 } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { GrFormClose } from "react-icons/gr";
 import { axiosInstance } from "../../settings";
-import { IToken } from "../../models";
 import styles from "./LoginWindow.module.css";
 
 interface ILoginWindowProps {
@@ -55,9 +50,12 @@ const LoginWindow = ({
     setShowSMSForm(true);
     if (canGenerateCode) {
       try {
-        await axiosInstance.post("send-auth-sms/", {
-          phone: phone,
-        });
+        const responseData = (
+          await axiosInstance.post("send-auth-sms/", {
+            phone: phone,
+          })
+        ).data;
+        if (typeof responseData === "string") alert(responseData);
         setCanGenerateCode(false);
       } catch (e) {
         setError("код уже был отправлен");

@@ -89,7 +89,7 @@ function App() {
       async (pos) => {
         axios
           .get(
-            `http://api.openweathermap.org/geo/1.0/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=879b6e4ef63abefd6fa01b2a25c7999a&`
+            `https://api.openweathermap.org/geo/1.0/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=879b6e4ef63abefd6fa01b2a25c7999a&`
           )
           .then((response) => setCity(response.data[0].local_names.ru));
       },

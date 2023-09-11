@@ -171,7 +171,6 @@
   justify-content: center;
   align-items: center;
   background-color: #f1f1f5;
-
 }
 
 .quantity_change.disabled {
@@ -266,7 +265,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-left: 10px;
+  align-self: center;
 }
 
 .empty_cart_icon {

@@ -1,0 +1,27 @@
+services:
+  caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile.caddy
+    pull_policy: build
+    restart: always
+    ports:
+      - 81:80
+      - 444:443
+      - 2020:2019
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+  app:
+    build: .
+    container_name: pypizza-frontend-app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - caddy
+
+volumes:
+  caddy-data:
+  caddy-config:
