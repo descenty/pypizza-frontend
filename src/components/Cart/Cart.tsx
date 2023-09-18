@@ -118,9 +118,10 @@ const Cart = ({
                   onClick={() => {
                     setChangeTimeout(true);
                     setTimeout(() => setChangeTimeout(false), changeDelay);
-                    addToCart(cart_good.good, cart_good.configuration).then(
-                      () => updateCart()
-                    );
+                    Promise.all([
+                      addToCart(cart_good.good, cart_good.configuration),
+                      addToCart(cart_good.good, cart_good.configuration),
+                    ]).then(() => updateCart());
                   }}
                 />
               </div>

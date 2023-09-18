@@ -121,7 +121,6 @@ const GoodPage = ({ cart, updateCart }: IGoodPageProps) => {
                     className={
                       config === goodConfig ? styles.active : undefined
                     }
-                    onClick={() => setGoodConfig(config)}
                     key={config.size}
                   >
                     {getSizeName(
