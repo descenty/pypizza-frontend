@@ -1,11 +1,6 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineShopping,
-} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus, AiOutlineShopping } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
 import { addToCart, removeFromCart } from "../../APIFunctions";
 import { axiosInstance, baseURL } from "../../settings";
@@ -20,13 +15,7 @@ interface ICartProps {
   toggleOrderConfirmation: () => void;
 }
 const changeDelay = 500;
-const Cart = ({
-  toggleCart,
-  showCart,
-  cart,
-  updateCart,
-  toggleOrderConfirmation,
-}: ICartProps) => {
+const Cart = ({ toggleCart, showCart, cart, updateCart, toggleOrderConfirmation }: ICartProps) => {
   const [changeTimeout, setChangeTimeout] = useState<boolean>();
   const [promoCodeInput, setPromoCodeInput] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -49,20 +38,12 @@ const Cart = ({
     <>
       {showCart && (
         <div
-          className={`backtrigger ${styles.backtrigger} ${
-            showCart ? styles.open : styles.close
-          }`}
+          className={`backtrigger ${styles.backtrigger} ${showCart ? styles.open : styles.close}`}
           onClick={() => toggleCart()}
         ></div>
       )}
-      <div
-        className={`${styles.cart} ${showCart ? styles.open : styles.close}`}
-      >
-        <div
-          className={`${styles.timeout_div} ${
-            changeTimeout ? styles.open : styles.close
-          }`}
-        >
+      <div className={`${styles.cart} ${showCart ? styles.open : styles.close}`}>
+        <div className={`${styles.timeout_div} ${changeTimeout ? styles.open : styles.close}`}>
           <div className={styles.ldsring}>
             <div />
             <div />
@@ -72,10 +53,7 @@ const Cart = ({
         </div>
         <div className={styles.cart_header}>
           <h3>Корзина</h3>
-          <GrFormClose
-            className={styles.close_button}
-            onClick={() => toggleCart()}
-          />
+          <GrFormClose className={styles.close_button} onClick={() => toggleCart()} />
         </div>
         <div className={styles.cart_goods}>
           {!cart && <h4>Не удалось загрузить корзину</h4>}
@@ -92,35 +70,27 @@ const Cart = ({
                 <h4>{cart_good.good.name}</h4>
                 <p>{cart_good.configuration.price} ₽</p>
                 <span>
-                  {getSizeName(
-                    cart_good.good.category as Category,
-                    cart_good.configuration.size as SizeType
-                  )}
+                  {getSizeName(cart_good.good.category as Category, cart_good.configuration.size as SizeType)}
                 </span>
               </div>
               <div className={styles.good_quantity}>
                 <AiOutlineMinus
-                  className={styles.quantity_change}
+                  className={`${styles.quantity_change} decrease-quantity`}
                   onClick={() => {
                     setChangeTimeout(true);
                     setTimeout(() => setChangeTimeout(false), changeDelay);
-                    removeFromCart(
-                      cart_good.good,
-                      cart_good.configuration
-                    ).then(() => updateCart());
+                    removeFromCart(cart_good.good, cart_good.configuration).then(() => updateCart());
                   }}
                 />
                 <span>{cart_good.quantity}</span>
                 <AiOutlinePlus
                   className={`${styles.quantity_change} ${
                     cart_good.quantity >= 10 ? styles.disabled : ""
-                  }`}
+                  } increase-quantity`}
                   onClick={() => {
                     setChangeTimeout(true);
                     setTimeout(() => setChangeTimeout(false), changeDelay);
-                    addToCart(cart_good.good, cart_good.configuration).then(
-                      () => updateCart()
-                    );
+                    addToCart(cart_good.good, cart_good.configuration).then(() => updateCart());
                   }}
                 />
               </div>
@@ -136,7 +106,7 @@ const Cart = ({
                   {(cart.total_with_discount - cart.total).toFixed(2)} ₽)
                 </span>
                 <AiOutlineClose
-                  className={`${styles.quantity_change} ${styles.close_button}`}
+                  className={`${styles.quantity_change} ${styles.close_button} delete-promocode`}
                   onClick={async () => {
                     setChangeTimeout(true);
                     setTimeout(() => setChangeTimeout(false), changeDelay);
